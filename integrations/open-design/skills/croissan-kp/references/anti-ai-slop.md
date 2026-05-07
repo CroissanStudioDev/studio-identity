@@ -1,0 +1,1 @@
+../../../../agents/anti-ai-slop.md

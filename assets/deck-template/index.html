@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>КП · {{Тема проекта}} · Круассан Студио</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Круассан Студио — HTML deck template
+     Single-file, vanilla HTML/CSS/JS. No build step.
+     Source: studio-identity/assets/deck-template/
+     Visual spec: studio-identity/design-system/decks.md
+     ============================================================ */
+
+  :root{
+    --cobalt:#2727CA;          /* brand primary */
+    --cobalt-deep:#1F1FA8;     /* hover / active */
+    --cobalt-soft:#3D3DE0;     /* secondary surface on cobalt */
+    --ink:#0E0E14;             /* premium black surface */
+    --ink-soft:#1A1A22;        /* graphite alt */
+    --paper:#FFFFFF;
+    --paper-dim:rgba(255,255,255,.72);
+    --paper-mute:rgba(255,255,255,.55);
+    --line:rgba(255,255,255,.18);
+    --font:"Golos Text","Golos UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--cobalt);color:var(--paper);font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+  /* Deck framework */
+  #deck{position:fixed;inset:0;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .7s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{
+    width:100vw;height:100vh;flex:0 0 100vw;
+    position:relative;
+    padding:7vh 6vw 7vh 6vw;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+    background:var(--cobalt);
+    color:var(--paper);
+  }
+
+  /* Brand mark — top-left of every slide */
+  .brand{position:absolute;top:5vh;left:6vw;display:flex;align-items:center;gap:.55em;z-index:3}
+  .brand svg{width:28px;height:28px;flex-shrink:0}
+  .brand .wm{font-weight:700;font-size:max(14px,1.05vw);letter-spacing:-.005em;color:var(--paper);line-height:1}
+
+  /* Page number — bottom-right, uppercase tracked, tabular */
+  .pn{position:absolute;bottom:4vh;right:6vw;font-weight:500;font-size:max(12px,.85vw);letter-spacing:.16em;color:var(--paper-mute);font-variant-numeric:tabular-nums;z-index:3}
+
+  /* Frame (content area) */
+  .frame{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:4vh;min-height:0}
+  .frame.top{justify-content:flex-start;padding-top:5vh}
+
+  /* Type system — Golos only, weight + size do the work */
+  .h-hero{font-weight:700;font-size:6.4vw;line-height:1.02;letter-spacing:-.025em;text-wrap:balance}
+  .h-xl  {font-weight:700;font-size:4.6vw;line-height:1.05;letter-spacing:-.022em;text-wrap:balance}
+  .h-lg  {font-weight:700;font-size:3.2vw;line-height:1.10;letter-spacing:-.018em;text-wrap:balance}
+  .h-md  {font-weight:700;font-size:2.2vw;line-height:1.15;letter-spacing:-.012em}
+  .h-sm  {font-weight:600;font-size:1.5vw;line-height:1.20;letter-spacing:-.005em}
+  .lead  {font-weight:500;font-size:max(17px,1.55vw);line-height:1.4;color:var(--paper-dim);letter-spacing:-.005em}
+  .body  {font-weight:400;font-size:max(15px,1.15vw);line-height:1.5;color:var(--paper-dim)}
+  .meta  {font-weight:500;font-size:max(11px,.85vw);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-mute)}
+  .num   {font-weight:800;font-feature-settings:"tnum";font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+  .dim   {color:var(--paper-mute)}
+
+  /* Pill / chip — signature device. 5 variants. */
+  .pill{
+    display:inline-flex;align-items:center;gap:.55em;
+    font-weight:500;font-size:max(13px,1vw);line-height:1;
+    padding:.85em 1.25em;
+    border-radius:999px;
+    letter-spacing:-.005em;
+    white-space:nowrap;
+    border:1px solid transparent;
+  }
+  .pill.dark   {background:var(--ink);color:var(--paper)}
+  .pill.light  {background:var(--paper);color:var(--cobalt)}
+  .pill.outline{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.45)}
+  .pill.soft   {background:var(--cobalt-soft);color:var(--paper)}
+  .pill.deep   {background:var(--cobalt-deep);color:var(--paper)}
+  .pill-row    {display:flex;flex-wrap:wrap;gap:.7vw .8vw;align-items:center}
+  .pill-row.tight{gap:.5vw .6vw}
+
+  /* Floating black badge above pill grid (e.g. "В них мы особо хороши") */
+  .badge-floating{position:relative;display:inline-block}
+  .badge-floating .lab{
+    position:absolute;top:-.85em;left:1.2vw;
+    background:var(--ink);color:var(--paper);
+    font-weight:500;font-size:max(11px,.78vw);
+    padding:.5em .85em;border-radius:999px;
+    z-index:2;white-space:nowrap;
+  }
+
+  /* Grids */
+  .grid-2     {display:grid;grid-template-columns:1fr 1fr;gap:3.4vw;align-items:center}
+  .grid-2-7-5 {display:grid;grid-template-columns:7fr 5fr;gap:4vw;align-items:start}
+  .grid-2-6-6 {display:grid;grid-template-columns:1fr 1fr;gap:2.4vw;align-items:stretch}
+  .grid-3     {display:grid;grid-template-columns:repeat(3,1fr);gap:1.8vw;align-items:stretch}
+  .grid-4     {display:grid;grid-template-columns:repeat(4,1fr);gap:1.2vw;align-items:stretch}
+  .col        {display:flex;flex-direction:column}
+  .col.gap-sm {gap:1.4vh}
+  .col.gap-md {gap:2.4vh}
+  .col.gap-lg {gap:4vh}
+  .row        {display:flex;align-items:center}
+
+  /* Cards (dark on cobalt). 3 variants: default / featured / outline */
+  .card{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:18px;
+    padding:2.6vh 1.6vw;
+    display:flex;flex-direction:column;gap:1vh;
+    height:100%;
+  }
+  .card .lbl  {font-weight:500;font-size:max(11px,.78vw);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-mute)}
+  .card .ttl  {font-weight:700;font-size:1.7vw;line-height:1.15;letter-spacing:-.012em}
+  .card .desc {font-weight:400;font-size:max(13px,.98vw);line-height:1.5;color:var(--paper-dim)}
+  .card .price{font-weight:800;font-size:2vw;line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums;margin-top:auto;padding-top:1.4vh}
+  .card.featured{background:var(--paper);color:var(--cobalt)}
+  .card.featured .lbl {color:var(--cobalt-deep)}
+  .card.featured .desc{color:rgba(39,39,202,.78)}
+  .card.outline{background:transparent;border:1px solid var(--line);color:var(--paper)}
+  .card.outline .desc{color:var(--paper-dim)}
+
+  /* Demo grid (4 frames) — for case showcases */
+  .demo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;align-items:stretch}
+  .demo-grid figure{margin:0;display:flex;flex-direction:column;min-width:0;gap:.8vh}
+  .demo-grid .img{
+    aspect-ratio:1/1;border-radius:14px;overflow:hidden;
+    background:rgba(0,0,0,.18);position:relative;
+  }
+  .demo-grid .img img{width:100%;height:100%;object-fit:cover;display:block}
+  .demo-grid .cap{
+    display:flex;justify-content:space-between;align-items:baseline;gap:.5vw;
+    font-weight:500;font-size:max(11px,.85vw);color:var(--paper-dim);
+  }
+  .demo-grid .cap .k{font-weight:700;color:var(--paper)}
+
+  /* Small tile (for stat-strips inside cards) */
+  .tile{
+    background:var(--ink);border-radius:14px;
+    padding:1.6vh 1.2vw;display:flex;flex-direction:column;gap:.4vh;
+    color:var(--paper);min-height:9vh;justify-content:center;
+  }
+  .tile .k{font-weight:500;font-size:max(11px,.82vw);color:var(--paper-mute);line-height:1.3}
+  .tile .v{font-weight:700;font-size:max(15px,1.18vw);line-height:1.2;letter-spacing:-.005em}
+
+  /* Final price block — huge tabular numerals, right-aligned */
+  .price-final{
+    display:flex;align-items:baseline;justify-content:flex-end;gap:.2em;
+    font-weight:800;font-size:11vw;line-height:.95;letter-spacing:-.04em;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .price-final .cur{font-size:.55em;font-weight:700;letter-spacing:-.02em;opacity:.85}
+
+  /* Stage row — for pricing breakdown */
+  .stage-row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:1.4vw;align-items:center;
+    padding:1.8vh 0;border-top:1px solid var(--line);
+  }
+  .stage-row:last-of-type{border-bottom:1px solid var(--line)}
+  .stage-row .num-lbl{font-weight:600;font-size:max(12px,.95vw);letter-spacing:.12em;color:var(--paper-mute);text-transform:uppercase;min-width:7vw}
+  .stage-row .nm     {font-weight:600;font-size:max(15px,1.25vw);line-height:1.2;letter-spacing:-.005em}
+  .stage-row .pr     {font-weight:700;font-size:max(15px,1.4vw);font-variant-numeric:tabular-nums;letter-spacing:-.015em}
+
+  .heart{display:inline-block;font-size:.85em;vertical-align:.05em}
+
+  /* Navigation */
+  #nav{position:fixed;left:50%;bottom:2.2vh;transform:translateX(-50%);z-index:30;display:flex;gap:7px;padding:7px 13px;border-radius:999px;background:rgba(0,0,0,.32);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  #nav .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.34);cursor:pointer;transition:all .3s ease;border:0;padding:0}
+  #nav .dot:hover{background:rgba(255,255,255,.6)}
+  #nav .dot.active{background:rgba(255,255,255,1);width:20px;border-radius:999px}
+  #hint{position:fixed;bottom:2.4vh;right:2vw;z-index:29;font-weight:500;font-size:10px;letter-spacing:.18em;text-transform:uppercase;opacity:.4;color:var(--paper)}
+
+  .logo-svg path,.logo-svg ellipse{fill:var(--paper)}
+
+  @media (max-width:900px){
+    .h-hero{font-size:11vw}
+    .h-xl{font-size:8vw}
+    .grid-2,.grid-2-7-5,.grid-2-6-6,.grid-3,.grid-4{grid-template-columns:1fr}
+    .demo-grid{grid-template-columns:1fr 1fr}
+    .price-final{font-size:18vw}
+  }
+
+  /* Print / PDF export — stack each slide as its own 1920×1080 page */
+  @media print{
+    @page{size:1920px 1080px;margin:0}
+    html,body{
+      width:1920px !important;height:auto !important;
+      overflow:visible !important;background:var(--cobalt) !important;
+      -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
+    }
+    #deck{
+      position:static !important;width:1920px !important;height:auto !important;
+      display:block !important;transform:none !important;transition:none !important;
+      flex-wrap:nowrap !important;
+    }
+    .slide{
+      width:1920px !important;height:1080px !important;flex:0 0 auto !important;
+      display:flex !important;flex-direction:column !important;
+      position:relative !important;
+      padding:75.6px 115.2px !important;
+      page-break-after:always;break-after:page;page-break-inside:avoid;
+      overflow:hidden !important;
+    }
+    .slide:last-child{page-break-after:auto;break-after:auto}
+    .brand{top:54px !important;left:115.2px !important}
+    .pn{bottom:43.2px !important;right:115.2px !important}
+    #nav,#hint,#overview{display:none !important}
+    *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable logo SVG (referenced via <use href="#croissan-logo">) -->
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true">
+  <defs>
+    <symbol id="croissan-logo" viewBox="0 0 36 36">
+      <ellipse cx="22.0277" cy="21.5989" rx="11.4081" ry="8.91908" transform="rotate(135 22.0277 21.5989)" fill="currentColor"/>
+      <path d="M2.13333 21.5215C2.27316 21.1417 2.43806 20.7593 2.6223 20.3737C3.39661 18.7529 4.38451 17.3468 5.62376 16.5249C6.40009 16.0101 7.25471 15.74 8.15856 15.7683C6.8603 14.62 4.64027 14.7881 3.01991 16.2162C1.29654 17.735 0.901976 20.1059 2.13333 21.5215Z" fill="currentColor"/>
+      <path d="M9.66614 17.0816C7.56193 18.5015 6.04834 20.914 5.69055 23.739C5.45599 25.5909 5.49735 27.4379 6.0701 29.0514C5.88245 28.9404 5.69209 28.8131 5.49905 28.6684C2.11363 26.1311 1.96103 23.8798 3.44766 20.768C4.93428 17.6563 7.0411 15.8275 9.66068 17.079C9.6625 17.0799 9.66432 17.0808 9.66614 17.0816Z" fill="currentColor"/>
+      <path d="M13.3717 16.6698C10.2173 21.1627 9.87752 26.8758 13.314 30.3124C14.3617 31.36 15.6209 32.0567 16.9926 32.4296C15.8818 32.8947 14.5023 33.063 12.7995 32.8473C7.22606 32.1414 6.033 28.3154 6.59809 23.8538C7.09266 19.9489 9.98303 17.0049 13.3717 16.6698Z" fill="currentColor"/>
+      <path d="M21.911 1.74382C21.5312 1.88365 21.1489 2.04855 20.7632 2.23279C19.1424 3.0071 17.7364 3.995 16.9145 5.23425C16.3996 6.01058 16.1295 6.8652 16.1578 7.76904C15.0096 6.47078 15.1776 4.25075 16.6057 2.63039C18.1246 0.907029 20.4955 0.512466 21.911 1.74382Z" fill="currentColor"/>
+      <path d="M17.4712 9.27661C18.8911 7.1724 21.3036 5.65882 24.1285 5.30102C25.9805 5.06647 27.8275 5.10783 29.4409 5.68057C29.33 5.49293 29.2027 5.30257 29.058 5.10953C26.5206 1.72411 24.2694 1.57151 21.1576 3.05814C18.0458 4.54476 16.2171 6.65157 17.4686 9.27115C17.4694 9.27297 17.4703 9.27479 17.4712 9.27661Z" fill="currentColor"/>
+      <path d="M17.0594 12.9823C21.5523 9.82785 27.2655 9.48807 30.702 12.9246C31.7496 13.9722 32.4463 15.2314 32.8193 16.6031C33.2843 15.4923 33.4526 14.1129 33.2369 12.4101C32.531 6.83662 28.7051 5.64356 24.2434 6.20864C20.3385 6.70321 17.3945 9.59358 17.0594 12.9823Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="hint">← →</div>
+
+<!-- ============================================================
+     A reusable shorthand:
+       <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+     Page numbers (`<span class="pn">NN / TT</span>`) are not auto-
+     calculated in this template — update them manually when
+     adding/removing slides.
+     ============================================================ -->
+
+<div id="deck">
+
+<!-- 01 · COVER -->
+<section class="slide" data-screen-label="01 Привет">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:14vh">
+    <h1 class="h-hero" style="max-width:18ch;font-weight:600">Привет!<br>Мы Круассан Студио</h1>
+    <p class="h-xl" style="margin-top:5vh;max-width:18ch;font-weight:600">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
+  </div>
+  <span class="pn">01 / 11</span>
+</section>
+
+<!-- 02 · CASES — short proof strip with two recent shipped projects -->
+<section class="slide" data-screen-label="02 Что делаем">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:3.5vh">
+    <h2 class="h-lg" style="max-width:30ch;font-weight:600">Создаём и&nbsp;развиваем продукты с&nbsp;ИИ<br>для&nbsp;{{Тип клиентов}}.</h2>
+    <div class="grid-2" style="gap:2vw;margin-top:1vh;align-items:stretch">
+      <div class="col gap-sm">
+        <span class="meta">Кейс · {{Клиент A}}</span>
+        <span class="pill dark" style="align-self:flex-start;font-size:max(13px,1.02vw);padding:.85em 1.2em">{{Заголовок кейса A}}</span>
+        <!-- Replace with real before/after or a single screenshot:
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6vw;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.18)">
+          <div style="aspect-ratio:1/1;overflow:hidden"><img src="images/before.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+          <div style="aspect-ratio:1/1;overflow:hidden"><img src="images/after.png"  alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        </div> -->
+        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац: что было, что стало, ключевая метрика}}.</p>
+      </div>
+      <div class="col gap-sm">
+        <span class="meta">Кейс · {{Клиент B}}</span>
+        <span class="pill dark" style="align-self:flex-start;font-size:max(13px,1.02vw);padding:.85em 1.2em">{{Заголовок кейса B}}</span>
+        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац про второй кейс}}.</p>
+      </div>
+    </div>
+  </div>
+  <span class="pn">02 / 11</span>
+</section>
+
+<!-- 03 · ONE-STOP SHOP — services chips with floating black badge -->
+<section class="slide" data-screen-label="03 One-stop shop">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:5vh">
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">Мы ваш one-stop&nbsp;shop<br>для&nbsp;ИИ-решений.</h2>
+    <div class="badge-floating" style="margin-top:2vh">
+      <span class="lab">В них мы особо хороши</span>
+      <div class="pill-row" style="max-width:62vw">
+        <span class="pill soft">Агентские системы и&nbsp;чат-боты</span>
+        <span class="pill soft">Брендформансы с&nbsp;ИИ</span>
+        <span class="pill soft">Оптимизация бизнес-процессов</span>
+        <span class="pill soft">Генеративные веб-сервисы</span>
+        <span class="pill soft">ИИ-инсталляции и&nbsp;стенды</span>
+        <span class="pill soft">Корпоративное обучение</span>
+      </div>
+    </div>
+    <p class="h-lg dim" style="margin-top:8vh;font-weight:500;opacity:.55">Дальше — про вашу задачу&nbsp;→</p>
+  </div>
+  <span class="pn">03 / 11</span>
+</section>
+
+<!-- 04 · OFFER — title slide for THIS proposal -->
+<section class="slide" data-screen-label="04 Оффер">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:5vh">
+    <span class="meta" style="color:rgba(255,255,255,.7)">Коммерческое предложение</span>
+    <h2 class="h-hero" style="max-width:14ch;font-weight:600">{{Название<br>проекта}}.</h2>
+    <p class="lead" style="max-width:42ch">{{Одно-два предложения: что это для пользователя клиента, какой результат}}.</p>
+    <div class="pill-row" style="margin-top:2vh">
+      <span class="pill outline">{{N&nbsp;недель}}</span>
+      <span class="pill outline">Под&nbsp;ключ</span>
+      <span class="pill outline">{{Ключевая характеристика}}</span>
+    </div>
+  </div>
+  <span class="pn">04 / 11</span>
+</section>
+
+<!-- 05 · WHAT IT DOES — dual mode/feature breakdown -->
+<section class="slide" data-screen-label="05 Что делает">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:4vh">
+    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{Заголовок-формула: «N класса X, M режимов Y»}}.</h2>
+    <div class="grid-2" style="gap:3vw;margin-top:1vh">
+      <div class="col gap-md">
+        <span class="meta">{{Группа A}}</span>
+        <div class="pill-row tight">
+          <span class="pill soft">{{Тег A1}}</span>
+          <span class="pill soft">{{Тег A2}}</span>
+          <span class="pill soft">{{Тег A3}}</span>
+          <span class="pill soft">{{Тег A4}}</span>
+        </div>
+      </div>
+      <div class="col gap-md">
+        <span class="meta">{{Группа B}}</span>
+        <div class="card" style="padding:2.4vh 1.6vw">
+          <span class="lbl">Режим&nbsp;A · {{Имя}}</span>
+          <div class="ttl" style="font-size:1.5vw">{{Короткое название режима}}.</div>
+          <div class="desc">{{Что происходит и какой UX. Один абзац}}.</div>
+        </div>
+        <div class="card" style="padding:2.4vh 1.6vw;background:var(--paper);color:var(--cobalt)">
+          <span class="lbl" style="color:var(--cobalt-deep)">Режим&nbsp;B · {{Имя}} ★</span>
+          <div class="ttl" style="font-size:1.5vw">{{Название «звёздного» режима}}.</div>
+          <div class="desc" style="color:rgba(39,39,202,.78)">{{Описание главного варианта — это рекомендуемый}}.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pn">05 / 11</span>
+</section>
+
+<!-- 06 · DEMO — 4-frame proof grid -->
+<section class="slide" data-screen-label="06 Демо">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:3.4vh">
+    <div class="grid-2-7-5" style="align-items:end">
+      <h2 class="h-lg" style="max-width:22ch;font-weight:600">{{Один тезис про результат демо}}.</h2>
+      <div class="pill-row" style="justify-content:flex-end">
+        <span class="pill outline">{{Метрика, напр. «live · 24 fps»}}</span>
+        <span class="pill light">{{Источник кадров}}</span>
+      </div>
+    </div>
+    <div class="demo-grid">
+      <figure>
+        <div class="img"><!-- <img src="images/01.jpg" alt=""> --></div>
+        <div class="cap"><span class="k">{{Подпись 1}}</span><span>00 · {{контекст}}</span></div>
+      </figure>
+      <figure>
+        <div class="img"><!-- <img src="images/02.jpg" alt=""> --></div>
+        <div class="cap"><span class="k">{{Подпись 2}}</span><span>01 · {{контекст}}</span></div>
+      </figure>
+      <figure>
+        <div class="img"><!-- <img src="images/03.jpg" alt=""> --></div>
+        <div class="cap"><span class="k">{{Подпись 3}}</span><span>02 · {{контекст}}</span></div>
+      </figure>
+      <figure>
+        <div class="img"><!-- <img src="images/04.jpg" alt=""> --></div>
+        <div class="cap"><span class="k">{{Подпись 4}}</span><span>03 · {{контекст}}</span></div>
+      </figure>
+    </div>
+    <p class="body" style="max-width:78ch">{{Один абзац: что общее у всех кадров, что меняется, что это значит для клиента}}.</p>
+  </div>
+  <span class="pn">06 / 11</span>
+</section>
+
+<!-- 07 · TECH — research candidates + our optimization layer -->
+<section class="slide" data-screen-label="07 Технологии">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:4vh">
+    <h2 class="h-xl" style="max-width:24ch;font-weight:600">Подберём оптимальный стек под&nbsp;вашу задачу.</h2>
+    <div class="grid-2-7-5" style="gap:4vw">
+      <div class="col gap-md">
+        <span class="meta">Кандидаты для&nbsp;research-этапа</span>
+        <div class="pill-row tight">
+          <span class="pill dark">{{Кандидат A}}</span>
+          <span class="pill dark">{{Кандидат B}}</span>
+          <span class="pill dark">{{Кандидат C}}</span>
+          <span class="pill dark">{{Кандидат D}}</span>
+        </div>
+        <p class="body" style="max-width:46ch">На&nbsp;research-этапе прогоняем кандидатов на&nbsp;вашей фактуре. Выбираем тот, у&nbsp;которого выше {{ключевая метрика}}.</p>
+      </div>
+      <div class="col gap-md">
+        <span class="meta">Наш слой оптимизации</span>
+        <div class="card" style="padding:2.6vh 1.4vw">
+          <span class="lbl">In-house · {{«~10× ускорение» / etc.}}</span>
+          <div class="ttl" style="font-size:1.4vw">{{Список техник: квантизация, кэш, пр.}}.</div>
+          <div class="desc">{{Один абзац: что даёт это ускорение в цифрах}}.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="pn">07 / 11</span>
+</section>
+
+<!-- 08 · HARDWARE / INFRA — recommended vs minimum -->
+<section class="slide" data-screen-label="08 Инфраструктура">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:4vh">
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Заголовок-формула про требования}}.</h2>
+    <div class="grid-2-6-6" style="gap:2vw;margin-top:1vh">
+      <div class="card featured">
+        <span class="lbl">Рекомендуем</span>
+        <div class="ttl">{{Конфигурация / провайдер}}<br>{{Ёмкость}}</div>
+        <div class="desc">{{Запас по производительности и почему этот вариант предпочтителен}}.</div>
+      </div>
+      <div class="card outline">
+        <span class="lbl">Минимум</span>
+        <div class="ttl">{{Минимальная конфигурация}}<br>{{Ёмкость}}</div>
+        <div class="desc">{{Полный функционал, но без запаса. Когда оправдано}}.</div>
+      </div>
+    </div>
+    <p class="body" style="max-width:78ch;margin-top:1vh">{{Один абзац про остальное: периферия, подбор и сборка под ключ}}.</p>
+  </div>
+  <span class="pn">08 / 11</span>
+</section>
+
+<!-- 09 · STAGES — 3-card breakdown with stage prices -->
+<section class="slide" data-screen-label="09 Этапы">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:4vh">
+    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{N&nbsp;недель<br>от&nbsp;старта до&nbsp;запуска}}.</h2>
+    <div class="grid-3" style="margin-top:1vh">
+      <div class="card">
+        <span class="lbl">Этап 01 · {{N}} нед.</span>
+        <div class="ttl">Research<br>&amp;&nbsp;{{подбор / discovery}}.</div>
+        <div class="desc">{{Что делаем, что получает клиент на выходе этапа}}.</div>
+        <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+      </div>
+      <div class="card">
+        <span class="lbl">Этап 02 · {{N}} нед.</span>
+        <div class="ttl">MVP &amp;&nbsp;Pilot.</div>
+        <div class="desc">{{Дообучение, сборка пайплайна, прогон полного цикла}}.</div>
+        <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+      </div>
+      <div class="card featured">
+        <span class="lbl">Этап 03 · {{N}} нед.</span>
+        <div class="ttl">Production<br>&amp;&nbsp;запуск.</div>
+        <div class="desc">{{Деплой, обучение оператора, поддержка после запуска}}.</div>
+        <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+      </div>
+    </div>
+  </div>
+  <span class="pn">09 / 11</span>
+</section>
+
+<!-- 10 · PRICE — itemized stages + huge final number -->
+<section class="slide" data-screen-label="10 Стоимость">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:4vh">
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Название проекта}} под&nbsp;ключ.</h2>
+    <div class="col gap-sm" style="max-width:80vw;margin-top:2vh">
+      <div class="stage-row">
+        <span class="num-lbl">Этап 01</span>
+        <span class="nm">Research &amp;&nbsp;{{...}} · {{N}} нед.</span>
+        <span class="pr">{{XXX 000&nbsp;₽}}</span>
+      </div>
+      <div class="stage-row">
+        <span class="num-lbl">Этап 02</span>
+        <span class="nm">MVP &amp;&nbsp;Pilot · {{N}} нед.</span>
+        <span class="pr">{{XXX 000&nbsp;₽}}</span>
+      </div>
+      <div class="stage-row">
+        <span class="num-lbl">Этап 03</span>
+        <span class="nm">Production &amp;&nbsp;запуск · {{N}} нед.</span>
+        <span class="pr">{{XXX 000&nbsp;₽}}</span>
+      </div>
+    </div>
+    <div class="col" style="margin-top:auto;padding-top:2vh;padding-bottom:2vh;align-items:flex-end">
+      <span class="meta" style="color:rgba(255,255,255,.7);align-self:flex-start">Итого&nbsp;— под&nbsp;ключ, {{N&nbsp;недель}}</span>
+      <div class="price-final" style="font-size:9.5vw;padding-right:5vw"><span>{{XXX XXX}}</span><span class="cur">&nbsp;₽</span></div>
+    </div>
+  </div>
+  <span class="pn">10 / 11</span>
+</section>
+
+<!-- 11 · CONTACT — single owner with 2-3 contact pills -->
+<section class="slide" data-screen-label="11 Контакты">
+  <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+  <div class="frame top" style="padding-top:13vh;gap:5vh">
+    <h2 class="h-hero" style="max-width:14ch;font-weight:600">Давайте сделаем<br>ваш проект.&nbsp;<span class="heart">🤍</span></h2>
+    <p class="lead" style="max-width:38ch">{{Имя}}, {{роль}} Круассан&nbsp;Студио&nbsp;— ответит на&nbsp;{{вопросы / технические вопросы}} и&nbsp;соберёт {{демо / план}} за&nbsp;пару дней.</p>
+    <div class="col gap-sm" style="margin-top:2vh">
+      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">@{{telegram}}</span>
+      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">{{e-mail}}</span>
+      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">hello@croissanstudio.ru</span>
+    </div>
+  </div>
+  <span class="pn">11 / 11</span>
+</section>
+
+</div>
+
+<div id="nav"></div>
+
+<script>
+/* ============================================================
+   Deck runtime — keyboard / wheel / touch / overview / URL
+   ============================================================ */
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const nav=document.getElementById('nav');
+let idx=0,total=slides.length,lock=false;
+
+deck.style.width=(total*100)+'vw';
+
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Slide '+(i+1));
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+
+function go(n){
+  if(lock)return;
+  idx=Math.max(0,Math.min(total-1,n));
+  deck.style.transform=`translateX(${-idx*100}vw)`;
+  nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  try{localStorage.setItem('croissan-deck-pos',idx)}catch(e){}
+  lock=true;setTimeout(()=>lock=false,650);
+}
+
+/* Esc opens an overview grid of all slides */
+let overviewOn=false;
+const ov=document.createElement('div');
+ov.id='overview';
+ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(14,14,20,.92);backdrop-filter:blur(14px);display:none;overflow-y:auto;padding:4vh 4vw';
+document.body.appendChild(ov);
+
+function buildOverview(){
+  ov.innerHTML='';
+  const grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';
+  slides.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText='cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid '+(i===idx?'#fff':'rgba(255,255,255,.18)')+';transition:border-color .2s;background:#2727CA';
+    const wrap=document.createElement('div');
+    wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:#2727CA';
+    const clone=s.cloneNode(true);
+    clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';
+    wrap.appendChild(clone);
+    const label=document.createElement('div');
+    label.style.cssText='padding:6px 10px;font-family:"Golos Text",sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;opacity:.7;background:rgba(0,0,0,.35)';
+    label.textContent=(i+1)+' / '+total+'  ·  '+(s.dataset.screenLabel||'');
+    card.appendChild(wrap);
+    card.appendChild(label);
+    card.onclick=()=>{toggleOverview();go(i)};
+    grid.appendChild(card);
+  });
+  ov.appendChild(grid);
+}
+function toggleOverview(){
+  overviewOn=!overviewOn;
+  if(overviewOn){buildOverview();ov.style.display='block';}
+  else{ov.style.display='none';}
+}
+
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}
+  if(overviewOn)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown')go(idx+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);
+  if(e.key==='Home')go(0);
+  if(e.key==='End')go(total-1);
+});
+
+let wheelTO=null,wheelAcc=0;
+addEventListener('wheel',e=>{
+  wheelAcc+=e.deltaY+e.deltaX;
+  if(Math.abs(wheelAcc)>50){go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}
+  clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);
+},{passive:true});
+
+let tx=0,ty=0;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{
+  const dx=(e.changedTouches[0].clientX-tx);
+  const dy=(e.changedTouches[0].clientY-ty);
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(idx+(dx<0?1:-1));
+},{passive:true});
+
+let saved=0;
+const urlSlide=new URLSearchParams(location.search).get('slide');
+if(urlSlide!==null){
+  saved=Math.max(0,Math.min(total-1,parseInt(urlSlide,10)-1));
+  document.getElementById('nav').style.display='none';
+  document.getElementById('hint').style.display='none';
+  deck.style.transition='none';
+}else{
+  try{saved=parseInt(localStorage.getItem('croissan-deck-pos')||'0',10)||0;}catch(e){}
+}
+go(saved);
+</script>
+</body>
+</html>

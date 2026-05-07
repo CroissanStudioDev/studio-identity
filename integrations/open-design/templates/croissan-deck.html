@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>croissan · deck template</title>
+  <style>
+    /* ===========================================================
+       Deck framework — DO NOT EDIT the rules in this <style> block.
+       This is a verbatim copy of templates/deck-framework.html.
+       Edit only the croissan token block + per-deck styles below,
+       and the <section class="slide"> bodies.
+       =========================================================== */
+    :root {
+      /* croissan tokens — cobalt brand on near-white with black + graphite tiers.
+         See design-systems/croissan/DESIGN.md for the full spec. */
+      --bg:           #2727CA;   /* default slide surface — brand primary */
+      --paper:        #ffffff;
+      --paper-dim:    rgba(255,255,255,.72);
+      --paper-mute:   rgba(255,255,255,.55);
+      --line:         rgba(255,255,255,.18);
+      --ink:          #0E0E14;   /* premium black surface, also card default */
+      --ink-soft:     #1A1A22;
+      --graphite:     #252527;   /* case-study slides */
+      --cobalt:       #2727CA;
+      --cobalt-deep:  #1F1FA8;
+      --cobalt-soft:  #3D3DE0;
+      --cobalt-lav:   #BCBCFF;
+      --cobalt-card:  #2D2DFC;   /* number-box surface */
+      --error:        #E53935;
+      --fg:           var(--paper);
+      --muted:        var(--paper-dim);
+      --accent:       var(--cobalt);
+      --shell:        var(--ink);
+      --deck-scale:   1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--shell);
+      color: var(--fg);
+      font: 18px/1.5 "Golos Text","Golos UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .deck-stage {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1920px;
+      height: 1080px;
+      background: var(--bg);
+      transform: translate(-50%, -50%) scale(var(--deck-scale, 1));
+      transform-origin: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .slide.active { display: flex; }
+    .deck-counter {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(10, 14, 26, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.18em;
+      z-index: 1000;
+    }
+    .deck-counter button {
+      width: 36px; height: 36px;
+      background: transparent;
+      color: #fff;
+      border: 0;
+      border-radius: 50%;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background 0.15s;
+    }
+    .deck-counter button:hover { background: rgba(255, 255, 255, 0.12); }
+    .deck-counter button[disabled] { opacity: 0.3; cursor: default; }
+    .deck-counter .deck-count {
+      padding: 0 14px;
+      letter-spacing: 0.22em;
+    }
+    .deck-counter .deck-count .total { color: rgba(255, 255, 255, 0.5); }
+    .deck-hint {
+      position: fixed;
+      bottom: 26px;
+      right: 28px;
+      color: rgba(255, 255, 255, 0.4);
+      font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 999;
+      pointer-events: none;
+    }
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body {
+        width: 1920px !important;
+        height: auto !important;
+        overflow: visible !important;
+        background: #fff !important;
+      }
+      .deck-stage {
+        position: static !important;
+        top: auto !important; left: auto !important;
+        transform: none !important; box-shadow: none !important;
+        width: 1920px !important; height: auto !important;
+        overflow: visible !important;
+      }
+      .slide {
+        display: flex !important;
+        position: relative !important;
+        inset: auto !important;
+        width: 1920px !important;
+        height: 1080px !important;
+        page-break-after: always;
+        break-after: page;
+      }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+      .deck-counter, .deck-hint { display: none !important; }
+    }
+  </style>
+
+  <!-- Google Fonts — Golos Text. Bundle locally if no network is available. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===========================================================
+       Per-deck Croissan styles. Free to edit. Do NOT redefine
+       .deck-stage, .slide, .deck-counter, .deck-hint, or anything
+       inside @media print above.
+       =========================================================== */
+
+    /* Slide surface variants */
+    .slide.brand    { background: var(--cobalt); color: var(--paper); }
+    .slide.paper    { background: var(--paper); color: var(--ink); }
+    .slide.ink      { background: var(--ink);   color: var(--paper); }
+    .slide.graphite { background: var(--graphite); color: var(--paper); }
+
+    /* Slide chrome — brand mark + page number on every slide.
+       Coordinates here match deck-framework's 1920×1080 canvas. */
+    .brand-mark {
+      position: absolute;
+      top: 60px; left: 116px;
+      display: flex; align-items: center; gap: .55em;
+      z-index: 3;
+    }
+    .brand-mark svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .brand-mark .wm { font-weight: 700; font-size: 18px; letter-spacing: -.005em; line-height: 1; }
+    .pn {
+      position: absolute;
+      bottom: 60px; right: 116px;
+      font-weight: 500; font-size: 14px;
+      letter-spacing: .16em;
+      color: var(--paper-mute);
+      font-variant-numeric: tabular-nums;
+      z-index: 3;
+    }
+    .slide.paper .brand-mark { color: var(--cobalt); }
+    .slide.paper .pn { color: rgba(21,14,71,.55); }
+
+    /* Frame (content area) — sits inside outer 7vh / 6vw padding */
+    .frame {
+      position: absolute;
+      inset: 150px 116px 150px 116px;
+      display: flex; flex-direction: column;
+      min-height: 0;
+    }
+    .frame.center { justify-content: center; }
+    .frame.top    { justify-content: flex-start; padding-top: 30px; }
+
+    /* Type scale */
+    .h-hero { font-weight: 700; font-size: 122px; line-height: 1.02; letter-spacing: -3.05px; text-wrap: balance; }
+    .h-xl   { font-weight: 700; font-size: 88px;  line-height: 1.05; letter-spacing: -1.94px; text-wrap: balance; }
+    .h-lg   { font-weight: 700; font-size: 62px;  line-height: 1.10; letter-spacing: -1.12px; text-wrap: balance; }
+    .h-md   { font-weight: 700; font-size: 42px;  line-height: 1.15; letter-spacing: -.50px; }
+    .h-sm   { font-weight: 600; font-size: 29px;  line-height: 1.20; letter-spacing: -.15px; }
+    .lead   { font-weight: 500; font-size: 30px;  line-height: 1.4;  color: var(--paper-dim); letter-spacing: -.15px; }
+    .body   { font-weight: 400; font-size: 22px;  line-height: 1.5;  color: var(--paper-dim); }
+    .meta   { font-weight: 500; font-size: 16px;  letter-spacing: .14em; text-transform: uppercase; color: var(--paper-mute); }
+    .num    { font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+    .dim    { color: var(--paper-mute); }
+
+    /* Pill / chip — five variants */
+    .pill {
+      display: inline-flex; align-items: center; gap: .55em;
+      font-weight: 500; font-size: 19px; line-height: 1;
+      padding: .85em 1.25em;
+      border-radius: 999px;
+      letter-spacing: -.005em;
+      white-space: nowrap;
+      border: 1px solid transparent;
+    }
+    .pill.dark    { background: var(--ink); color: var(--paper); }
+    .pill.light   { background: var(--paper); color: var(--cobalt); }
+    .pill.outline { background: transparent; color: var(--paper); border-color: rgba(255,255,255,.45); }
+    .pill.soft    { background: var(--cobalt-soft); color: var(--paper); }
+    .pill.deep    { background: var(--cobalt-deep); color: var(--paper); }
+    .pill-row     { display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: center; }
+    .pill-row.tight { gap: 10px 12px; }
+
+    /* Floating black badge above pill grid */
+    .badge-floating { position: relative; display: inline-block; }
+    .badge-floating .lab {
+      position: absolute; top: -1em; left: 24px;
+      background: var(--ink); color: var(--paper);
+      font-weight: 500; font-size: 15px;
+      padding: .5em .85em; border-radius: 999px;
+      z-index: 2; white-space: nowrap;
+    }
+
+    /* Cards — three variants */
+    .card {
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 18px;
+      padding: 32px 30px;
+      display: flex; flex-direction: column; gap: 12px;
+      height: 100%;
+    }
+    .card .lbl  { font-weight: 500; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--paper-mute); }
+    .card .ttl  { font-weight: 700; font-size: 33px; line-height: 1.15; letter-spacing: -.012em; }
+    .card .desc { font-weight: 400; font-size: 19px; line-height: 1.5; color: var(--paper-dim); }
+    .card .price{ font-weight: 800; font-size: 38px; line-height: 1; letter-spacing: -.025em; font-variant-numeric: tabular-nums; margin-top: auto; padding-top: 18px; }
+    .card.featured       { background: var(--paper); color: var(--cobalt); }
+    .card.featured .lbl  { color: var(--cobalt-deep); }
+    .card.featured .desc { color: rgba(39,39,202,.78); }
+    .card.outline        { background: transparent; border: 1px solid var(--line); color: var(--paper); }
+    .card.outline .desc  { color: var(--paper-dim); }
+
+    /* Number-box (cobalt slides only) */
+    .number-box {
+      border-radius: 32px;
+      padding: 32px 32px 28px;
+      background:
+        linear-gradient(180deg, rgba(14,14,181,0) 0%, rgba(14,14,181,0.3) 100%),
+        var(--cobalt-card);
+      color: var(--cobalt-lav);
+      font-weight: 600; font-size: 32px; line-height: 1.2; letter-spacing: -.96px;
+      min-height: 87px;
+      display: flex; align-items: center;
+    }
+
+    /* Stage row — pricing breakdown */
+    .stage-row {
+      display: grid;
+      grid-template-columns: 168px 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+    .stage-row:last-of-type { border-bottom: 1px solid var(--line); }
+    .stage-row .num-lbl { font-weight: 600; font-size: 18px; letter-spacing: .12em; color: var(--paper-mute); text-transform: uppercase; }
+    .stage-row .nm      { font-weight: 600; font-size: 26px; line-height: 1.2; letter-spacing: -.005em; }
+    .stage-row .pr      { font-weight: 700; font-size: 28px; font-variant-numeric: tabular-nums; letter-spacing: -.015em; }
+
+    /* Final price */
+    .price-final {
+      display: flex; align-items: baseline; justify-content: flex-end; gap: .2em;
+      font-weight: 800; font-size: 184px; line-height: .95; letter-spacing: -.04em;
+      font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .price-final .cur { font-size: .55em; font-weight: 700; letter-spacing: -.02em; opacity: .85; }
+
+    /* Demo grid — 4-frame */
+    .demo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .demo-grid figure { margin: 0; display: flex; flex-direction: column; min-width: 0; gap: 14px; }
+    .demo-grid .img {
+      aspect-ratio: 1/1; border-radius: 14px; overflow: hidden;
+      background: rgba(0,0,0,.18);
+    }
+    .demo-grid .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .demo-grid .cap {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 10px;
+      font-weight: 500; font-size: 16px; color: var(--paper-dim);
+    }
+    .demo-grid .cap .k { font-weight: 700; color: var(--paper); }
+
+    /* Polaroid photo card */
+    .polaroid {
+      background: var(--paper);
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.25));
+      padding: 30px 20px 40px;
+      border-radius: 1px;
+      display: inline-block;
+    }
+    .polaroid > div {
+      width: 366px; height: 480px;
+      border-radius: 4px; overflow: hidden;
+      box-shadow: inset 0 2px 12px rgba(0,0,0,.1);
+    }
+    .polaroid img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Slides Tag (sticker over photos) */
+    .sticker {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(0,0,0,.25);
+      padding: 12px 24px;
+      border-radius: 100px;
+      color: var(--paper);
+      font-weight: 500; font-size: 18px; line-height: 1.2;
+      text-shadow: 0 0 8px rgba(0,0,0,.2);
+      display: inline-block;
+    }
+
+    /* Layout helpers */
+    .grid-2     { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
+    .grid-2-7-5 { display: grid; grid-template-columns: 7fr 5fr; gap: 76px; align-items: start; }
+    .grid-2-6-6 { display: grid; grid-template-columns: 1fr 1fr; gap: 46px; align-items: stretch; }
+    .grid-3     { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; align-items: stretch; }
+    .grid-4     { display: grid; grid-template-columns: repeat(4, 1fr); gap: 23px; align-items: stretch; }
+    .col        { display: flex; flex-direction: column; }
+    .col.gap-sm { gap: 18px; }
+    .col.gap-md { gap: 32px; }
+    .col.gap-lg { gap: 54px; }
+  </style>
+
+  <!-- SLOT: theme overrides — leave empty unless the deck explicitly
+       needs to swap a token (e.g. for a partner-branded slide). Example:
+       <style>:root { --cobalt: #2A2ADA; }</style>
+  -->
+</head>
+<body>
+
+<!-- Reusable logo SVG (referenced via <use href="#croissan-logo">) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="croissan-logo" viewBox="0 0 36 36">
+      <ellipse cx="22.0277" cy="21.5989" rx="11.4081" ry="8.91908" transform="rotate(135 22.0277 21.5989)" fill="currentColor"/>
+      <path d="M2.13333 21.5215C2.27316 21.1417 2.43806 20.7593 2.6223 20.3737C3.39661 18.7529 4.38451 17.3468 5.62376 16.5249C6.40009 16.0101 7.25471 15.74 8.15856 15.7683C6.8603 14.62 4.64027 14.7881 3.01991 16.2162C1.29654 17.735 0.901976 20.1059 2.13333 21.5215Z" fill="currentColor"/>
+      <path d="M9.66614 17.0816C7.56193 18.5015 6.04834 20.914 5.69055 23.739C5.45599 25.5909 5.49735 27.4379 6.0701 29.0514C5.88245 28.9404 5.69209 28.8131 5.49905 28.6684C2.11363 26.1311 1.96103 23.8798 3.44766 20.768C4.93428 17.6563 7.0411 15.8275 9.66068 17.079C9.6625 17.0799 9.66432 17.0808 9.66614 17.0816Z" fill="currentColor"/>
+      <path d="M13.3717 16.6698C10.2173 21.1627 9.87752 26.8758 13.314 30.3124C14.3617 31.36 15.6209 32.0567 16.9926 32.4296C15.8818 32.8947 14.5023 33.063 12.7995 32.8473C7.22606 32.1414 6.033 28.3154 6.59809 23.8538C7.09266 19.9489 9.98303 17.0049 13.3717 16.6698Z" fill="currentColor"/>
+      <path d="M21.911 1.74382C21.5312 1.88365 21.1489 2.04855 20.7632 2.23279C19.1424 3.0071 17.7364 3.995 16.9145 5.23425C16.3996 6.01058 16.1295 6.8652 16.1578 7.76904C15.0096 6.47078 15.1776 4.25075 16.6057 2.63039C18.1246 0.907029 20.4955 0.512466 21.911 1.74382Z" fill="currentColor"/>
+      <path d="M17.4712 9.27661C18.8911 7.1724 21.3036 5.65882 24.1285 5.30102C25.9805 5.06647 27.8275 5.10783 29.4409 5.68057C29.33 5.49293 29.2027 5.30257 29.058 5.10953C26.5206 1.72411 24.2694 1.57151 21.1576 3.05814C18.0458 4.54476 16.2171 6.65157 17.4686 9.27115C17.4694 9.27297 17.4703 9.27479 17.4712 9.27661Z" fill="currentColor"/>
+      <path d="M17.0594 12.9823C21.5523 9.82785 27.2655 9.48807 30.702 12.9246C31.7496 13.9722 32.4463 15.2314 32.8193 16.6031C33.2843 15.4923 33.4526 14.1129 33.2369 12.4101C32.531 6.83662 28.7051 5.64356 24.2434 6.20864C20.3385 6.70321 17.3945 9.59358 17.0594 12.9823Z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="deck-stage" id="deck-stage">
+
+  <!-- ============================================================
+       SLIDE 01 · COVER
+       ============================================================ -->
+  <section class="slide brand active" data-screen-label="01 Привет">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="padding-top:14vh">
+      <h1 class="h-hero" style="max-width:18ch">Привет!<br>Мы Круассан Студио</h1>
+      <p class="h-xl" style="margin-top:5vh;max-width:18ch">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
+    </div>
+    <span class="pn">01 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 02 · CASES (compact proof — two side-by-side)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="02 Что делаем">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:50px">
+      <h2 class="h-lg" style="max-width:30ch">Создаём и&nbsp;развиваем продукты с&nbsp;ИИ<br>для&nbsp;{{Тип клиентов}}.</h2>
+      <div class="grid-2" style="gap:38px;align-items:stretch">
+        <div class="col gap-sm">
+          <span class="meta">Кейс · {{Клиент A}}</span>
+          <span class="pill dark" style="align-self:flex-start;font-size:20px">{{Заголовок кейса A}}</span>
+          <p class="body" style="font-size:17px;max-width:38ch">{{Один абзац: что было, что стало, ключевая метрика.}}</p>
+        </div>
+        <div class="col gap-sm">
+          <span class="meta">Кейс · {{Клиент B}}</span>
+          <span class="pill dark" style="align-self:flex-start;font-size:20px">{{Заголовок кейса B}}</span>
+          <p class="body" style="font-size:17px;max-width:38ch">{{Один абзац про второй кейс.}}</p>
+        </div>
+      </div>
+    </div>
+    <span class="pn">02 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 03 · ONE-STOP SHOP — pill grid + floating black badge
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="03 One-stop shop">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:80px">
+      <h2 class="h-xl" style="max-width:18ch">Мы ваш one-stop&nbsp;shop<br>для&nbsp;ИИ-решений.</h2>
+      <div class="badge-floating">
+        <span class="lab">В них мы особо хороши</span>
+        <div class="pill-row" style="max-width:1180px">
+          <span class="pill soft">Агентские системы и&nbsp;чат-боты</span>
+          <span class="pill soft">Брендформансы с&nbsp;ИИ</span>
+          <span class="pill soft">Оптимизация бизнес-процессов</span>
+          <span class="pill soft">Генеративные веб-сервисы</span>
+          <span class="pill soft">ИИ-инсталляции и&nbsp;стенды</span>
+          <span class="pill soft">Корпоративное обучение</span>
+        </div>
+      </div>
+      <p class="h-lg dim" style="font-weight:500;opacity:.55">Дальше — про вашу задачу&nbsp;→</p>
+    </div>
+    <span class="pn">03 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 04 · OFFER (this proposal's title slide)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="04 Оффер">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:50px">
+      <span class="meta" style="color:rgba(255,255,255,.7)">Коммерческое предложение</span>
+      <h2 class="h-hero" style="max-width:14ch">{{Название<br>проекта}}.</h2>
+      <p class="lead" style="max-width:42ch">{{Одно-два предложения: что это для пользователя клиента, какой результат.}}</p>
+      <div class="pill-row" style="margin-top:30px">
+        <span class="pill outline">{{N&nbsp;недель}}</span>
+        <span class="pill outline">Под&nbsp;ключ</span>
+        <span class="pill outline">{{Ключевая характеристика}}</span>
+      </div>
+    </div>
+    <span class="pn">04 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 05 · WHAT IT DOES (dual feature/mode breakdown)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="05 Что делает">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:60px">
+      <h2 class="h-xl" style="max-width:22ch">{{Заголовок-формула}}.</h2>
+      <div class="grid-2" style="gap:60px;align-items:start">
+        <div class="col gap-md">
+          <span class="meta">{{Группа A}}</span>
+          <div class="pill-row tight">
+            <span class="pill soft">{{Тег A1}}</span>
+            <span class="pill soft">{{Тег A2}}</span>
+            <span class="pill soft">{{Тег A3}}</span>
+            <span class="pill soft">{{Тег A4}}</span>
+          </div>
+        </div>
+        <div class="col gap-md">
+          <span class="meta">{{Группа B}}</span>
+          <div class="card">
+            <span class="lbl">Режим A · {{Имя}}</span>
+            <div class="ttl">{{Короткое название}}.</div>
+            <div class="desc">{{Что происходит, какой UX. Один абзац.}}</div>
+          </div>
+          <div class="card featured">
+            <span class="lbl">Режим B · {{Имя}} ★</span>
+            <div class="ttl">{{«Звёздный» режим}}.</div>
+            <div class="desc">{{Описание главного варианта — рекомендуем.}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="pn">05 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 06 · DEMO (4-frame proof grid)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="06 Демо">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:48px">
+      <div class="grid-2-7-5" style="align-items:end">
+        <h2 class="h-lg" style="max-width:22ch">{{Один тезис про результат демо}}.</h2>
+        <div class="pill-row" style="justify-content:flex-end">
+          <span class="pill outline">{{Метрика}}</span>
+          <span class="pill light">{{Источник кадров}}</span>
+        </div>
+      </div>
+      <div class="demo-grid">
+        <figure>
+          <div class="img"><!-- <img src="images/01.jpg" alt=""> --></div>
+          <div class="cap"><span class="k">{{Подпись 1}}</span><span>00 · {{контекст}}</span></div>
+        </figure>
+        <figure>
+          <div class="img"><!-- <img src="images/02.jpg" alt=""> --></div>
+          <div class="cap"><span class="k">{{Подпись 2}}</span><span>01 · {{контекст}}</span></div>
+        </figure>
+        <figure>
+          <div class="img"><!-- <img src="images/03.jpg" alt=""> --></div>
+          <div class="cap"><span class="k">{{Подпись 3}}</span><span>02 · {{контекст}}</span></div>
+        </figure>
+        <figure>
+          <div class="img"><!-- <img src="images/04.jpg" alt=""> --></div>
+          <div class="cap"><span class="k">{{Подпись 4}}</span><span>03 · {{контекст}}</span></div>
+        </figure>
+      </div>
+      <p class="body" style="max-width:78ch">{{Один абзац: что общее у всех кадров, что меняется, что это значит.}}</p>
+    </div>
+    <span class="pn">06 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 07 · TECH (research candidates + our optimization layer)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="07 Технологии">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:60px">
+      <h2 class="h-xl" style="max-width:24ch">Подберём оптимальный стек под&nbsp;вашу задачу.</h2>
+      <div class="grid-2-7-5" style="gap:76px">
+        <div class="col gap-md">
+          <span class="meta">Кандидаты для&nbsp;research-этапа</span>
+          <div class="pill-row tight">
+            <span class="pill dark">{{Кандидат A}}</span>
+            <span class="pill dark">{{Кандидат B}}</span>
+            <span class="pill dark">{{Кандидат C}}</span>
+            <span class="pill dark">{{Кандидат D}}</span>
+          </div>
+          <p class="body" style="max-width:46ch">На&nbsp;research-этапе прогоняем кандидатов на&nbsp;вашей фактуре. Выбираем тот, у&nbsp;которого выше {{ключевая метрика}}.</p>
+        </div>
+        <div class="col gap-md">
+          <span class="meta">Наш слой оптимизации</span>
+          <div class="card">
+            <span class="lbl">In-house · {{выигрыш}}</span>
+            <div class="ttl">{{Список техник}}.</div>
+            <div class="desc">{{Один абзац: что даёт это в цифрах.}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="pn">07 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 08 · INFRASTRUCTURE (recommended vs minimum)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="08 Инфраструктура">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:60px">
+      <h2 class="h-xl" style="max-width:18ch">{{Заголовок про требования}}.</h2>
+      <div class="grid-2-6-6" style="align-items:stretch">
+        <div class="card featured">
+          <span class="lbl">Рекомендуем</span>
+          <div class="ttl">{{Конфигурация}}<br>{{Ёмкость}}</div>
+          <div class="desc">{{Запас по производительности и почему этот вариант.}}</div>
+        </div>
+        <div class="card outline">
+          <span class="lbl">Минимум</span>
+          <div class="ttl">{{Минимальная}}<br>{{Ёмкость}}</div>
+          <div class="desc">{{Полный функционал, но без запаса. Когда оправдано.}}</div>
+        </div>
+      </div>
+      <p class="body" style="max-width:78ch">{{Один абзац про остальное: периферия, подбор и сборка под ключ.}}</p>
+    </div>
+    <span class="pn">08 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 09 · STAGES (3 cards with stage prices)
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="09 Этапы">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:60px">
+      <h2 class="h-xl" style="max-width:22ch">{{N&nbsp;недель<br>от&nbsp;старта до&nbsp;запуска}}.</h2>
+      <div class="grid-3">
+        <div class="card">
+          <span class="lbl">Этап 01 · {{N}} нед.</span>
+          <div class="ttl">Research<br>&amp;&nbsp;{{discovery}}.</div>
+          <div class="desc">{{Что делаем, что получает клиент на выходе.}}</div>
+          <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+        </div>
+        <div class="card">
+          <span class="lbl">Этап 02 · {{N}} нед.</span>
+          <div class="ttl">MVP &amp;&nbsp;Pilot.</div>
+          <div class="desc">{{Дообучение, сборка пайплайна, прогон полного цикла.}}</div>
+          <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+        </div>
+        <div class="card featured">
+          <span class="lbl">Этап 03 · {{N}} нед.</span>
+          <div class="ttl">Production<br>&amp;&nbsp;запуск.</div>
+          <div class="desc">{{Деплой, обучение оператора, поддержка после запуска.}}</div>
+          <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
+        </div>
+      </div>
+    </div>
+    <span class="pn">09 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 10 · PRICE TOTAL
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="10 Стоимость">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:50px">
+      <h2 class="h-xl" style="max-width:18ch">{{Название проекта}} под&nbsp;ключ.</h2>
+      <div class="col" style="max-width:1500px">
+        <div class="stage-row"><span class="num-lbl">Этап 01</span><span class="nm">Research &amp;&nbsp;{{...}} · {{N}} нед.</span><span class="pr">{{XXX 000&nbsp;₽}}</span></div>
+        <div class="stage-row"><span class="num-lbl">Этап 02</span><span class="nm">MVP &amp;&nbsp;Pilot · {{N}} нед.</span><span class="pr">{{XXX 000&nbsp;₽}}</span></div>
+        <div class="stage-row"><span class="num-lbl">Этап 03</span><span class="nm">Production &amp;&nbsp;запуск · {{N}} нед.</span><span class="pr">{{XXX 000&nbsp;₽}}</span></div>
+      </div>
+      <div class="col" style="margin-top:auto;align-items:flex-end">
+        <span class="meta" style="color:rgba(255,255,255,.7);align-self:flex-start">Итого&nbsp;— под&nbsp;ключ, {{N&nbsp;недель}}</span>
+        <div class="price-final"><span>{{XXX XXX}}</span><span class="cur">&nbsp;₽</span></div>
+      </div>
+    </div>
+    <span class="pn">10 / 11</span>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 11 · CONTACT
+       ============================================================ -->
+  <section class="slide brand" data-screen-label="11 Контакты">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="gap:60px">
+      <h2 class="h-hero" style="max-width:14ch">Давайте сделаем<br>ваш проект.&nbsp;🤍</h2>
+      <p class="lead" style="max-width:38ch">{{Имя}}, {{роль}} Круассан&nbsp;Студио&nbsp;— ответит на&nbsp;{{вопросы}} и&nbsp;соберёт {{демо / план}} за&nbsp;пару дней.</p>
+      <div class="col gap-sm" style="margin-top:30px">
+        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">@{{telegram}}</span>
+        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">{{e-mail}}</span>
+        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">hello@croissanstudio.ru</span>
+      </div>
+    </div>
+    <span class="pn">11 / 11</span>
+  </section>
+
+</div>
+
+<!-- Framework chrome — DO NOT EDIT below this line. -->
+<nav class="deck-counter" role="navigation" aria-label="Deck navigation">
+  <button type="button" id="deck-prev" aria-label="Previous slide">‹</button>
+  <span class="deck-count"><span id="deck-cur">01</span> <span class="total">/ <span id="deck-total">01</span></span></span>
+  <button type="button" id="deck-next" aria-label="Next slide">›</button>
+</nav>
+<div class="deck-hint">← / → · space</div>
+
+<script>
+  /* Verbatim copy of the open-design deck-framework.html runtime.
+     Do not modify — it solves five specific iframe-nav bugs. */
+  (function () {
+    var root = document.documentElement;
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+    var prev = document.getElementById('deck-prev');
+    var next = document.getElementById('deck-next');
+    var cur = document.getElementById('deck-cur');
+    var total = document.getElementById('deck-total');
+    var STORE = 'deck:idx:' + (location.pathname || '/');
+    var idx = 0;
+
+    function fit() {
+      var sw = window.innerWidth, sh = window.innerHeight;
+      if (sw <= 0 || sh <= 0) return;
+      var pad = 24;
+      var s = Math.min((sw - pad) / 1920, (sh - pad) / 1080);
+      if (!isFinite(s) || s <= 0) s = 1;
+      root.style.setProperty('--deck-scale', String(s));
+    }
+
+    function pad2(n) { return (n < 10 ? '0' : '') + n; }
+    function paint() {
+      slides.forEach(function (el, i) { el.classList.toggle('active', i === idx); });
+      if (cur) cur.textContent = pad2(idx + 1);
+      if (total) total.textContent = pad2(slides.length);
+      if (prev) prev.toggleAttribute('disabled', idx <= 0);
+      if (next) next.toggleAttribute('disabled', idx >= slides.length - 1);
+    }
+    function go(i) {
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      paint();
+      try { localStorage.setItem(STORE, String(idx)); } catch (_) {}
+    }
+    function onKey(e) {
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(idx + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(idx - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); go(0); }
+      else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+    }
+    window.addEventListener('keydown', onKey, true);
+    document.addEventListener('keydown', onKey, true);
+    if (prev) prev.addEventListener('click', function () { go(idx - 1); });
+    if (next) next.addEventListener('click', function () { go(idx + 1); });
+
+    document.body.setAttribute('tabindex', '-1');
+    document.body.style.outline = 'none';
+    function focusDeck() { try { window.focus(); document.body.focus({ preventScroll: true }); } catch (_) {} }
+    document.addEventListener('mousedown', focusDeck);
+    window.addEventListener('load', focusDeck);
+
+    try {
+      var saved = parseInt(localStorage.getItem(STORE) || '0', 10);
+      if (!isNaN(saved) && saved >= 0 && saved < slides.length) idx = saved;
+    } catch (_) {}
+
+    window.addEventListener('resize', fit);
+    if (typeof ResizeObserver === 'function') {
+      try { new ResizeObserver(fit).observe(document.documentElement); } catch (_) {}
+    }
+    fit();
+    paint();
+    go(idx);
+  })();
+</script>
+
+</body>
+</html>
