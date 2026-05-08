@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+# Remove the Croissan Studio identity skill links and (optionally) the install dir.
+#
+# Usage:
+#   bash ~/.croissan/identity/bin/uninstall              # removes symlinks only
+#   bash ~/.croissan/identity/bin/uninstall --purge      # also removes the cloned repo
+
+set -euo pipefail
+
+INSTALL_DIR="${CROISSAN_HOME:-$HOME/.croissan/identity}"
+CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
+SKILL_NAME="croissan-identity"
+
+bold()  { printf '\033[1m%s\033[0m\n' "$*"; }
+green() { printf '\033[32m%s\033[0m\n' "$*"; }
+warn()  { printf '\033[33m%s\033[0m\n' "$*"; }
+step()  { printf '\033[36m→\033[0m %s\n' "$*"; }
+
+PURGE=0
+if [ "${1:-}" = "--purge" ]; then PURGE=1; fi
+
+# Unlink Claude Code skill
+target="$CLAUDE_SKILLS_DIR/$SKILL_NAME"
+if [ -L "$target" ]; then
+  rm "$target"; step "Removed $target"
+elif [ -e "$target" ]; then
+  warn "$target is not a symlink — leaving alone. Remove manually if needed."
+fi
+
+# Unlink open-design integration if it was linked
+od_dirs=(
+  "$HOME/Dev/open-design" "$HOME/dev/open-design"
+  "$HOME/Code/open-design" "$HOME/code/open-design"
+  "$HOME/open-design"
+)
+for d in "${od_dirs[@]}"; do
+  for sub in "design-systems/croissan" "skills/croissan-kp" "templates/croissan-deck.html"; do
+    p="$d/$sub"
+    if [ -L "$p" ]; then
+      target_path="$(readlink "$p")"
+      if [[ "$target_path" == *"/croissan/identity/integrations/open-design/"* ]] || \
+         [[ "$target_path" == *"studio-identity/integrations/open-design/"* ]]; then
+        rm "$p"; step "Removed $p"
+      fi
+    fi
+  done
+done
+
+# Optionally remove the install dir
+if [ "$PURGE" = "1" ]; then
+  if [ -d "$INSTALL_DIR" ]; then
+    rm -rf "$INSTALL_DIR"
+    step "Removed $INSTALL_DIR"
+  fi
+fi
+
+echo
+green "Uninstalled."
+if [ "$PURGE" = "0" ]; then
+  echo "Repo still at $INSTALL_DIR. Re-run with --purge to remove it too."
+fi

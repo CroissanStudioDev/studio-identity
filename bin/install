@@ -1,0 +1,140 @@
+#!/usr/bin/env bash
+# Install Croissan Studio identity as a globally-available Claude Code skill.
+#
+# What this does:
+#   1. Clones (or updates) studio-identity into ~/.croissan/identity
+#   2. Symlinks the skill into ~/.claude/skills/croissan-identity
+#   3. Optionally symlinks the open-design integration if open-design is detected
+#
+# Usage:
+#   curl -sL https://raw.githubusercontent.com/CroissanStudioDev/studio-identity/main/bin/install | bash
+#
+# Or, after cloning manually:
+#   bin/install
+
+set -euo pipefail
+
+REPO_URL="https://github.com/CroissanStudioDev/studio-identity.git"
+INSTALL_DIR="${CROISSAN_HOME:-$HOME/.croissan/identity}"
+CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
+SKILL_NAME="croissan-identity"
+
+# ---------- pretty output ---------------------------------------------------
+bold()  { printf '\033[1m%s\033[0m\n' "$*"; }
+green() { printf '\033[32m%s\033[0m\n' "$*"; }
+red()   { printf '\033[31m%s\033[0m\n' "$*" >&2; }
+warn()  { printf '\033[33m%s\033[0m\n' "$*"; }
+step()  { printf '\033[36m→\033[0m %s\n' "$*"; }
+
+# ---------- preflight -------------------------------------------------------
+preflight() {
+  command -v git >/dev/null 2>&1 || {
+    red "git is required but not installed. Install git first."
+    exit 1
+  }
+  if [ ! -d "$HOME/.claude" ]; then
+    warn "~/.claude does not exist — Claude Code may not be installed."
+    warn "The skill will still be staged at $INSTALL_DIR, and ~/.claude/skills will be created."
+  fi
+}
+
+# ---------- clone or update -------------------------------------------------
+fetch_repo() {
+  if [ -d "$INSTALL_DIR/.git" ]; then
+    step "Updating $INSTALL_DIR"
+    git -C "$INSTALL_DIR" fetch --quiet origin
+    local current branch
+    branch="$(git -C "$INSTALL_DIR" symbolic-ref --short HEAD 2>/dev/null || echo main)"
+    git -C "$INSTALL_DIR" reset --quiet --hard "origin/$branch"
+  else
+    step "Cloning $REPO_URL → $INSTALL_DIR"
+    mkdir -p "$(dirname "$INSTALL_DIR")"
+    git clone --quiet "$REPO_URL" "$INSTALL_DIR"
+  fi
+}
+
+# ---------- link the Claude Code skill --------------------------------------
+link_skill() {
+  mkdir -p "$CLAUDE_SKILLS_DIR"
+  local target="$CLAUDE_SKILLS_DIR/$SKILL_NAME"
+  local source="$INSTALL_DIR/skills/$SKILL_NAME"
+
+  if [ ! -d "$source" ]; then
+    red "Expected skill at $source — repo layout may have changed."
+    exit 1
+  fi
+
+  if [ -L "$target" ]; then
+    rm "$target"
+  elif [ -e "$target" ]; then
+    warn "$target exists and is not a symlink — leaving alone."
+    warn "Move/remove it manually if you want this installer to take over."
+    return 0
+  fi
+
+  ln -s "$source" "$target"
+  step "Linked $target → $source"
+}
+
+# ---------- optionally link open-design integration -------------------------
+link_open_design() {
+  local od_dirs=(
+    "$HOME/Dev/open-design"
+    "$HOME/dev/open-design"
+    "$HOME/Code/open-design"
+    "$HOME/code/open-design"
+    "$HOME/open-design"
+  )
+  local od_root=""
+  for d in "${od_dirs[@]}"; do
+    if [ -d "$d/skills" ] && [ -d "$d/design-systems" ] && [ -d "$d/templates" ]; then
+      od_root="$d"; break
+    fi
+  done
+  if [ -z "$od_root" ]; then
+    return 0
+  fi
+
+  step "Detected open-design at $od_root"
+  local src_root="$INSTALL_DIR/integrations/open-design"
+
+  for sub in "design-systems/croissan" "skills/croissan-kp" "templates/croissan-deck.html"; do
+    local src="$src_root/$sub"
+    local dst="$od_root/$sub"
+    if [ ! -e "$src" ]; then
+      warn "  $src missing — skipping."
+      continue
+    fi
+    mkdir -p "$(dirname "$dst")"
+    if [ -L "$dst" ] || [ -e "$dst" ]; then
+      rm -rf "$dst"
+    fi
+    ln -s "$src" "$dst"
+    step "  Linked $dst → $src"
+  done
+}
+
+# ---------- main ------------------------------------------------------------
+main() {
+  bold "Croissan Studio identity — installer"
+  echo  "Target: $INSTALL_DIR"
+  echo
+  preflight
+  fetch_repo
+  link_skill
+  link_open_design
+  echo
+  green "Done."
+  echo
+  bold "What's installed:"
+  echo  "  • Repo at $INSTALL_DIR"
+  echo  "  • Claude Code skill at $CLAUDE_SKILLS_DIR/$SKILL_NAME"
+  echo
+  bold "Next steps:"
+  echo  "  • Open any project; Claude Code will surface this skill when you mention 'Croissan' or 'студия'"
+  echo  "  • To update later:    bash $INSTALL_DIR/bin/install"
+  echo  "  • To uninstall:       bash $INSTALL_DIR/bin/uninstall"
+  echo  "  • Single-file context: cat $INSTALL_DIR/SUMMARY.md"
+}
+
+main "$@"

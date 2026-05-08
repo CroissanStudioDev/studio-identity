@@ -16,10 +16,55 @@ Copilot, custom subagents) that need durable context about how we work.
 
 ---
 
+## Use this in another workspace (3 ways)
+
+### 1. Just paste a URL (zero install)
+
+The single-file context summary lives at:
+
+> https://raw.githubusercontent.com/CroissanStudioDev/studio-identity/main/SUMMARY.md
+
+In Cursor, Claude.ai, ChatGPT, Windsurf, Continue — paste that URL into the chat (or
+attach it as context). [`SUMMARY.md`](SUMMARY.md) is ~250 lines and self-contained —
+it's the 20% of the brand that delivers 80% of the value (color tokens, type scale,
+voice principles, top do/don'ts, anti-slop pre-flight). No clone, no install.
+
+### 2. Install as a Claude Code skill (one line)
+
+```bash
+curl -sL https://raw.githubusercontent.com/CroissanStudioDev/studio-identity/main/bin/install | bash
+```
+
+This:
+- Clones (or updates) the repo at `~/.croissan/identity`
+- Symlinks the skill to `~/.claude/skills/croissan-identity`
+- Auto-detects [`open-design`](https://github.com/nexu-io/open-design) at common paths
+  and links the integration in too
+
+After install, **every project** on the machine has access. Claude Code activates the
+skill when the user mentions Croissan, the studio, or asks for KP / commercial-proposal
+output.
+
+To update later: re-run the same one-liner. To uninstall:
+`bash ~/.croissan/identity/bin/uninstall` (add `--purge` to also remove the cloned repo).
+
+### 3. Clone the full repo
+
+For editing the brand itself, or for projects that need the actual binary assets
+(logo SVGs, font files, deck-template HTML):
+
+```bash
+git clone https://github.com/CroissanStudioDev/studio-identity ~/Dev/studio-identity
+```
+
+Then point your project's `CLAUDE.md` / `.cursorrules` at the cloned path.
+
+---
+
 ## How to use this repo
 
 ### Starting a new project
-1. Read [`brand/voice-and-tone.md`](brand/voice-and-tone.md) and [`identity/colors.md`](identity/colors.md)
+1. Read [`SUMMARY.md`](SUMMARY.md) and [`brand/voice-and-tone.md`](brand/voice-and-tone.md)
    to set the mood.
 2. Copy [`design-system/design-tokens.css`](design-system/design-tokens.css) into your `globals.css`.
 3. Copy logo assets from [`assets/logos/`](assets/logos) and fonts from [`assets/fonts/`](assets/fonts).
@@ -40,13 +85,16 @@ rules are hard, and how to reconcile this repo with the project you're working i
 ## Repo map
 
 ```
+SUMMARY.md         — single-file self-contained brand context (paste-into-any-chat)
 brand/             — voice, tone, messaging, company facts, sub-brands, proposal structure
 identity/          — logo, colors, typography, iconography
 design-system/     — tokens, components, sections, decks, animations, a11y
 tech/              — default stack, Next.js patterns, code standards, SEO/GEO
 agents/            — rules, checklists, and the creative-latitude principle
 assets/            — logos, client logos, fonts, deck-template (single-file HTML deck)
+skills/            — Claude Code skill (croissan-identity) — symlinked into ~/.claude/skills/
 integrations/      — plug-in artifacts for external tools (open-design skill registry)
+bin/               — install / uninstall scripts for the curl one-liner
 ```
 
 ### How to think about it
