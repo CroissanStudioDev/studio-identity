@@ -8,3 +8,16 @@ node_modules/
 .claude/settings.local.json
 .claude/worktrees/
 
+# Non-redistributable fonts — these folders ship a README only.
+# If you drop the actual binaries locally, .gitignore keeps you from
+# committing them by accident. Do NOT remove these lines without
+# checking the per-folder README first.
+assets/fonts/golos-ui/*.ttf
+assets/fonts/golos-ui/*.otf
+assets/fonts/golos-ui/*.woff
+assets/fonts/golos-ui/*.woff2
+assets/fonts/sf-pro/*.ttf
+assets/fonts/sf-pro/*.otf
+assets/fonts/sf-pro/*.woff
+assets/fonts/sf-pro/*.woff2
+

@@ -8,9 +8,11 @@ Copilot, custom subagents) that need durable context about how we work.
 
 > Primary live references:
 > - **Code**: `~/Dev/croissan-landing` — when this repo and the codebase disagree, **the code is right**. Update this repo to match.
-> - **Visual brand**: Figma file [`Branding`](https://www.figma.com/design/5evQ6yHHzqQoqu8N40m54s/Branding) — logo lockups, wordmark, color tiles.
-> - **Sales decks**: Figma file [`🥐 Studio Sales`](https://www.figma.com/design/6vPS5wLtzWOsiowTw5kcTV).
-> - **Client proposals (КП)**: Figma file [`КПшки`](https://www.figma.com/design/TKIBzc5szwfCA0cufpu8cq).
+> - **Visual brand**: internal Figma `Branding` file — logo lockups, wordmark, color tiles.
+> - **Sales decks**: internal Figma `Studio Sales` master.
+> - **Client proposals (КП)**: internal Figma `КПшки` file (page «Самая Новая» is the canonical template).
+>
+> Figma file URLs are intentionally not committed — those files are private to the studio. Ask a founder for access if you need it.
 
 ---
 

@@ -4,7 +4,7 @@ The Croissan brand mark is a stylized croissant — three crescent strokes aroun
 rotated ellipse. It exists in two visual modes (flat 2D and dimensional 3D) and pairs with the
 **Croissan Studio** wordmark in three lockup variants.
 
-> Source of truth: Figma file [`Branding`](https://www.figma.com/design/5evQ6yHHzqQoqu8N40m54s/Branding).
+> Source of truth: the studio's internal Figma `Branding` file (URLs not committed — ask a founder for access).
 
 ## Mark variants
 

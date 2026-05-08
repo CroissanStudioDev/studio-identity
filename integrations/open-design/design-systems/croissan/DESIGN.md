@@ -75,11 +75,13 @@ Never a hero gradient. Never a "trust" two-stop sweep. If you find yourself reac
 ## 3. Typography Rules
 
 ### Font Family
-- **Right Grotesk** (display, H1 only on web): Local font file. CSS variable `--font-right-grotesk`. Used **only for the H1 of marketing pages** — bold, slightly cheeky, modern. Lowering it into H2/H3 makes the system noisy.
-- **Golos Text** (body and slides): Google Fonts. CSS variable `--font-geist-sans`. Carries every line of body, every H2/H3 on web, and **every line on slides** (including H1 on slides — Right Grotesk is web-only).
-- **Golos UI Bold** (slides H1): A weight of Golos used for slide titles at 90 px. On the web, this is `font-bold` Golos Text.
-- **Geist Mono** (mono): Google Fonts via `next/font`. CSS variable `--font-geist-mono`. Code blocks, technical readouts.
-- **Noto Sans** (server-side rendering): Bundled TTFs (Regular + Bold) for OG-image generation and PDF rendering where Google Fonts isn't reachable.
+- **Right Grotesk** (display, H1 only on web): Studio-licensed local font, bundled at [`assets/fonts/right-grotesk/accent-typeface.woff2`](../../../../assets/fonts/right-grotesk/accent-typeface.woff2). CSS variable `--font-right-grotesk`. Used **only for the H1 of marketing pages** — bold, slightly cheeky, modern. Lowering it into H2/H3 makes the system noisy.
+- **Golos Text** (body, sub-headings, slides): OFL, bundled at [`assets/fonts/golos-text/`](../../../../assets/fonts/golos-text/). CSS variable `--font-geist-sans`. Carries every line of body, every H2/H3 on web, and **every line on slides** (including H1 on slides — Right Grotesk is web-only).
+- **Golos UI** (older Figma slide masters): **Not bundled** — commercial license via ParaType. New decks should substitute Golos Text Bold at 90 px (visually near-identical at that size). See [`assets/fonts/golos-ui/README.md`](../../../../assets/fonts/golos-ui/README.md).
+- **Inter** (slide metric chips on case-study slides): OFL, bundled at [`assets/fonts/inter/`](../../../../assets/fonts/inter/). 18 px Medium only. Don't use Inter on the web — that's an AI-default tell.
+- **Geist Mono** (mono): OFL, bundled at [`assets/fonts/geist-mono/`](../../../../assets/fonts/geist-mono/). CSS variable `--font-geist-mono`. Code blocks, technical readouts, page-number chrome.
+- **Noto Sans** (server-side rendering): OFL TTFs (Regular + Bold) bundled at [`assets/fonts/noto-sans/`](../../../../assets/fonts/noto-sans/). For OG-image generation and PDF rendering where Google Fonts isn't reachable.
+- **SF Pro Text** (iOS-flavored mockups in Figma): **Not bundled** — Apple license forbids redistribution. Only relevant when designing iOS UI mockups; everywhere else, use Golos Text.
 
 ### Hierarchy (web)
 

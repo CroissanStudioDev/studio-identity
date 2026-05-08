@@ -1,13 +1,14 @@
 # Decks & presentations — visual spec
 
 Канонический визуальный язык для слайдов: КП (коммерческие предложения), питч-деки,
-event-деки. Источник правды — страница **«Самая Новая»** в Figma-файле
-[`КПшки`](https://www.figma.com/design/TKIBzc5szwfCA0cufpu8cq/%D0%9A%D0%9F%D1%88%D0%BA%D0%B8?node-id=196-1787)
-([slide #1 cover](https://www.figma.com/design/TKIBzc5szwfCA0cufpu8cq/%D0%9A%D0%9F%D1%88%D0%BA%D0%B8?node-id=196-1787)).
+event-деки. Источник правды — страница **«Самая Новая»** во внутреннем Figma-файле
+**`КПшки`**.
 
-Связанные файлы:
-- [`Studio Sales`](https://www.figma.com/design/6vPS5wLtzWOsiowTw5kcTV) — мастер-питч и переиспользуемые слайды.
-- [`Branding`](https://www.figma.com/design/5evQ6yHHzqQoqu8N40m54s/Branding) — логотипы и фирменные плашки.
+Связанные файлы (внутренние, ссылки не коммитим):
+- `Studio Sales` — мастер-питч и переиспользуемые слайды.
+- `Branding` — логотипы и фирменные плашки.
+
+> Figma-файлы приватны для студии. Если нужен доступ — попроси у фаундера.
 
 > Для нарративной структуры (какие слайды в каком порядке) — [`../brand/proposal-structure.md`](../brand/proposal-structure.md).
 
@@ -346,7 +347,7 @@ align: right;
 
 Два пути в зависимости от деки:
 
-### Figma-путь (Figma-файл [`КПшки`](https://www.figma.com/design/TKIBzc5szwfCA0cufpu8cq))
+### Figma-путь (внутренний файл `КПшки`)
 
 1. Дублируй мастер-фрейм из «Самой Новой» (или подходящей готовой КП — Гознак, PIMS,
    Цифровой Туризм). Не начинай с пустого листа.
