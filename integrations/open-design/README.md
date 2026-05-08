@@ -20,73 +20,80 @@ files in this repo:
 skills/croissan-kp/
 ├── SKILL.md
 ├── assets/
-│   └── croissan-deck.html       → ../../templates/croissan-deck.html
+│   └── croissan-deck.html       → ../../../templates/croissan-deck.html
 └── references/
-    ├── DESIGN.md                → ../../design-systems/croissan/DESIGN.md
-    ├── proposal-structure.md    → ../../../../brand/proposal-structure.md
-    ├── voice-and-tone.md        → ../../../../brand/voice-and-tone.md
-    ├── facts.md                 → ../../../../brand/facts.md
-    └── creative-latitude.md     → ../../../../agents/creative-latitude.md
+    ├── DESIGN.md                → ../../../design-systems/croissan/DESIGN.md
+    ├── anti-ai-slop.md          → ../../../../../agents/anti-ai-slop.md
+    ├── creative-latitude.md     → ../../../../../agents/creative-latitude.md
+    ├── facts.md                 → ../../../../../brand/facts.md
+    ├── proposal-structure.md    → ../../../../../brand/proposal-structure.md
+    └── voice-and-tone.md        → ../../../../../brand/voice-and-tone.md
 ```
 
-This keeps a single source of truth: when you update [`brand/facts.md`](../../brand/facts.md)
-or [`design-system/decks.md`](../../design-system/decks.md), the open-design skill picks
-up the change automatically without a separate sync step.
+These symlinks live **inside studio-identity** and keep a single source of truth here.
+When the skill is *deployed* into open-design (`bin/sync-opendesign`), `rsync -L`
+dereferences them into real files — necessary because open-design's discovery skips
+symlinks. So the source-of-truth is here; the deployed copy is a snapshot.
 
 ## Install
 
-### Option A — symlink into open-design (recommended for active development)
+### Why we copy instead of symlink
 
-From the root of your open-design checkout:
+**Symlinks don't work for open-design's discovery.** Both
+[`apps/daemon/src/design-systems.ts`](https://github.com/nexu-io/open-design/blob/main/apps/daemon/src/design-systems.ts)
+and [`apps/daemon/src/skills.ts`](https://github.com/nexu-io/open-design/blob/main/apps/daemon/src/skills.ts)
+scan their root with `readdir({ withFileTypes: true })` and filter on
+`entry.isDirectory()`. Node's `Dirent.isDirectory()` returns **false** for
+symlinks-to-directories — so symlinked entries are silently skipped.
 
-```bash
-SI=~/Dev/studio-identity   # adjust to wherever this repo lives
+The fix is a real-file copy with `rsync -L` (which dereferences nested symlinks like
+the skill's `references/` pointing back to `brand/facts.md`). Trade-off: edits in
+studio-identity don't propagate instantly; you re-run a sync command.
 
-# Croissan design system
-ln -s "$SI/integrations/open-design/design-systems/croissan" \
-      design-systems/croissan
+> **TODO upstream:** [submit a PR](https://github.com/nexu-io/open-design) that handles
+> symlinks via stat-after-readdir. Once it lands, switch back to the symlink option.
 
-# Croissan deck template
-ln -s "$SI/integrations/open-design/templates/croissan-deck.html" \
-      templates/croissan-deck.html
-
-# Croissan KP skill
-ln -s "$SI/integrations/open-design/skills/croissan-kp" \
-      skills/croissan-kp
-```
-
-Edits in studio-identity propagate to open-design instantly.
-
-### Option B — copy snapshot (recommended for shipping)
+### Option A — `bin/install` does it for you (recommended)
 
 ```bash
-cp -r integrations/open-design/design-systems/croissan       /path/to/open-design/design-systems/
-cp    integrations/open-design/templates/croissan-deck.html  /path/to/open-design/templates/
-cp -r integrations/open-design/skills/croissan-kp            /path/to/open-design/skills/
+curl -sL https://raw.githubusercontent.com/CroissanStudioDev/studio-identity/main/bin/install | bash
 ```
 
-You'll need to **resolve the symlinks** after copying so open-design sees real files:
+The installer auto-detects open-design at common paths
+(`~/Dev/open-design`, `~/Dev/opendesign`, `~/Code/open-design`, …) and rsyncs the
+three artifacts in. Re-run any time to update.
+
+### Option B — manual sync (if open-design is in a non-standard location)
 
 ```bash
-cd /path/to/open-design/skills/croissan-kp
-for link in references/* assets/*; do
-  if [ -L "$link" ]; then
-    target=$(readlink -f "$link")
-    rm "$link"
-    cp "$target" "$link"
-  fi
-done
+bash ~/.croissan/identity/bin/sync-opendesign /path/to/your/open-design
 ```
 
-This fork is now self-contained but will drift from studio-identity over time. Re-run on
-brand updates.
+Or, if you've cloned studio-identity directly:
 
-### Option C — fork open-design's skill registry path
+```bash
+bash ~/Dev/studio-identity/bin/sync-opendesign /path/to/your/open-design
+```
 
-If you maintain your own open-design fork or namespace (e.g. internal-only skills), drop
-the same three artifacts into your fork's matching paths. open-design's skill registry
-scans `~/.claude/skills/`, `./skills/`, and `./.claude/skills/` — anywhere on that list
-works.
+The script uses `rsync -aL --delete` so deletions in studio-identity also propagate.
+
+### Option C — manual rsync (if you don't want to use our scripts)
+
+```bash
+SI=~/Dev/studio-identity
+OD=/path/to/open-design
+
+rsync -aL --delete "$SI/integrations/open-design/design-systems/croissan/" \
+                   "$OD/design-systems/croissan/"
+rsync -aL --delete "$SI/integrations/open-design/skills/croissan-kp/" \
+                   "$OD/skills/croissan-kp/"
+cp                 "$SI/integrations/open-design/templates/croissan-deck.html" \
+                   "$OD/templates/croissan-deck.html"
+```
+
+The `-L` flag is critical — without it, the skill's `references/*.md` symlinks
+(pointing back to `brand/facts.md` etc.) get copied as broken symlinks instead of
+their content.
 
 ## Verifying the install
 
@@ -132,14 +139,25 @@ clean separation.
 
 ## Updating
 
-When you update brand artifacts in this repo, propagate to deployed open-design:
+After editing brand artifacts in this repo, run:
 
-| You changed… | …and the change reaches open-design via |
-|--------------|------------------------------------------|
-| `brand/facts.md` | symlink (Option A) — instant. Snapshot (B) — re-run snapshot script. |
-| `design-system/decks.md` | not auto-propagated — `decks.md` documents internal patterns; the spec the agent reads is `integrations/open-design/design-systems/croissan/DESIGN.md`. Update both. |
-| `integrations/open-design/design-systems/croissan/DESIGN.md` | symlink (A) — instant. Snapshot (B) — re-copy file. |
-| `integrations/open-design/templates/croissan-deck.html` | symlink (A) — instant. Snapshot (B) — re-copy file. |
+```bash
+bash ~/.croissan/identity/bin/sync-opendesign        # auto-detects open-design
+# or
+bash ~/Dev/studio-identity/bin/sync-opendesign /path/to/your/open-design
+```
+
+Then refresh open-design's browser tab (or restart its dev server). What propagates:
+
+| You changed… | …reaches open-design after `sync-opendesign` |
+|--------------|----------------------------------------------|
+| `brand/facts.md` | yes (the skill's `references/facts.md` symlink resolves to it; rsync `-L` dereferences) |
+| `agents/anti-ai-slop.md`, `agents/creative-latitude.md` | yes (same path — symlinked into the skill, dereferenced on copy) |
+| `brand/voice-and-tone.md`, `brand/proposal-structure.md` | yes |
+| `integrations/open-design/design-systems/croissan/DESIGN.md` | yes |
+| `integrations/open-design/templates/croissan-deck.html` | yes |
+| `integrations/open-design/skills/croissan-kp/SKILL.md` | yes |
+| `design-system/decks.md` (internal doc) | NO — decks.md is for humans editing the brand. The spec the open-design agent reads is `DESIGN.md`. Update both deliberately. |
 
 If open-design itself updates its `templates/deck-framework.html` (e.g. the runtime fixes
 a new iframe-nav bug), re-fetch and **diff** their version against the verbatim block at

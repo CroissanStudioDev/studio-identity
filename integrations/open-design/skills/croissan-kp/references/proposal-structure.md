@@ -1,1 +1,1 @@
-../../../../brand/proposal-structure.md
+../../../../../brand/proposal-structure.md

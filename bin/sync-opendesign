@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# Re-sync the Croissan Studio integration into a local open-design checkout.
+#
+# When to use: you edited something in studio-identity (DESIGN.md, the deck
+# template, the KP skill, brand/facts.md, etc.) and want the changes to
+# show up in open-design's UI.
+#
+# We copy real files instead of symlinking because open-design's discovery
+# (apps/daemon/src/design-systems.ts and skills.ts) checks
+# `entry.isDirectory()` on readdir Dirents, which returns false for
+# symlinks-to-directories. Real copies, manual re-sync.
+#
+# Usage:
+#   bash ~/.croissan/identity/bin/sync-opendesign            # auto-detect
+#   bash ~/.croissan/identity/bin/sync-opendesign /path/to/open-design
+
+set -euo pipefail
+
+SI_ROOT="${CROISSAN_HOME:-$HOME/.croissan/identity}"
+# If we're being run from a clone (not from ~/.croissan), use that clone.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -d "$SCRIPT_DIR/../integrations/open-design" ]; then
+  SI_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+fi
+
+bold()  { printf '\033[1m%s\033[0m\n' "$*"; }
+green() { printf '\033[32m%s\033[0m\n' "$*"; }
+red()   { printf '\033[31m%s\033[0m\n' "$*" >&2; }
+step()  { printf '\033[36m→\033[0m %s\n' "$*"; }
+
+if [ ! -d "$SI_ROOT/integrations/open-design" ]; then
+  red "Cannot find studio-identity — looked at $SI_ROOT"
+  red "Run bin/install first, or set CROISSAN_HOME to the studio-identity root."
+  exit 1
+fi
+
+# Resolve target open-design root
+OD_ROOT="${1:-}"
+if [ -z "$OD_ROOT" ]; then
+  for d in \
+    "$HOME/Dev/open-design"  "$HOME/dev/open-design" \
+    "$HOME/Dev/opendesign"   "$HOME/dev/opendesign" \
+    "$HOME/Code/open-design" "$HOME/code/open-design" \
+    "$HOME/Code/opendesign"  "$HOME/code/opendesign" \
+    "$HOME/open-design"      "$HOME/opendesign"; do
+    if [ -d "$d/skills" ] && [ -d "$d/design-systems" ] && [ -d "$d/templates" ]; then
+      OD_ROOT="$d"; break
+    fi
+  done
+fi
+
+if [ -z "$OD_ROOT" ] || [ ! -d "$OD_ROOT/skills" ]; then
+  red "Could not find open-design. Pass the path explicitly:"
+  red "  bin/sync-opendesign /path/to/open-design"
+  exit 1
+fi
+
+command -v rsync >/dev/null 2>&1 || {
+  red "rsync is required. Install it and re-run."
+  exit 1
+}
+
+bold "Syncing Croissan Studio → $OD_ROOT"
+SRC="$SI_ROOT/integrations/open-design"
+
+for sub in "design-systems/croissan" "skills/croissan-kp"; do
+  if [ ! -d "$SRC/$sub" ]; then
+    red "  $SRC/$sub missing — skipping"; continue
+  fi
+  mkdir -p "$OD_ROOT/$sub"
+  rsync -aL --delete "$SRC/$sub/" "$OD_ROOT/$sub/"
+  step "$OD_ROOT/$sub"
+done
+
+cp "$SRC/templates/croissan-deck.html" "$OD_ROOT/templates/croissan-deck.html"
+step "$OD_ROOT/templates/croissan-deck.html"
+
+echo
+green "Synced. Restart the open-design dev server (or refresh the browser tab) to pick up changes."

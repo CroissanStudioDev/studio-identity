@@ -1,1 +1,1 @@
-../../../../agents/creative-latitude.md
+../../../../../agents/creative-latitude.md

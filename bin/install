@@ -98,20 +98,36 @@ link_open_design() {
   step "Detected open-design at $od_root"
   local src_root="$INSTALL_DIR/integrations/open-design"
 
-  for sub in "design-systems/croissan" "skills/croissan-kp" "templates/croissan-deck.html"; do
-    local src="$src_root/$sub"
-    local dst="$od_root/$sub"
-    if [ ! -e "$src" ]; then
-      warn "  $src missing — skipping."
+  # NOTE: open-design's design-system + skill discovery uses
+  # readdir({withFileTypes:true}) and filters by entry.isDirectory(),
+  # which returns FALSE for symlinks-to-directories. So we copy real
+  # files instead of symlinking. Re-run this script (or bin/sync-opendesign)
+  # after editing studio-identity to propagate changes.
+  command -v rsync >/dev/null 2>&1 || {
+    red "rsync is required for the open-design integration. Install rsync and re-run."
+    return 1
+  }
+
+  for sub in "design-systems/croissan" "skills/croissan-kp"; do
+    local src="$src_root/$sub/"
+    local dst="$od_root/$sub/"
+    if [ ! -d "${src%/}" ]; then
+      warn "  ${src%/} missing — skipping."
       continue
     fi
-    mkdir -p "$(dirname "$dst")"
-    if [ -L "$dst" ] || [ -e "$dst" ]; then
-      rm -rf "$dst"
-    fi
-    ln -s "$src" "$dst"
-    step "  Linked $dst → $src"
+    mkdir -p "$dst"
+    rsync -aL --delete "$src" "$dst"
+    step "  Synced $od_root/$sub"
   done
+
+  # Single file template
+  local tpl_src="$src_root/templates/croissan-deck.html"
+  local tpl_dst="$od_root/templates/croissan-deck.html"
+  if [ -f "$tpl_src" ]; then
+    if [ -L "$tpl_dst" ]; then rm "$tpl_dst"; fi
+    cp "$tpl_src" "$tpl_dst"
+    step "  Synced $tpl_dst"
+  fi
 }
 
 # ---------- main ------------------------------------------------------------

@@ -45,7 +45,9 @@ After install, **every project** on the machine has access. Claude Code activate
 skill when the user mentions Croissan, the studio, or asks for KP / commercial-proposal
 output.
 
-To update later: re-run the same one-liner. To uninstall:
+To update later: re-run the same one-liner. To re-sync just the open-design integration
+after editing the brand:
+`bash ~/.croissan/identity/bin/sync-opendesign`. To uninstall:
 `bash ~/.croissan/identity/bin/uninstall` (add `--purge` to also remove the cloned repo).
 
 ### 3. Clone the full repo

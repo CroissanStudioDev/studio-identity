@@ -1,1 +1,1 @@
-../../design-systems/croissan/DESIGN.md
+../../../design-systems/croissan/DESIGN.md
