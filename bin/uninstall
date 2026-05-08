@@ -29,9 +29,11 @@ fi
 
 # Unlink open-design integration if it was linked
 od_dirs=(
-  "$HOME/Dev/open-design" "$HOME/dev/open-design"
+  "$HOME/Dev/open-design"  "$HOME/dev/open-design"
+  "$HOME/Dev/opendesign"   "$HOME/dev/opendesign"
   "$HOME/Code/open-design" "$HOME/code/open-design"
-  "$HOME/open-design"
+  "$HOME/Code/opendesign"  "$HOME/code/opendesign"
+  "$HOME/open-design"      "$HOME/opendesign"
 )
 for d in "${od_dirs[@]}"; do
   for sub in "design-systems/croissan" "skills/croissan-kp" "templates/croissan-deck.html"; do

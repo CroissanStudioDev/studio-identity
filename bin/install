@@ -79,11 +79,11 @@ link_skill() {
 # ---------- optionally link open-design integration -------------------------
 link_open_design() {
   local od_dirs=(
-    "$HOME/Dev/open-design"
-    "$HOME/dev/open-design"
-    "$HOME/Code/open-design"
-    "$HOME/code/open-design"
-    "$HOME/open-design"
+    "$HOME/Dev/open-design"  "$HOME/dev/open-design"
+    "$HOME/Dev/opendesign"   "$HOME/dev/opendesign"
+    "$HOME/Code/open-design" "$HOME/code/open-design"
+    "$HOME/Code/opendesign"  "$HOME/code/opendesign"
+    "$HOME/open-design"      "$HOME/opendesign"
   )
   local od_root=""
   for d in "${od_dirs[@]}"; do
