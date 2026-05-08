@@ -98,11 +98,6 @@ link_open_design() {
   step "Detected open-design at $od_root"
   local src_root="$INSTALL_DIR/integrations/open-design"
 
-  # NOTE: open-design's design-system + skill discovery uses
-  # readdir({withFileTypes:true}) and filters by entry.isDirectory(),
-  # which returns FALSE for symlinks-to-directories. So we copy real
-  # files instead of symlinking. Re-run this script (or bin/sync-opendesign)
-  # after editing studio-identity to propagate changes.
   command -v rsync >/dev/null 2>&1 || {
     red "rsync is required for the open-design integration. Install rsync and re-run."
     return 1
@@ -120,7 +115,6 @@ link_open_design() {
     step "  Synced $od_root/$sub"
   done
 
-  # Single file template
   local tpl_src="$src_root/templates/croissan-deck.html"
   local tpl_dst="$od_root/templates/croissan-deck.html"
   if [ -f "$tpl_src" ]; then

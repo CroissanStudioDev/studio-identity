@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
-# Re-sync the Croissan Studio integration into a local open-design checkout.
-#
-# When to use: you edited something in studio-identity (DESIGN.md, the deck
-# template, the KP skill, brand/facts.md, etc.) and want the changes to
-# show up in open-design's UI.
-#
-# We copy real files instead of symlinking because open-design's discovery
-# (apps/daemon/src/design-systems.ts and skills.ts) checks
-# `entry.isDirectory()` on readdir Dirents, which returns false for
-# symlinks-to-directories. Real copies, manual re-sync.
+# Sync the Croissan Studio integration into a local open-design checkout.
+# Run this after editing anything in studio-identity to propagate changes.
 #
 # Usage:
 #   bash ~/.croissan/identity/bin/sync-opendesign            # auto-detect
