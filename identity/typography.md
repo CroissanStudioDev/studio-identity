@@ -9,14 +9,14 @@
 | Mono | **Geist Mono** | OFL (Vercel) | bundled — [`../assets/fonts/geist-mono/`](../assets/fonts/geist-mono/), or `next/font/google` | `--font-geist-mono` |
 | Slide metric chips (case-study) | **Inter** | OFL (rsms) | bundled — [`../assets/fonts/inter/`](../assets/fonts/inter/) | `--font-inter` |
 | OG images / PDFs (server-side) | **Noto Sans** | OFL (Google) | bundled — [`../assets/fonts/noto-sans/`](../assets/fonts/noto-sans/) | — |
-| Older Figma slide masters | **Golos UI** | commercial (ParaType) | **NOT bundled** — Figma serves it server-side; for new work prefer Golos Text | — |
-| iOS-flavored mockups in Figma | **SF Pro Text** | Apple, no redistribution | **NOT bundled** — only edit on a Mac where it's preinstalled | — |
+| Older slide masters | **Golos UI** | commercial (ParaType) | **NOT bundled** — for new work prefer Golos Text | — |
+| iOS-style mockups | **SF Pro Text** | Apple, no redistribution | **NOT bundled** — preinstalled on every Mac | — |
 
 > **Why Right Grotesk only on H1?** It carries the brand voice — bold, slightly cheeky, modern.
 > Using it lower in the hierarchy makes it noisy. H2/H3 use the body font in heavier weights.
 
 > **Golos UI vs Golos Text — for new work, prefer Golos Text.** Same family DNA; Golos Text is OFL
-> and bundled, Golos UI is commercial and can't be redistributed. Older Figma slide masters use
+> and bundled, Golos UI is commercial and can't be redistributed. Older slide masters use
 > Golos UI for historical reasons; the visual difference at H1 sizes is negligible. See
 > [`../assets/fonts/golos-ui/README.md`](../assets/fonts/golos-ui/README.md).
 

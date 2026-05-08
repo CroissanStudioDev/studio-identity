@@ -15,17 +15,17 @@ One folder per family. Each folder has a `README.md` with provenance and usage.
 
 ## Reference-only (not committable)
 
-These typefaces appear in our Figma masters or external systems but their licenses **do
-not allow redistribution**. The folder is empty; the README explains where to obtain.
+These typefaces appear in older slide masters or in iOS-style mockups but their licenses
+**do not allow redistribution**. The folder is empty; the README explains where to obtain.
 
 | Family | Used for | Why not bundled | How to obtain |
 |--------|----------|-----------------|---------------|
-| **Golos UI** | Older Figma slide masters (H1 90 px Bold/Medium) | Commercial license via ParaType | [`golos-ui/README.md`](golos-ui/README.md) |
-| **SF Pro Text** | Some Figma annotations / iOS-flavored mockups | Apple Developer license forbids redistribution | [`sf-pro/README.md`](sf-pro/README.md) |
+| **Golos UI** | Older slide masters (H1 90 px Bold/Medium) | Commercial license via ParaType | [`golos-ui/README.md`](golos-ui/README.md) |
+| **SF Pro Text** | iOS-style mockups | Apple Developer license forbids redistribution | [`sf-pro/README.md`](sf-pro/README.md) |
 
 > **For new work, prefer Golos Text over Golos UI.** They share the design DNA; Golos
 > Text is OFL and ships with this repo, so every implementation surface (web, decks,
-> server-side rendering) can use the same file. The Figma masters keep Golos UI for
+> server-side rendering) can use the same file. Older slide masters keep Golos UI for
 > historical reasons.
 
 ## Where these get used

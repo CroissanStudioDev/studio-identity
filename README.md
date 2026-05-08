@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/identity-snapshot/header.svg" alt="Croissan Studio brand kit — mark, bilingual wordmark, color tokens, typography, and component vocabulary" width="100%">
+</p>
+
 # Круассан Студио — Identity & Design System
 
 Single source of truth for everything that defines **Круассан Студио** as a brand and as a product team:
@@ -6,13 +10,8 @@ brand voice, visual identity, design system, code conventions, SEO playbooks, an
 This repo is meant to be **read** — by humans starting a new project, and by AI agents (Claude, Cursor,
 Copilot, custom subagents) that need durable context about how we work.
 
-> Primary live references:
-> - **Code**: `~/Dev/croissan-landing` — when this repo and the codebase disagree, **the code is right**. Update this repo to match.
-> - **Visual brand**: internal Figma `Branding` file — logo lockups, wordmark, color tiles.
-> - **Sales decks**: internal Figma `Studio Sales` master.
-> - **Client proposals (КП)**: internal Figma `КПшки` file (page «Самая Новая» is the canonical template).
->
-> Figma file URLs are intentionally not committed — those files are private to the studio. Ask a founder for access if you need it.
+> Live reference: `~/Dev/croissan-landing` — the marketing site. When this repo and the
+> code disagree, **the code is right**; update this repo to match.
 
 ---
 
@@ -93,7 +92,7 @@ identity/          — logo, colors, typography, iconography
 design-system/     — tokens, components, sections, decks, animations, a11y
 tech/              — default stack, Next.js patterns, code standards, SEO/GEO
 agents/            — rules, checklists, and the creative-latitude principle
-assets/            — logos, client logos, fonts, deck-template (single-file HTML deck)
+assets/            — logos, client logos, fonts, deck-template, identity-snapshot (the README header)
 skills/            — Claude Code skill (croissan-identity) — symlinked into ~/.claude/skills/
 integrations/      — plug-in artifacts for external tools (open-design skill registry)
 bin/               — install / uninstall scripts for the curl one-liner

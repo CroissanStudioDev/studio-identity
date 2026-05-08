@@ -147,9 +147,9 @@ Run the checklist below before declaring done. Failing any P0 item = ship is not
 
 ### Step 5 — Hand-off
 
-Print to PDF (Chrome → Print → Save as PDF) for client send. The Figma source-of-truth
-deck (page «Самая Новая» in КПшки file) is updated by humans; this HTML deck is the
-agent-friendly path.
+Print to PDF (Chrome → Print → Save as PDF) for client send. Designer-led КП masters
+live in the studio's private design archive and are updated by humans; this HTML deck
+is the agent-friendly path.
 
 ## Creative latitude
 

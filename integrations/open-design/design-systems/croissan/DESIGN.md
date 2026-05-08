@@ -77,11 +77,11 @@ Never a hero gradient. Never a "trust" two-stop sweep. If you find yourself reac
 ### Font Family
 - **Right Grotesk** (display, H1 only on web): Studio-licensed local font, bundled at [`assets/fonts/right-grotesk/accent-typeface.woff2`](../../../../assets/fonts/right-grotesk/accent-typeface.woff2). CSS variable `--font-right-grotesk`. Used **only for the H1 of marketing pages** — bold, slightly cheeky, modern. Lowering it into H2/H3 makes the system noisy.
 - **Golos Text** (body, sub-headings, slides): OFL, bundled at [`assets/fonts/golos-text/`](../../../../assets/fonts/golos-text/). CSS variable `--font-geist-sans`. Carries every line of body, every H2/H3 on web, and **every line on slides** (including H1 on slides — Right Grotesk is web-only).
-- **Golos UI** (older Figma slide masters): **Not bundled** — commercial license via ParaType. New decks should substitute Golos Text Bold at 90 px (visually near-identical at that size). See [`assets/fonts/golos-ui/README.md`](../../../../assets/fonts/golos-ui/README.md).
+- **Golos UI** (older slide masters): **Not bundled** — commercial license via ParaType. New decks should substitute Golos Text Bold at 90 px (visually near-identical at that size). See [`assets/fonts/golos-ui/README.md`](../../../../assets/fonts/golos-ui/README.md).
 - **Inter** (slide metric chips on case-study slides): OFL, bundled at [`assets/fonts/inter/`](../../../../assets/fonts/inter/). 18 px Medium only. Don't use Inter on the web — that's an AI-default tell.
 - **Geist Mono** (mono): OFL, bundled at [`assets/fonts/geist-mono/`](../../../../assets/fonts/geist-mono/). CSS variable `--font-geist-mono`. Code blocks, technical readouts, page-number chrome.
 - **Noto Sans** (server-side rendering): OFL TTFs (Regular + Bold) bundled at [`assets/fonts/noto-sans/`](../../../../assets/fonts/noto-sans/). For OG-image generation and PDF rendering where Google Fonts isn't reachable.
-- **SF Pro Text** (iOS-flavored mockups in Figma): **Not bundled** — Apple license forbids redistribution. Only relevant when designing iOS UI mockups; everywhere else, use Golos Text.
+- **SF Pro Text** (iOS-style mockups): **Not bundled** — Apple license forbids redistribution. Only relevant when designing iOS UI mockups; everywhere else, use Golos Text.
 
 ### Hierarchy (web)
 
@@ -429,7 +429,7 @@ className="w-full md:w-auto"
 
 ### Slides — fixed canvas
 
-Slide masters are **1280×720 absolute-positioned** in Figma. The HTML deck framework uses a 1920×1080 logical canvas with `transform: scale(--deck-scale)`; the runtime calculates `--deck-scale` to fit the viewport. Don't try to make slides responsive — they don't reflow.
+Slide masters are **1280×720 absolute-positioned**. The HTML deck framework uses a 1920×1080 logical canvas with `transform: scale(--deck-scale)`; the runtime calculates `--deck-scale` to fit the viewport. Don't try to make slides responsive — they don't reflow.
 
 The HTML template ([`../../templates/croissan-deck.html`](../../templates/croissan-deck.html)) does collapse some grids at `max-width: 900 px` for mobile preview, but the canonical experience is fullscreen on desktop or PDF.
 

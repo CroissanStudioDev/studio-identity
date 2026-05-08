@@ -1,9 +1,7 @@
 # Inter
 
-Used on **case-study slide metric chips**. Figma's design-context exports show
-`font-['Inter:Medium',sans-serif]` on slide 173 (the «Брендформанс» case-study
-template). Inter Medium reads cleaner at the 18 px chip size on graphite (`#252527`)
-than Golos at the same size — Cyrillic numeral spacing is tighter.
+Used on **case-study slide metric chips** — Inter Medium 18 px on graphite (`#252527`).
+Reads cleaner at chip size than Golos — Cyrillic numeral spacing is tighter.
 
 For **everything else**, use Golos Text.
 

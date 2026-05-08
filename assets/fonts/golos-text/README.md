@@ -68,6 +68,6 @@ both code and Figma).
 
 - **Default body face on every surface.** Web body, slide body, deck body, PDF body.
 - **Default H2/H3 on web** — `font-semibold`/`font-medium` on top.
-- **Default H1 on slides** — Bold at 90 px (matches the Figma master treatment).
+- **Default H1 on slides** — Bold at 90 px (matches the slide master treatment).
 - **Prefer over Golos UI** for new work. See [`../golos-ui/README.md`](../golos-ui/README.md)
   for why.

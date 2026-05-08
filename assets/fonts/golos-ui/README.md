@@ -1,7 +1,6 @@
 # Golos UI — reference only, NOT bundled
 
-Older Figma slide masters use **Golos UI Bold** and **Golos UI Medium** at 90 px for
-slide H1s. The font appears in design context exports as `font-['Golos_UI:Bold',sans-serif]`.
+Older slide masters use **Golos UI Bold** and **Golos UI Medium** at 90 px for slide H1s.
 
 ## Why this folder is empty
 
@@ -12,12 +11,11 @@ ParaType's terms.
 
 ## Where to obtain
 
-If you have a Figma seat through the studio organization, Golos UI is already
-available to you in Figma — Figma resolves the font through its server-side license. No
-local install needed for **Figma editing**.
+If you have a studio Figma seat, Golos UI is already available — the design tool
+resolves the font server-side, no local install needed.
 
-If you need the actual font files locally (e.g. for non-Figma slide rendering, OG
-images, server-side PDF), purchase a license at:
+If you need the actual font files locally (e.g. for non-design-tool slide rendering,
+OG images, server-side PDF), purchase a license at:
 
 > https://www.paratype.com/fonts/pt/golos
 
@@ -29,7 +27,7 @@ the rule.
 
 We **bundle Golos Text** ([`../golos-text/`](../golos-text/)) — same family DNA, OFL
 license, freely redistributable. New decks and new web surfaces should use Golos Text
-across the board. Golos UI lives on in older Figma masters because that's what was
+across the board. Golos UI lives on in older slide masters because that's what was
 selected when those files were authored.
 
 The visual difference at slide-H1 sizes (90 px) is minor — Golos Text Bold reads

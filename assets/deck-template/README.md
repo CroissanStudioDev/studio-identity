@@ -52,10 +52,10 @@ Stack:
 - 5 type sizes: `h-hero`, `h-xl`, `h-lg`, `h-md`, `h-sm`, plus `lead`, `body`, `meta`.
 - Brand mark + wordmark top-left every slide; tracked uppercase page number bottom-right.
 
-## When to use this vs Figma
+## When to use this vs the designer-led path
 
-| Use HTML template | Use Figma КПшки file |
-|-------------------|----------------------|
+| Use HTML template | Use a designer-built master |
+|-------------------|-----------------------------|
 | Fast turnaround (< 1 day to send) | Visual-heavy, custom illustrations |
 | Engineer-led pitches | Designer-led pitches |
 | Tech/quote-driven content | Photo-driven content (team intro, polaroids) |
@@ -63,6 +63,7 @@ Stack:
 | You want clients to navigate themselves | One-shot send-and-forget |
 
 Both are valid. Both inherit from [`../../design-system/decks.md`](../../design-system/decks.md).
+The designer-led masters live in the studio's private design archive — ask a founder.
 
 ## Editing rules
 
@@ -84,4 +85,4 @@ Use this when:
 - The total contract is small enough that an 18-slide deck would feel heavy.
 
 For longer proposals (deep case studies, multi-team, multi-phase), use the canonical
-18-slide structure and start in Figma instead.
+18-slide structure with a designer-built master from the private archive instead.

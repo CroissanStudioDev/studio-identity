@@ -117,7 +117,7 @@ It happens. The docs were written across multiple sessions and code has shipped 
 them. Reconcile in this order:
 
 1. The **live code** in `~/Dev/croissan-landing` (web) and the **live deck masters** in
-   the КПшки Figma file (slides) win over any spec document in this repo.
+   the studio's private design archive (slides) win over any spec document in this repo.
 2. Among spec documents: the file closest to your task wins. Slide work? `decks.md`.
    Web component? `components.md`. Voice? `voice-and-tone.md`.
 3. If still ambiguous: ask the user. Don't pick the rule that lets you ship — pick the
