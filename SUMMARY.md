@@ -200,7 +200,10 @@ Vary across consecutive slides — never run >3 of the same kind in a row:
 ## Where to find more
 
 Everything in this file maps to one or more deeper docs at
-[`https://github.com/CroissanStudioDev/studio-identity`](https://github.com/CroissanStudioDev/studio-identity):
+[`https://github.com/CroissanStudioDev/studio-identity`](https://github.com/CroissanStudioDev/studio-identity).
+**Single sources of truth**: voice → `brand/voice-and-tone.md`; slide visual primitives →
+`design-system/decks.md`; token hex values → `design-system/design-tokens.css`. Other
+docs (including this one) surface extracts; if they drift, the SoT wins.
 
 | Topic | Deeper doc |
 |-------|-----------|

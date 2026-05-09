@@ -2,6 +2,12 @@
 
 How we sound — in headlines, body copy, CTAs, error messages, emails, decks, and anywhere a human reads us.
 
+> **This file is the SoT for voice.** Other docs surface extracts of this — the
+> enforcement layer in [`../agents/content-rules.md`](../agents/content-rules.md), the
+> single-file context in [`../SUMMARY.md`](../SUMMARY.md), the open-design portable spec
+> in [`../integrations/open-design/design-systems/croissan/DESIGN.md`](../integrations/open-design/design-systems/croissan/DESIGN.md).
+> Edit voice principles here first; let the others drift back into sync.
+
 ## Core identity
 
 - **Tone**: caring, smart, slightly bold (заботливый, умный, чуть дерзкий).

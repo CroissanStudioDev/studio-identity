@@ -70,7 +70,7 @@ canonical layout:
 │   └── seo-geo.md                          ← SEO + GEO playbook
 ├── agents/
 │   ├── creative-latitude.md                ← READ EARLY: locked / negotiable / free rings
-│   ├── anti-ai-slop.md                     ← READ BEFORE GENERATING: 15 cardinal sins
+│   ├── anti-ai-slop.md                     ← READ BEFORE GENERATING: cardinal sins + "good tells"
 │   ├── design-rules.md                     ← locked visual rules
 │   ├── content-rules.md                    ← locked copy rules
 │   └── checklists.md                       ← pre-commit checklists
@@ -92,8 +92,8 @@ When this skill activates, do this **in order**:
    way to brand-correct output for almost any task.
 2. **`agents/creative-latitude.md`** — the three rings (locked / negotiable / free).
    Critical for understanding which decisions are yours vs. which need the user's OK.
-3. **`agents/anti-ai-slop.md`** — the 15 cardinal sins. Read before generating, not
-   after.
+3. **`agents/anti-ai-slop.md`** — cardinal sins (don't ship these) + "good tells"
+   (grade toward these). Read before generating, not after.
 
 These three files together are ~1500 lines of context — small enough to fit anywhere.
 

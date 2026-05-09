@@ -1,7 +1,12 @@
 # Content rules — hard
 
 Hard rules for any user-facing copy: page text, CTAs, error messages, emails, deck slides, social
-posts. Voice details and rationale live in [`../brand/voice-and-tone.md`](../brand/voice-and-tone.md).
+posts.
+
+> **SoT split.** [`../brand/voice-and-tone.md`](../brand/voice-and-tone.md) is the
+> **single source of truth for voice principles + examples**. This file is the
+> **enforcement layer** — the locked rules an agent or reviewer should treat as P0.
+> If the two ever drift, voice-and-tone.md wins; reconcile here, then update.
 
 ## Default language
 

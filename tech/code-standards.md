@@ -57,6 +57,37 @@ that belongs in PR descriptions and rots quickly.
 - One concern per commit. Don't bundle a refactor into a feature commit.
 - Don't `git push --force` without explicit user permission.
 
+## Performance budget
+
+Pre-ship targets per route on the marketing site. If a PR pushes any of these over,
+fix the regression before merging — don't normalize a worse baseline.
+
+| Metric | Target | Hard ceiling |
+|--------|--------|--------------|
+| Lighthouse Performance (mobile) | ≥ 95 | ≥ 90 |
+| Lighthouse Accessibility | **100** | 100 (no compromise) |
+| Lighthouse SEO | ≥ 95 | ≥ 90 |
+| LCP (mobile, 4G) | < 2.0 s | < 2.5 s |
+| CLS | < 0.05 | < 0.1 |
+| INP (mobile) | < 150 ms | < 200 ms |
+| JS shipped per route (gzipped) | < 120 kB | < 200 kB |
+| Hero image weight (per asset) | < 80 kB | < 150 kB |
+| Total page weight (homepage) | < 600 kB | < 1 MB |
+
+`pnpm lighthouse` runs the audit; CI fails the PR if any hard ceiling is breached.
+Specific tactics:
+
+- **`next/image`** for everything photo-shaped. Pre-size with `width`/`height` to lock
+  CLS. Use `priority` only on above-the-fold images.
+- **`next/font`** for fonts. Don't `<link rel="stylesheet">` Google Fonts manually —
+  defeats subsetting and adds a render-blocking request.
+- **Dynamic imports** for below-the-fold sections. See the pattern in
+  [`tech/nextjs-patterns.md`](nextjs-patterns.md).
+- **Motion library lazy-loaded.** `motion` ships ~30 kB; only import it on routes that
+  actually animate.
+- **`use cache`** on data fetchers (Next 16). Caching errors at the framework level is
+  cheaper than caching them in component code.
+
 ## What we don't do
 
 - No barrel files (`index.ts` re-exports).

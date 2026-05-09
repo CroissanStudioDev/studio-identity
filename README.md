@@ -87,11 +87,11 @@ rules are hard, and how to reconcile this repo with the project you're working i
 
 ```
 SUMMARY.md         — single-file self-contained brand context (paste-into-any-chat)
-brand/             — voice, tone, messaging, company facts, sub-brands, proposal structure
-identity/          — logo, colors, typography, iconography
-design-system/     — tokens, components, sections, decks, animations, a11y
-tech/              — default stack, Next.js patterns, code standards, SEO/GEO
-agents/            — rules, checklists, and the creative-latitude principle
+brand/             — voice, tone, messaging, facts, sub-brands, proposal structure, reference brands
+identity/          — logo, colors, typography, iconography (incl. canonical Lucide allowlist)
+design-system/     — tokens, components, sections, decks, animations, a11y, OG cards
+tech/              — default stack, Next.js patterns, code standards (incl. perf budget), SEO/GEO
+agents/            — rules, checklists, anti-slop, creative-latitude principle
 assets/            — logos, client logos, fonts, deck-template, identity-snapshot (the README header)
 skills/            — Claude Code skill (croissan-identity) — symlinked into ~/.claude/skills/
 integrations/      — plug-in artifacts for external tools (open-design skill registry)
@@ -113,9 +113,10 @@ Read that **first** if you're an AI agent. It's the lens for everything else her
 
 Also read [`agents/anti-ai-slop.md`](agents/anti-ai-slop.md) **before generating** —
 concrete LLM defaults the studio explicitly rejects (Tailwind indigo, two-stop trust
-gradients, emoji as icons, invented metrics, Latin quotes in Russian copy, etc.). The 7
-generic + 8 Croissan-specific cardinal sins are P0 — fix them before declaring done, no
-exceptions.
+gradients, gradient text on H1, emoji as icons, fake testimonials, invented metrics,
+Latin quotes in Russian copy, etc.). All P0 entries are non-negotiable; fix them before
+declaring done. The companion "good tells" section at the bottom is what to grade
+*toward*.
 
 ---
 

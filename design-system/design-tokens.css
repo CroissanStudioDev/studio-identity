@@ -49,6 +49,8 @@
   --brand-primary: #2727ca;
   --brand-primary-hover: #2424b4;
   --brand-dark: #150e47;
+  --brand-black: #0e0e14;       /* premium covers, high-contrast surfaces */
+  --brand-graphite: #252527;    /* case-study slide background */
   --color-error: #e53935;
 
   /* Surfaces (oklch hue 260) */
@@ -114,6 +116,8 @@
 
   .bg-brand        { background-color: var(--brand-primary); }
   .bg-brand-hover:hover { background-color: var(--brand-primary-hover); }
+  .bg-brand-black    { background-color: var(--brand-black); }
+  .bg-brand-graphite { background-color: var(--brand-graphite); }
   .text-brand      { color: var(--brand-primary); }
   .text-brand-dark { color: var(--brand-dark); }
   .text-error      { color: var(--color-error); }

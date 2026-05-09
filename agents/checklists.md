@@ -5,7 +5,7 @@ Copy these into your TodoWrite when finishing UI / content work.
 ## UI checklist
 
 ### Anti-slop pre-flight (before you start)
-- [ ] Read [`anti-ai-slop.md`](anti-ai-slop.md) once. The 7 generic + 8 Croissan-specific cardinal sins are P0 — fix them before declaring done, no exceptions.
+- [ ] Read [`anti-ai-slop.md`](anti-ai-slop.md) once. All P0 cardinal sins are non-negotiable — fix them before declaring done. The "good tells" companion section at the bottom is what to grade toward.
 
 ### Visual
 - [ ] Tokens only — no `bg-[#...]`, no `text-gray-*`/`text-zinc-*` for body

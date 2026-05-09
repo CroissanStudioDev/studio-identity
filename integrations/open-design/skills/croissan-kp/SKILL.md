@@ -71,8 +71,9 @@ croissan-kp/
 5. **Read `references/creative-latitude.md`** — know which decisions are yours to make
    freely vs which require asking.
 6. **Read `references/anti-ai-slop.md`** — the LLM patterns we will reject on review.
-   The 7 generic + 8 Croissan-specific cardinal sins are P0; treat them as hard rules
-   even though that file isn't framed as one.
+   All P0 cardinal sins are non-negotiable; treat them as hard rules even though that
+   file isn't framed as one. The "good tells" section at the bottom is what to grade
+   toward.
 
 ### Step 1 — Copy the seed
 
@@ -126,7 +127,11 @@ project type. Pull from `facts.md` FOUNDERS list.
 Run the checklist below before declaring done. Failing any P0 item = ship is not ready.
 
 #### P0 — must-fix
-- [ ] **All cardinal sins from `references/anti-ai-slop.md` cleared** — no Tailwind indigo, no two-stop trust gradients, no emoji as icons, no system-ui on display H1s, no left-border-accent cards, no invented metrics, no filler copy, no Latin quotes in Russian copy, no hyphens-where-em-dashes-belong, no missing `&nbsp;` before short Russian prepositions, no «заказчик / исполнитель», no generic "AI-marketing" phrases, no stock photography, no mid-grey backgrounds, no decorative drop-shadows.
+- [ ] **All P0 cardinal sins from `references/anti-ai-slop.md` cleared.** Walk the
+  whole P0 section before declaring done — Tailwind indigo, hero gradients, gradient
+  text on H1, emoji icons, fake testimonials, invented metrics, filler copy, Latin
+  quotes in Russian, missing `&nbsp;`, «заказчик / исполнитель», generic AI-marketing
+  phrases, stock photography, mid-grey backgrounds, decorative drop-shadows.
 - [ ] No `{{placeholders}}` left anywhere. Search `{{`.
 - [ ] Every page-number `01 / 11` matches actual slide count.
 - [ ] Brand mark + wordmark present on **every slide** (including covers, dividers, totals).

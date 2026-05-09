@@ -20,6 +20,14 @@
 > Golos UI for historical reasons; the visual difference at H1 sizes is negligible. See
 > [`../assets/fonts/golos-ui/README.md`](../assets/fonts/golos-ui/README.md).
 
+> **`--font-geist-sans` is misleadingly named — it binds Golos Text.** Live code in
+> [`croissan-landing`](https://github.com/CroissanStudioDev/croissan-landing) keeps the
+> `geist-sans` variable name as a relic of when the site used Geist; today the variable
+> is bound to `Golos_Text({...})`. **Don't rename it** — every component on the live site
+> reads `var(--font-geist-sans)`, and renaming would touch every component for no visual
+> change. New projects can pick a clearer name (`--font-golos`); when sharing components
+> between the marketing site and a new project, accept the inherited variable.
+
 Every font folder has its own `README.md` explaining provenance, license, and how to load it.
 Index: [`../assets/fonts/README.md`](../assets/fonts/README.md).
 

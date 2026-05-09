@@ -1,8 +1,10 @@
 # Colors
 
-Single source of truth for our color system. CSS variables live in
-[`../design-system/design-tokens.css`](../design-system/design-tokens.css). **Never hardcode hex** in
-component code when a token exists.
+Single source of truth for the **named** color system. The actual hex values live in
+[`../design-system/design-tokens.css`](../design-system/design-tokens.css) — that file
+is canonical for what each token resolves to. If hex disagrees between this doc and
+`design-tokens.css`, **the CSS file wins**. **Never hardcode hex** in component code
+when a token exists.
 
 ## Brand palette
 
@@ -11,18 +13,26 @@ component code when a token exists.
 | Primary (CTA, accents) | `--brand-primary` | `#2727CA` |
 | Primary hover | `--brand-primary-hover` | `#2424B4` |
 | Brand dark (main text) | `--brand-dark` | `#150E47` |
-| Brand black (covers, premium contrast) | — | `#000000` |
+| Brand black (premium covers, high-contrast) | `--brand-black` | `#0E0E14` |
+| Brand graphite (case-study slides) | `--brand-graphite` | `#252527` |
 | Error | `--color-error` | `#E53935` |
-| Background (light neutral) | `--background` | `oklch(0.98 0.01 260)` |
+| Background (light neutral canvas) | `--background` | `oklch(0.98 0.01 260)` |
 
-The brand is built on a **deep blue-violet** (`#2727CA`) against three approved background tiles:
-**white**, **brand primary**, and **pure black**. Dark UI text (`#150E47`) is the same hue as the
-primary, just much darker — that's what gives the brand a coherent, slightly moody feel without
-going monochrome.
+The brand is built on a **deep blue-violet** (`#2727CA`) against four approved background
+tiles: **white**, **brand primary**, **brand black**, and **graphite**. Dark UI text
+(`#150E47`) is the same hue as the primary, just much darker — that's what gives the
+brand a coherent, slightly moody feel without going monochrome.
 
-**Black is a brand background**, not a fallback. It's used for premium-feeling deck covers, video
-title cards, and high-contrast social posts. In product UI we still default to the light
-`--background`. Mid-greys are never a brand surface — pick darker or lighter.
+**Black is a brand background**, not a fallback. It's used for premium-feeling deck
+covers, video title cards, and high-contrast social posts. We use `#0E0E14` (slight
+hue toward the brand) on screens; pure `#000` is fine for print.
+
+**Graphite (`#252527`) is the fourth surface** — exclusively for case-study slides
+where product screenshots need a softer-than-black backdrop. It's not a fallback for
+black; pick deliberately when a slide is product-screenshot-led.
+
+In product UI we still default to the light `--background`. Mid-greys (`#404040`–`#909090`)
+are never a brand surface — pick darker or lighter.
 
 ## Tailwind utilities (use these, not raw hex)
 

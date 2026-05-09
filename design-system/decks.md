@@ -1,5 +1,11 @@
 # Decks & presentations — visual spec
 
+> **SoT for slide visual primitives.** Pill variants, card variants, polaroid, slides-tag,
+> number-box, stage-row, final-price — defined here. The single-file context in
+> [`../SUMMARY.md`](../SUMMARY.md) and the open-design portable spec
+> [`../integrations/open-design/design-systems/croissan/DESIGN.md`](../integrations/open-design/design-systems/croissan/DESIGN.md)
+> surface extracts. If they drift, this file wins.
+
 Канонический визуальный язык для слайдов: КП (коммерческие предложения), питч-деки,
 event-деки. Числа и спеки в этом доке — извлечённые из мастер-фрейма «Самая Новая»;
 рабочие исходники (логотипы, мастер-фреймы, фирменные плашки) лежат в приватном
@@ -43,12 +49,17 @@ event-деки. Числа и спеки в этом доке — извлечё
 
 | Роль | Шрифт | Размер | Line-height | Tracking | Цвет |
 |-----|-------|--------|-------------|----------|------|
-| **H1 (slide title)** — стандартный | **Golos UI Bold** | 90 px | 1.0 | −1.8 px (−2%) | white на brand, brand-dark на white |
-| **H1 (case-study)** — облегчённый | **Golos UI Medium** | 90 px | 1.0 | −1.8 px | white, со вторичной частью на 60% (split-color title) |
+| **H1 (slide title)** — стандартный | **Golos Text Bold** ¹ | 90 px | 1.0 | −1.8 px (−2%) | white на brand, brand-dark на white |
+| **H1 (case-study)** — облегчённый | **Golos Text Medium** ¹ | 90 px | 1.0 | −1.8 px | white, со вторичной частью на 60% (split-color title) |
 | **Lead / subtitle** | **Golos Text Regular** | 48 px | 1.2 | −0.96 px | white at **opacity 80%** на тёмных |
 | **Caption / pre-strip text** | **Golos Text Regular** | 32 px | 1.2 | −0.64 px | white at 80% |
 | **Card body (chip большой)** | **Golos Text SemiBold** | 32 px | 1.2 | −0.96 px | `#BCBCFF` (на brand) или white |
-| **Tag / sticker / metric chip** | **Golos UI Medium** или **Inter Medium** | 18 px | 1 / 1.2 | −0.36 px | white |
+| **Tag / sticker / metric chip** | **Golos Text Medium** или **Inter Medium** | 18 px | 1 / 1.2 | −0.36 px | white |
+
+¹ **Старые мастер-фреймы используют Golos UI** (та же визуальная семья, лицензируется
+коммерчески через ParaType, не редистрибутируется). Для новой работы — **Golos Text**:
+визуально неразличим на 90&nbsp;px, OFL, бандлится в этом репо. Если правишь старый мастер,
+оставляй Golos UI; новый файл — сразу Golos Text. См. [`../assets/fonts/golos-ui/README.md`](../assets/fonts/golos-ui/README.md).
 
 Notes:
 - **Не сокращай 90 px H1**. Если заголовок не помещается — два-три line breaks; если всё ещё не лезет — переписывай заголовок короче.

@@ -14,7 +14,7 @@ rotated ellipse. It exists in two visual modes (flat 2D and dimensional 3D) and 
 |---------|-------------|------|
 | **2D flat — brand primary** | Default. Light or neutral surfaces. | [`../../assets/logos/croissan-logo.svg`](../../assets/logos/croissan-logo.svg) |
 | **2D flat — white** | Brand-primary, dark, or photographic surfaces. | [`../../assets/logos/croissan-logo-white.svg`](../../assets/logos/croissan-logo-white.svg) |
-| **3D rendered (mascot)** | Decorative hero accents, deck covers, social posts. Never as a UI control. | TODO — export from Figma |
+| **3D rendered (mascot)** | Decorative hero accents, deck covers, social posts. Never as a UI control. | Lives in the studio's private design archive — ask a founder for the latest export |
 
 The **3D mark** is the dimensional purple-blue rendered croissant visible in deck covers and
 brand collateral. Treat it as a mascot / illustration, not a logo. Don't use it in dense UI

@@ -16,7 +16,7 @@ Severity:
 
 ---
 
-## P0 — the seven cardinal sins
+## P0 — universal cardinal sins
 
 These are the patterns that mark a generation as "AI default" rather than "studio output."
 Failing any of these is a regression.
@@ -76,8 +76,17 @@ either (a) make the entire card `card.featured` (white inverse on cobalt slides)
 unless the number is from a **real engagement** or **[`brand/facts.md`](../brand/facts.md)**,
 don't write it.
 
+**Orphan statistics** — numbers without a baseline or source («3× faster than what?»,
+«90% accuracy on what test set?») — are the same sin in disguise. Either name the
+baseline (`«быстрее обычного RAG-пайплайна на той же GPU в 3 раза»`) or drop the
+multiplier.
+
 The Russian variant is just as common: «в&nbsp;10&nbsp;раз быстрее», «эффективность в&nbsp;3&nbsp;раза»,
 «рост на&nbsp;200%». Same rule.
+
+**"Join thousands of…" / "trusted by 10,000+"** — Croissan's truth is `15+ проектов`
+with **named clients** (МТС, Ростелеком, Яндекс, T1, Positive Technologies). Don't pad
+the number; name the engagement.
 
 If the brief is missing a real metric and you need a placeholder, write
 `{{TODO: real metric}}` and surface it in your hand-off. **Never invent.**
@@ -93,7 +102,7 @@ If you don't know what goes there, leave the section out of the layout entirely 
 
 ---
 
-## P0 — Croissan-specific cardinal sins (eight more)
+## P0 — Croissan-specific cardinal sins
 
 These are P0 too but they're brand-specific, not the universal LLM tells above.
 
@@ -179,6 +188,25 @@ The **only** drop-shadow in the whole system is on polaroid photo cards
 (`drop-shadow(0px 4px 10px rgba(0,0,0,0.25))`). Glass surfaces use `backdrop-blur`,
 not shadow. Cards use a hairline border.
 
+### 16. Gradient text on H1/H2
+
+`background: linear-gradient(...); -webkit-background-clip: text; color: transparent;`
+on a hero headline. Universal AI-SaaS giveaway, hard ban. Display H1 is **solid
+`text-primary` on light surfaces** or **solid white on cobalt/black/graphite**. Same
+rule applies to slide H1s.
+
+If a designer wants emphasis on a single word inside an H1, use **opacity** (the
+split-color H1 pattern from case-study slides — primary white + 60% white) — never
+gradients.
+
+### 17. Fake testimonials
+
+`"Jane, Product Manager at TechCorp" + stock-headshot circle.` Hard ban. Quotes either
+come from a real client we can name (or attribute as "клиент Х под NDA" with founder
+sign-off) or they don't ship. Logos in the trust strip come from
+[`assets/client-logos/`](../assets/client-logos/) only — real engagements, no
+"as featured in" composites.
+
 ---
 
 ## P1 — soft tells, should-fix
@@ -206,6 +234,40 @@ The work ships if these slip through, but it stops feeling like ours.
 - **`<br>` in body paragraphs** on the marketing site. Use `<br>` only inside hero H1s
   (where line breaks are typographic decisions) and inside slide H1/H2 (same reason).
   Body paragraphs flow naturally.
+- **Generic vision taglines.** «Meet the future of AI», «Empowering teams to ship
+  faster», «The next generation of product studios». They say nothing. Replace with
+  concrete: what we do, for whom, in what timeframe.
+- **Vague "AI-powered" claims.** «AI-powered platform», «smart insights», «intelligent
+  automation» without naming the model, the architecture, or the actual user outcome.
+  Croissan voice uses concrete: `RAG`, `LLM-агент`, `GPT-4o`, `чат-бот для саппорта на
+  300k пользователей`.
+- **CTA inconsistency across a page.** Hero says "Get started", nav says "Sign up",
+  footer says "Try free" — three CTAs, three voices, no shared library. CTAs must trace
+  to [`../brand/messaging.md`](../brand/messaging.md). Pick one phrase and use it
+  everywhere on the page.
+- **Logo entrance animation on page load.** Scale-up, rotate-in, bounce, fade. Tanks
+  LCP and reads as junky. The mark renders as-is; if a hero needs movement, use a
+  short opacity fade on the *content below* the mark, not the mark itself.
+- **Scroll-jacking / parallax-on-everything.** Smooth-scroll hijacks, locked sections,
+  pinned-and-released hero on scroll, parallax on the brand mark. Kills keyboard nav,
+  kills trackpad UX, kills accessibility. The browser's default scroll is already good.
+- **Fade-up-on-scroll on every section.** Restraint clause: motion is allowed on
+  *interactive* elements (button hover, modal entry, polaroid drag) and on the *first*
+  viewport — never as page-wide entrance choreography. If every section animates in,
+  no section stands out.
+- **AI-image tells in illustrations.** Over-rendered glassy 3D blobs, asymmetric eyes
+  or hands, "iridescent gradient mesh" backgrounds, "plasma" abstract textures. The
+  3D croissant mascot is the only dimensional render in the system; everything else is
+  flat SVG, real photography, or a screenshot.
+- **Em-dash overuse and "It's not just X — it's Y" parallelism.** Cap at one em-dash
+  per paragraph. The «не просто X — но Y» / «It's not just X — it's Y» rhetorical
+  scaffold is banned outright; it's the most overused AI-prose construct of the era.
+- **Lorem-ipsum-shaped real copy.** Three feature cards with identical sentence length
+  and parallel rhythm («Быстрая разработка / Умная аналитика / Надёжная инфраструктура»).
+  Vary the cadence — one short sentence, one with a sub-clause, one specific outcome.
+- **Demo videos without poster frame, captions, or transcript.** Poster is a P1 a11y +
+  LCP issue; captions are an a11y issue; transcript is a GEO issue (AI search engines
+  index the transcript, not the video).
 
 ---
 
@@ -224,6 +286,12 @@ The work ships if these slip through, but it stops feeling like ours.
   Better to drop the adjective.
 - **Consecutive slides with the same `slide.<surface>` class.** More than 3 in a row
   flattens the deck. Vary brand → divider → content → case → divider.
+- **Icon-as-decoration soup.** Every bullet prefixed by a different Lucide icon picked
+  more or less at random — `Zap` for one, `Sparkles` for the next, `Star` for the third.
+  Icons earn their place by carrying meaning the text alone doesn't, or get cut. See
+  the canonical icon-per-concept allowlist in [`../identity/iconography.md`](../identity/iconography.md).
+- **Hidden desktop nav at `≥md:`.** Hamburger on a 1440-pixel screen is a SaaS template
+  copy-paste. Show the nav inline; collapse only below `md:`.
 
 ---
 
@@ -231,10 +299,8 @@ The work ships if these slip through, but it stops feeling like ours.
 
 If you're an agent and you've just generated something:
 
-1. Read your output once **looking for cardinal sins**. The seven generic + eight
-   Croissan-specific are P0.
-2. If you find any, fix them before declaring done. Don't ask the user; these are
-   non-negotiable.
+1. Read your output once **looking for cardinal sins**. All P0 entries are non-negotiable.
+2. If you find any, fix them before declaring done. Don't ask the user.
 3. Soft tells (P1) — fix if you have time, surface in hand-off if you don't.
 4. Polish (P2) — note for follow-up.
 
@@ -252,3 +318,50 @@ If you're a reviewer:
 - The DESIGN.md anti-slop section in the open-design integration:
   [`../integrations/open-design/design-systems/croissan/DESIGN.md`](../integrations/open-design/design-systems/croissan/DESIGN.md)
   (section 7 — Do's and Don'ts)
+
+---
+
+## Good tells — what to grade *toward*
+
+The audit list above is what to grade *away from*. This section is what good output
+looks like — concrete moves a reviewer can recognize as "this writer knows the brand."
+
+- **Specific verbs over weasel verbs.** «Внедряем», «собираем», «оборачиваем» beat
+  «помогаем», «обеспечиваем», «поддерживаем». «We embed RAG into your support flow»
+  beats «We help you with AI».
+- **Real numbers that trace to a real engagement** or to [`../brand/facts.md`](../brand/facts.md).
+  `15+ проектов`, `300 000 пользователей`, `~300 мс на кадр`, `2–4 недели` — every one
+  pulled from a real shipped project. The reviewer should be able to ask "where does
+  this number come from?" and get a one-line answer.
+- **Named clients, not "trusted by leading enterprises".** `МТС`, `Ростелеком`,
+  `Яндекс`, `T1`, `Positive Technologies`. Listed in recognition order, not
+  alphabetical.
+- **Concrete deliverables, not "solutions".** `Telegram-бот для 300 000 пользователей`
+  beats `решение для повышения вовлечённости`. The deliverable is what the user touches;
+  the «solution» framing is what AI defaults to.
+- **One technical term per claim, used correctly.** `RAG`, `ИИ-агент`, `LLM`,
+  `FP8-квантизация`, `realtime-стилизация`. Signals expertise (Princeton: +32.7% AI
+  citation rate). Don't stack three; pick the one that's load-bearing.
+- **One em-dash per paragraph, used as a true parenthetical break.** «Бережно собираем
+  идеи, оборачиваем их в технологии, тестируем, запускаем — и всё это в партнёрстве с
+  вами.» — the dash earns the pause.
+- **Russian quotes («…»), em-dashes (—), and `&nbsp;` before short prepositions** —
+  these are typographic signals that someone wrote it, not generated it.
+- **Partner-not-vendor framing.** «мы / вы», «в&nbsp;партнёрстве», «совместно». Avoid
+  «заказчик / исполнитель», «оказываем услуги».
+- **CTA that names the next action, not the meta-action.** «Написать нам» beats
+  «Связаться с нами»; «Создать бриф» beats «Узнать больше»; «Забронировать звонок»
+  beats «Оставить заявку».
+- **Sections that vary in shape across the page.** Hero (left-aligned H1) → cases
+  (card grid) → focus (chip cluster) → process (numbered list) → pricing (comparison
+  table) → CTA (heavy-glass card). Each section reads as its own thing; the page has
+  rhythm.
+- **Photos that look like the team actually exists.** Real portraits in the polaroid
+  treatment, real product screenshots in case-study slides, real client logos in the
+  trust strip. If you can't trace a photo to a real person/product/client, don't ship
+  it.
+- **Comments in copy that earn their place.** A footnote on a number is good
+  («¹ замер на потребительской GPU 4090, 1024×1024»); a footnote on a name is bad
+  («¹ leading enterprise client»).
+
+If a reviewer can identify three of these in a generated artifact, it's probably ours.
