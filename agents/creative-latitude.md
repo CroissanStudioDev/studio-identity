@@ -70,7 +70,7 @@ You **may** deviate, but leave a one-line comment or PR note explaining why:
 
 - **Tweaking spacing** (e.g., `py-20` instead of `py-16` on a section that needs it).
   Note: "this section has a tall hero asset, default `py-16` cropped it."
-- **Adding a sixth pill variant** for a one-off use case. Note: "client logos pill —
+- **Adding a fourth pill variant** for a one-off use case. Note: "client logos pill —
   needed transparent border because logos already include their own backgrounds."
 - **Substituting Inter for Golos Text** on a compliance/legal slide where rendering
   needs to survive untrusted environments (e.g., emailed without fonts). Note: "fallback

@@ -1,7 +1,6 @@
 # Geist Mono
 
-Monospace for code blocks, technical readouts, page-number chrome on slides
-(uppercase tracked tabular-nums), and anywhere else we need fixed-width.
+Monospace for code blocks, technical readouts, and anywhere else we need fixed-width.
 
 ## Files
 
@@ -37,7 +36,6 @@ mirrored on Google Fonts.
 ## Use rules
 
 - Code blocks (web + slides).
-- Page numbers and the deck-counter chrome (`01 / 11`) on HTML decks — see
-  [`design-system/decks.md`](../../../design-system/decks.md).
+- Tabular numerals in technical readouts where monospace helps — never for body copy.
 - Don't use on body, headlines, or anything readable longer than ~12 characters.
   Monospace at body length tires the eye.

@@ -2,7 +2,7 @@
 
 **One-paragraph summary.** Croissan Studio is a Russian-default AI product studio.
 Voice is caring, smart, slightly bold — partner not vendor, concrete numbers over fuzzy
-adjectives. Visual identity runs on a single cobalt-blue (`#2727CA`) over near-white,
+adjectives. Visual identity runs on a single Croissan blue (`#2727CA`) over near-white,
 with black and graphite (`#252527`) as premium and case-study surfaces. Two typefaces
 do all the work: **Right Grotesk Bold** for web H1, **Golos Text** for everything else.
 
@@ -19,7 +19,7 @@ brand-correct output without installing anything.
 ## Color tokens (locked)
 
 ```css
---brand-primary:        #2727CA;   /* cobalt — every CTA, every accent */
+--brand-primary:        #2727CA;   /* Croissan blue — every CTA, every accent */
 --brand-primary-hover:  #2424B4;   /* hover state on primary */
 --brand-dark:           #150E47;   /* near-black, same hue family */
 --brand-black:          #0E0E14;   /* premium / cover surface */
@@ -31,10 +31,10 @@ brand-correct output without installing anything.
 **Surface vocabulary on slides:**
 
 ```css
---cobalt-soft:   #3D3DE0;   /* secondary pill on cobalt */
---cobalt-deep:   #1F1FA8;   /* alternative secondary pill */
---cobalt-card:   #2D2DFC;   /* number-box surface */
---cobalt-lav:    #BCBCFF;   /* text inside number-box (lavender) */
+--croissan-blue-soft: #3D3DE0;   /* secondary pill on brand slide bg */
+--croissan-blue-deep: #1F1FA8;   /* alternative secondary pill */
+--croissan-blue-card: #2D2DFC;   /* number-box surface */
+--croissan-blue-lav:  #BCBCFF;   /* text inside number-box (lavender) */
 --paper-dim:     rgba(255,255,255,.72);   /* secondary text on dark */
 --paper-mute:    rgba(255,255,255,.55);   /* tertiary text on dark */
 --line:          rgba(255,255,255,.18);   /* dividers on dark */
@@ -79,7 +79,7 @@ H1 standard   Golos UI Bold (or Golos Text Bold) 90px / line-height 1 / -1.8px t
 H1 case-study Same as above but Medium weight; often split-color for the accented word
 Lead          Golos Text Regular 48px / 1.2 / -0.96px / opacity 0.8
 Caption       Golos Text Regular 32px / 1.2 / -0.64px / opacity 0.8
-Card body     Golos Text SemiBold 32px / 1.2 / color #BCBCFF on cobalt
+Card body     Golos Text SemiBold 32px / 1.2 / color #BCBCFF on Croissan blue
 Tag/sticker   Golos UI Medium (or Golos Text Medium) 18px / line-height 1
 ```
 
@@ -90,25 +90,23 @@ before short prepositions (`с&nbsp;ИИ`, `за&nbsp;2-4&nbsp;недели`).
 
 ## Components — pill / card vocabulary
 
-The brand is heavy on **pills and cards**. There are exactly **5 pill variants** and
-**3 card variants** — don't add a sixth or a fourth.
+The brand is heavy on **pills and cards**. There are exactly **3 pill variants** (filled
+only — no outline, no white «light» pill on brand slides) and **2 card variants** — don't
+add a fourth pill type or a third card chrome without a brand decision.
 
 **Pills** (border-radius 999px, padding ~`.85em 1.25em`, weight 500 ~1vw):
 
 ```
-.pill.dark    bg #0E0E14, white text          — case headlines, accent tags
-.pill.light   bg white,   brand-blue text     — CTAs, contact info
-.pill.outline transparent + 45% white border  — meta info ("3 weeks", "Под ключ")
+.pill.dark    bg #0E0E14, white text          — accent tags, contact chips on brand bg
 .pill.soft    bg #3D3DE0, white text          — service / tag clusters
 .pill.deep    bg #1F1FA8, white text          — alternative when soft would clash
 ```
 
-**Cards** on cobalt slide backgrounds (border-radius 18px, padding `2.6vh 1.6vw`):
+**Cards** on Croissan-blue slide backgrounds (border-radius 18px, padding `2.6vh 1.6vw`):
 
 ```
-.card           bg #0E0E14, white text         — default
-.card.featured  bg white,   brand-blue text    — recommended option
-.card.outline   transparent + 1px white-18%    — alternative / minimum tier
+.card           bg #0E0E14 (or `#1A1A22` ink-soft for contrast), white text — default / alt tier
+.card.featured  bg white, brand-blue text       — recommended option / highlighted tier
 ```
 
 ---
@@ -154,10 +152,10 @@ These are the LLM defaults that mark a generation as "AI default" rather than ou
 Treat as P0:
 
 1. **Tailwind indigo** (`#6366f1`, `#4f46e5`, `#4338ca`, `#8b5cf6`, `#7c3aed`) used as
-   accent. Use `--brand-primary` `#2727CA`. Indigo is *next to* cobalt — that's why
+   accent. Use `--brand-primary` `#2727CA`. Indigo is *next to* Croissan blue — that's why
    models reach for it. Don't.
 2. **Two-stop "trust" gradients** on hero (purple→blue, blue→cyan, indigo→pink,
-   cobalt→cyan). Flat surfaces only. The only gradient anywhere in the system is the
+   Croissan-blue→cyan). Flat surfaces only. The only gradient anywhere in the system is the
    number-box chip surface, hidden inside a 32px-radius box.
 3. **Emoji as feature icons** (`✨ 🚀 🎯 ⚡ 🔥 💡`). Use Lucide SVG, 1.6–1.8px stroke,
    `currentColor`. The single allowed exception is the typographic `🤍` on the КП
@@ -178,7 +176,7 @@ Treat as P0:
     технологии искусственного интеллекта», «комплексная цифровая трансформация».
 13. **Stock photography** — Unsplash, picsum, "diverse team in glass office," handshake
     composites. Real team, real screenshots.
-14. **Mid-grey backgrounds.** Surfaces are: cobalt, white, black, graphite. Anything in
+14. **Mid-grey backgrounds.** Surfaces are: Croissan blue, white, black, graphite. Anything in
     between (zinc-700, slate-800) is the AI midtone — not ours.
 15. **Drop-shadows on cards.** Polaroids are the only exception in the system.
 

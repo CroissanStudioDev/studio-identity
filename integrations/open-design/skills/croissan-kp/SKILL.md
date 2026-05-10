@@ -78,8 +78,8 @@ croissan-kp/
 ### Step 1 — Copy the seed
 
 Copy `assets/croissan-deck.html` to the project root as `index.html`. The seed already
-embeds the Croissan token block (`--cobalt`, `--graphite`, `--paper-dim`, etc.) and the
-five-pill / three-card vocabulary; do not redefine these.
+embeds the Croissan token block (`--croissan-blue`, `--graphite`, `--paper-dim`, etc.) and the
+three-pill / two-card vocabulary; do not redefine these.
 
 ### Step 2 — Decide the narrative shape BEFORE writing any slide
 
@@ -113,7 +113,7 @@ hand-off.
   four placeholder boxes labelled with what they *will* show.
 - Slide 7 (tech): research candidates as `pill.dark` chips (real model/library names),
   our optimization layer in a `card` (concrete techniques + numbers).
-- Slide 8 (infra): featured card = recommended config; outline card = minimum.
+- Slide 8 (infra): featured card = recommended config; second column = filled `card` on `ink-soft` for minimum tier.
 
 **Pass 4: numbers (slides 9, 10)**. Stage prices first, total second. Pricing must come
 from a real engagement template — never invent. If the brief doesn't include a budget
@@ -133,7 +133,7 @@ Run the checklist below before declaring done. Failing any P0 item = ship is not
   quotes in Russian, missing `&nbsp;`, «заказчик / исполнитель», generic AI-marketing
   phrases, stock photography, mid-grey backgrounds, decorative drop-shadows.
 - [ ] No `{{placeholders}}` left anywhere. Search `{{`.
-- [ ] Every page-number `01 / 11` matches actual slide count.
+- [ ] No `pill.outline`, `pill.light`, or `card.outline` unless the brief explicitly overrides (default is filled-only).
 - [ ] Brand mark + wordmark present on **every slide** (including covers, dividers, totals).
 - [ ] All studio-level metrics traceable to `references/facts.md`.
 - [ ] Pricing slide totals match the sum of stage prices.

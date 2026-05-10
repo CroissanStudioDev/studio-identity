@@ -4,7 +4,7 @@ Restraint over flair. Animations exist to communicate state changes — not to e
 
 ## Rules
 
-- **Duration**: 150–300 ms for micro-interactions. Anything longer feels broken.
+- **Duration**: 150–250 ms for micro-interactions. Anything longer feels broken.
 - **Properties**: animate **only `transform` and `opacity`**. Never `width`, `height`, `top`, `left` —
   they trigger layout and tank performance.
 - **Reduced motion**: `prefers-reduced-motion` is respected globally in `globals.css`. Don't override.
@@ -13,9 +13,9 @@ Restraint over flair. Animations exist to communicate state changes — not to e
 ## Transitions
 
 ```tsx
-className="transition-all duration-300"        // standard
+className="transition-all duration-250"        // standard
 className="transition-colors"                  // color-only changes
-className="transition-transform duration-300 ease-out"
+className="transition-transform duration-250 ease-out"
 ```
 
 ## Hover effects

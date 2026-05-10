@@ -19,11 +19,9 @@ That's it. No `package.json`, no `node_modules`, no bundler.
 1. **Copy** `index.html` into a new project folder (e.g. `deck-<client>-<date>/`).
 2. **Open** in a browser to preview live (no server needed — `file://` works).
 3. **Replace `{{placeholders}}`** with your content. Search for `{{` to find them all.
-4. **Update page numbers** — `<span class="pn">NN / TT</span>`. Counted manually; if you add
-   or remove slides, fix every slide's `pn`.
-5. **Add images** to a sibling `images/` folder if you need demo screenshots, before/after
+4. **Add images** to a sibling `images/` folder if you need demo screenshots, before/after
    pairs, etc. Reference as `<img src="images/foo.png">`.
-6. **Print → Save as PDF** — that's the deliverable. The print CSS in this file locks
+5. **Print → Save as PDF** — that's the deliverable. The print CSS in this file locks
    each slide to a 1920×1080 page and disables nav UI automatically.
 
 ## Controls (live preview)
@@ -47,10 +45,11 @@ something fundamental here (type scale, color tokens, card variants), update tha
 
 Stack:
 - **Golos Text** (Google Fonts) — only typeface; weight + size do all the work.
-- 5 pill variants: `dark`, `light`, `outline`, `soft`, `deep`.
-- 3 card variants: default (ink), `featured` (white), `outline`.
-- 5 type sizes: `h-hero`, `h-xl`, `h-lg`, `h-md`, `h-sm`, plus `lead`, `body`, `meta`.
-- Brand mark + wordmark top-left every slide; tracked uppercase page number bottom-right.
+- CSS tokens: `--croissan-blue` (+ `-deep`, `-soft`) for the brand slide background and pill fills.
+- **3 pill variants** (filled only): `dark`, `soft`, `deep` — no outline, no white pill on brand slides.
+- **2 card variants**: default (ink or ink-soft fill), `featured` (white) — no outline cards.
+- Type scale: `h-hero`, `h-xl`, `h-lg`, `h-md`, `h-sm`, plus `lead`, `body`.
+- Brand mark + wordmark top-left every slide; **no slide page numbers** in the layout.
 
 ## When to use this vs the designer-led path
 

@@ -78,7 +78,7 @@ unique OG image per URL. Examples already in `croissan-landing`:
 
 ## Don'ts
 
-- ❌ **Don't use `--brand-primary` as the OG background.** A solid cobalt OG is a
+- ❌ **Don't use `--brand-primary` as the OG background.** A solid Croissan-blue OG is a
   miss-read at thumbnail size in feeds; the soft gradient on near-white reads as a
   neutral document. Reserved as a deliberate exception to the "flat surfaces only"
   rule.

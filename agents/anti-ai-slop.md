@@ -27,13 +27,13 @@ Exactly any of: `#6366f1`, `#4f46e5`, `#4338ca`, `#3730a3`, `#8b5cf6`, `#7c3aed`
 `#a855f7`, plus the `bg-indigo-*` / `bg-violet-*` / `bg-purple-*` Tailwind utilities used
 as a brand surface.
 
-The studio's brand is `#2727CA` (cobalt). It is **next to** indigo on the color wheel —
+The studio's brand is `#2727CA` (Croissan blue — rich deep blue). It is **next to** indigo on the color wheel —
 that makes it tempting to substitute. Don't. Use `--brand-primary` (`bg-brand`,
 `text-brand`).
 
 ### 2. Two-stop "trust" gradients on the hero
 
-Purple→blue, blue→cyan, indigo→pink, cobalt→cyan. The "AI SaaS hero" gradient is the most
+Purple→blue, blue→cyan, indigo→pink, Croissan-blue→cyan. The "AI SaaS hero" gradient is the most
 recognizable LLM-default pattern in 2024–2026 web design.
 
 Croissan's web hero is a **flat near-white surface** (`--background`). Croissan's slide
@@ -67,8 +67,8 @@ ship this shape. Cards in our system have:
 - **No** left-border accent. **No** colored stripes.
 
 If a section feels like it needs a left-border accent for visual emphasis, the answer is
-either (a) make the entire card `card.featured` (white inverse on cobalt slides) or
-(b) add a tracked uppercase eyebrow (`.lbl` / `.meta` class) at the top.
+either (a) make the entire card `card.featured` (white inverse on brand-blue slides) or
+(b) fold the label into the title line — no separate uppercase eyebrow row.
 
 ### 6. Invented metrics
 
@@ -192,7 +192,7 @@ not shadow. Cards use a hairline border.
 
 `background: linear-gradient(...); -webkit-background-clip: text; color: transparent;`
 on a hero headline. Universal AI-SaaS giveaway, hard ban. Display H1 is **solid
-`text-primary` on light surfaces** or **solid white on cobalt/black/graphite**. Same
+`text-primary` on light surfaces** or **solid white on Croissan blue/black/graphite**. Same
 rule applies to slide H1s.
 
 If a designer wants emphasis on a single word inside an H1, use **opacity** (the
@@ -226,8 +226,9 @@ The work ships if these slip through, but it stops feeling like ours.
   hex, tokens were not honored. Refactor.
 - **Hyphenated bullet lists.** `- foo / - bar / - baz` with trivial labels. Either it's
   worth a real sentence each or it's a `pill-row`.
-- **Section headers shouting** in `text-uppercase`. We don't shout headers; eyebrow
-  labels shout (`.meta`, `.lbl`), section H2s don't.
+- **Section headers shouting** in `text-uppercase`. Marketing section H2s stay sentence case.
+  On **slides**, don't stack a small uppercase line above the main heading — fold context into
+  the H2, lead, pills, or card titles (see [`design-system/decks.md`](../design-system/decks.md)).
 - **Emoji bullet points** (`✅ ❌ 🟢 🔴 ⚠️ ℹ️`). Inside this repo's docs, ✅/❌ are used
   to mark do/don't examples — that's fine and intentional. In *generated user-facing
   output*, no emoji bullets.

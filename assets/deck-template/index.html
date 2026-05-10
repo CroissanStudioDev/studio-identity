@@ -16,9 +16,9 @@
      ============================================================ */
 
   :root{
-    --cobalt:#2727CA;          /* brand primary */
-    --cobalt-deep:#1F1FA8;     /* hover / active */
-    --cobalt-soft:#3D3DE0;     /* secondary surface on cobalt */
+    --croissan-blue:#2727CA;       /* brand primary — Croissan blue: rich deep blue */
+    --croissan-blue-deep:#1F1FA8;  /* hover / active */
+    --croissan-blue-soft:#3D3DE0;  /* secondary pill on brand blue */
     --ink:#0E0E14;             /* premium black surface */
     --ink-soft:#1A1A22;        /* graphite alt */
     --paper:#FFFFFF;
@@ -28,7 +28,7 @@
     --font:"Golos Text","Golos UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:100%;height:100%;overflow:hidden;background:var(--cobalt);color:var(--paper);font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--croissan-blue);color:var(--paper);font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 
   /* Deck framework */
   #deck{position:fixed;inset:0;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .7s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
@@ -38,7 +38,7 @@
     padding:7vh 6vw 7vh 6vw;
     display:flex;flex-direction:column;
     overflow:hidden;
-    background:var(--cobalt);
+    background:var(--croissan-blue);
     color:var(--paper);
   }
 
@@ -46,9 +46,6 @@
   .brand{position:absolute;top:5vh;left:6vw;display:flex;align-items:center;gap:.55em;z-index:3}
   .brand svg{width:28px;height:28px;flex-shrink:0}
   .brand .wm{font-weight:700;font-size:max(14px,1.05vw);letter-spacing:-.005em;color:var(--paper);line-height:1}
-
-  /* Page number — bottom-right, uppercase tracked, tabular */
-  .pn{position:absolute;bottom:4vh;right:6vw;font-weight:500;font-size:max(12px,.85vw);letter-spacing:.16em;color:var(--paper-mute);font-variant-numeric:tabular-nums;z-index:3}
 
   /* Frame (content area) */
   .frame{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:4vh;min-height:0}
@@ -62,11 +59,10 @@
   .h-sm  {font-weight:600;font-size:1.5vw;line-height:1.20;letter-spacing:-.005em}
   .lead  {font-weight:500;font-size:max(17px,1.55vw);line-height:1.4;color:var(--paper-dim);letter-spacing:-.005em}
   .body  {font-weight:400;font-size:max(15px,1.15vw);line-height:1.5;color:var(--paper-dim)}
-  .meta  {font-weight:500;font-size:max(11px,.85vw);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-mute)}
   .num   {font-weight:800;font-feature-settings:"tnum";font-variant-numeric:tabular-nums;letter-spacing:-.04em}
   .dim   {color:var(--paper-mute)}
 
-  /* Pill / chip — signature device. 5 variants. */
+  /* Pill / chip — signature device. Filled surfaces only (dark / soft / deep). */
   .pill{
     display:inline-flex;align-items:center;gap:.55em;
     font-weight:500;font-size:max(13px,1vw);line-height:1;
@@ -74,13 +70,10 @@
     border-radius:999px;
     letter-spacing:-.005em;
     white-space:nowrap;
-    border:1px solid transparent;
   }
-  .pill.dark   {background:var(--ink);color:var(--paper)}
-  .pill.light  {background:var(--paper);color:var(--cobalt)}
-  .pill.outline{background:transparent;color:var(--paper);border-color:rgba(255,255,255,.45)}
-  .pill.soft   {background:var(--cobalt-soft);color:var(--paper)}
-  .pill.deep   {background:var(--cobalt-deep);color:var(--paper)}
+  .pill.dark {background:var(--ink);color:var(--paper)}
+  .pill.soft {background:var(--croissan-blue-soft);color:var(--paper)}
+  .pill.deep {background:var(--croissan-blue-deep);color:var(--paper)}
   .pill-row    {display:flex;flex-wrap:wrap;gap:.7vw .8vw;align-items:center}
   .pill-row.tight{gap:.5vw .6vw}
 
@@ -106,7 +99,7 @@
   .col.gap-lg {gap:4vh}
   .row        {display:flex;align-items:center}
 
-  /* Cards (dark on cobalt). 3 variants: default / featured / outline */
+  /* Cards — filled surfaces only: ink default / white featured */
   .card{
     background:var(--ink);
     color:var(--paper);
@@ -115,15 +108,11 @@
     display:flex;flex-direction:column;gap:1vh;
     height:100%;
   }
-  .card .lbl  {font-weight:500;font-size:max(11px,.78vw);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-mute)}
   .card .ttl  {font-weight:700;font-size:1.7vw;line-height:1.15;letter-spacing:-.012em}
   .card .desc {font-weight:400;font-size:max(13px,.98vw);line-height:1.5;color:var(--paper-dim)}
   .card .price{font-weight:800;font-size:2vw;line-height:1;letter-spacing:-.025em;font-variant-numeric:tabular-nums;margin-top:auto;padding-top:1.4vh}
-  .card.featured{background:var(--paper);color:var(--cobalt)}
-  .card.featured .lbl {color:var(--cobalt-deep)}
+  .card.featured{background:var(--paper);color:var(--croissan-blue)}
   .card.featured .desc{color:rgba(39,39,202,.78)}
-  .card.outline{background:transparent;border:1px solid var(--line);color:var(--paper)}
-  .card.outline .desc{color:var(--paper-dim)}
 
   /* Demo grid (4 frames) — for case showcases */
   .demo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1vw;align-items:stretch}
@@ -162,7 +151,7 @@
     padding:1.8vh 0;border-top:1px solid var(--line);
   }
   .stage-row:last-of-type{border-bottom:1px solid var(--line)}
-  .stage-row .num-lbl{font-weight:600;font-size:max(12px,.95vw);letter-spacing:.12em;color:var(--paper-mute);text-transform:uppercase;min-width:7vw}
+  .stage-row .num-lbl{font-weight:600;font-size:max(13px,1vw);color:var(--paper-dim);min-width:7vw}
   .stage-row .nm     {font-weight:600;font-size:max(15px,1.25vw);line-height:1.2;letter-spacing:-.005em}
   .stage-row .pr     {font-weight:700;font-size:max(15px,1.4vw);font-variant-numeric:tabular-nums;letter-spacing:-.015em}
 
@@ -190,7 +179,7 @@
     @page{size:1920px 1080px;margin:0}
     html,body{
       width:1920px !important;height:auto !important;
-      overflow:visible !important;background:var(--cobalt) !important;
+      overflow:visible !important;background:var(--croissan-blue) !important;
       -webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;
     }
     #deck{
@@ -208,7 +197,6 @@
     }
     .slide:last-child{page-break-after:auto;break-after:auto}
     .brand{top:54px !important;left:115.2px !important}
-    .pn{bottom:43.2px !important;right:115.2px !important}
     #nav,#hint,#overview{display:none !important}
     *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
   }
@@ -234,56 +222,51 @@
 <div id="hint">← →</div>
 
 <!-- ============================================================
-     A reusable shorthand:
+     Brand row:
        <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
-     Page numbers (`<span class="pn">NN / TT</span>`) are not auto-
-     calculated in this template — update them manually when
-     adding/removing slides.
      ============================================================ -->
 
 <div id="deck">
 
 <!-- 01 · COVER -->
-<section class="slide" data-screen-label="01 Привет">
+<section class="slide" data-screen-label="Привет">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:14vh">
     <h1 class="h-hero" style="max-width:18ch;font-weight:600">Привет!<br>Мы Круассан Студио</h1>
-    <p class="h-xl" style="margin-top:5vh;max-width:18ch;font-weight:600">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
+    <p class="h-xl" style="margin-top:5vh;max-width:18ch;font-weight:600">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ</p>
   </div>
-  <span class="pn">01 / 11</span>
 </section>
 
 <!-- 02 · CASES — short proof strip with two recent shipped projects -->
-<section class="slide" data-screen-label="02 Что делаем">
+<section class="slide" data-screen-label="Что делаем">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:3.5vh">
-    <h2 class="h-lg" style="max-width:30ch;font-weight:600">Создаём и&nbsp;развиваем продукты с&nbsp;ИИ<br>для&nbsp;{{Тип клиентов}}.</h2>
+    <h2 class="h-lg" style="max-width:30ch;font-weight:600">Создаём и&nbsp;развиваем продукты с&nbsp;ИИ<br>для&nbsp;{{Тип клиентов}}</h2>
     <div class="grid-2" style="gap:2vw;margin-top:1vh;align-items:stretch">
       <div class="col gap-sm">
-        <span class="meta">Кейс · {{Клиент A}}</span>
-        <span class="pill dark" style="align-self:flex-start;font-size:max(13px,1.02vw);padding:.85em 1.2em">{{Заголовок кейса A}}</span>
+        <h3 class="h-sm" style="font-weight:600">Кейс · {{Клиент A}}</h3>
+        <p class="lead" style="font-size:max(14px,1.05vw);max-width:38ch">{{Заголовок кейса A}}</p>
         <!-- Replace with real before/after or a single screenshot:
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6vw;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.18)">
           <div style="aspect-ratio:1/1;overflow:hidden"><img src="images/before.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
           <div style="aspect-ratio:1/1;overflow:hidden"><img src="images/after.png"  alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         </div> -->
-        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац: что было, что стало, ключевая метрика}}.</p>
+        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац: что было, что стало, ключевая метрика}}</p>
       </div>
       <div class="col gap-sm">
-        <span class="meta">Кейс · {{Клиент B}}</span>
-        <span class="pill dark" style="align-self:flex-start;font-size:max(13px,1.02vw);padding:.85em 1.2em">{{Заголовок кейса B}}</span>
-        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац про второй кейс}}.</p>
+        <h3 class="h-sm" style="font-weight:600">Кейс · {{Клиент B}}</h3>
+        <p class="lead" style="font-size:max(14px,1.05vw);max-width:38ch">{{Заголовок кейса B}}</p>
+        <p class="body" style="font-size:max(12px,.88vw);max-width:38ch;margin-top:.4vh">{{Один абзац про второй кейс}}</p>
       </div>
     </div>
   </div>
-  <span class="pn">02 / 11</span>
 </section>
 
 <!-- 03 · ONE-STOP SHOP — services chips with floating black badge -->
-<section class="slide" data-screen-label="03 One-stop shop">
+<section class="slide" data-screen-label="One-stop shop">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:5vh">
-    <h2 class="h-xl" style="max-width:18ch;font-weight:600">Мы ваш one-stop&nbsp;shop<br>для&nbsp;ИИ-решений.</h2>
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">Мы ваш one-stop&nbsp;shop<br>для&nbsp;ИИ-решений</h2>
     <div class="badge-floating" style="margin-top:2vh">
       <span class="lab">В них мы особо хороши</span>
       <div class="pill-row" style="max-width:62vw">
@@ -297,33 +280,30 @@
     </div>
     <p class="h-lg dim" style="margin-top:8vh;font-weight:500;opacity:.55">Дальше — про вашу задачу&nbsp;→</p>
   </div>
-  <span class="pn">03 / 11</span>
 </section>
 
 <!-- 04 · OFFER — title slide for THIS proposal -->
-<section class="slide" data-screen-label="04 Оффер">
+<section class="slide" data-screen-label="Оффер">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:5vh">
-    <span class="meta" style="color:rgba(255,255,255,.7)">Коммерческое предложение</span>
-    <h2 class="h-hero" style="max-width:14ch;font-weight:600">{{Название<br>проекта}}.</h2>
-    <p class="lead" style="max-width:42ch">{{Одно-два предложения: что это для пользователя клиента, какой результат}}.</p>
+    <h2 class="h-hero" style="max-width:14ch;font-weight:600">{{Название<br>проекта}}</h2>
+    <p class="lead" style="max-width:42ch">Коммерческое предложение — {{Одно-два предложения: что это для пользователя клиента, какой результат}}</p>
     <div class="pill-row" style="margin-top:2vh">
-      <span class="pill outline">{{N&nbsp;недель}}</span>
-      <span class="pill outline">Под&nbsp;ключ</span>
-      <span class="pill outline">{{Ключевая характеристика}}</span>
+      <span class="pill deep">{{N&nbsp;недель}}</span>
+      <span class="pill soft">Под&nbsp;ключ</span>
+      <span class="pill deep">{{Ключевая характеристика}}</span>
     </div>
   </div>
-  <span class="pn">04 / 11</span>
 </section>
 
 <!-- 05 · WHAT IT DOES — dual mode/feature breakdown -->
-<section class="slide" data-screen-label="05 Что делает">
+<section class="slide" data-screen-label="Что делает">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:4vh">
-    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{Заголовок-формула: «N класса X, M режимов Y»}}.</h2>
+    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{Заголовок-формула: «N класса X, M режимов Y»}}</h2>
     <div class="grid-2" style="gap:3vw;margin-top:1vh">
       <div class="col gap-md">
-        <span class="meta">{{Группа A}}</span>
+        <h3 class="h-md" style="font-weight:600">{{Группа A}}</h3>
         <div class="pill-row tight">
           <span class="pill soft">{{Тег A1}}</span>
           <span class="pill soft">{{Тег A2}}</span>
@@ -332,142 +312,129 @@
         </div>
       </div>
       <div class="col gap-md">
-        <span class="meta">{{Группа B}}</span>
+        <h3 class="h-md" style="font-weight:600">{{Группа B}}</h3>
         <div class="card" style="padding:2.4vh 1.6vw">
-          <span class="lbl">Режим&nbsp;A · {{Имя}}</span>
-          <div class="ttl" style="font-size:1.5vw">{{Короткое название режима}}.</div>
-          <div class="desc">{{Что происходит и какой UX. Один абзац}}.</div>
+          <div class="ttl" style="font-size:1.5vw">Режим&nbsp;A · {{Имя}} — {{Короткое название режима}}</div>
+          <div class="desc">{{Что происходит и какой UX. Один абзац}}</div>
         </div>
-        <div class="card" style="padding:2.4vh 1.6vw;background:var(--paper);color:var(--cobalt)">
-          <span class="lbl" style="color:var(--cobalt-deep)">Режим&nbsp;B · {{Имя}} ★</span>
-          <div class="ttl" style="font-size:1.5vw">{{Название «звёздного» режима}}.</div>
-          <div class="desc" style="color:rgba(39,39,202,.78)">{{Описание главного варианта — это рекомендуемый}}.</div>
+        <div class="card featured" style="padding:2.4vh 1.6vw">
+          <div class="ttl" style="font-size:1.5vw">Режим&nbsp;B · {{Имя}} ★ — {{Название «звёздного» режима}}</div>
+          <div class="desc">{{Описание главного варианта — это рекомендуемый}}</div>
         </div>
       </div>
     </div>
   </div>
-  <span class="pn">05 / 11</span>
 </section>
 
 <!-- 06 · DEMO — 4-frame proof grid -->
-<section class="slide" data-screen-label="06 Демо">
+<section class="slide" data-screen-label="Демо">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:3.4vh">
     <div class="grid-2-7-5" style="align-items:end">
-      <h2 class="h-lg" style="max-width:22ch;font-weight:600">{{Один тезис про результат демо}}.</h2>
+      <h2 class="h-lg" style="max-width:22ch;font-weight:600">{{Один тезис про результат демо}}</h2>
       <div class="pill-row" style="justify-content:flex-end">
-        <span class="pill outline">{{Метрика, напр. «live · 24 fps»}}</span>
-        <span class="pill light">{{Источник кадров}}</span>
+        <span class="pill deep">{{Метрика, напр. «live · 24 fps»}}</span>
+        <span class="pill dark">{{Источник кадров}}</span>
       </div>
     </div>
     <div class="demo-grid">
       <figure>
         <div class="img"><!-- <img src="images/01.jpg" alt=""> --></div>
-        <div class="cap"><span class="k">{{Подпись 1}}</span><span>00 · {{контекст}}</span></div>
+        <div class="cap"><span class="k">{{Подпись 1}}</span><span>{{контекст}}</span></div>
       </figure>
       <figure>
         <div class="img"><!-- <img src="images/02.jpg" alt=""> --></div>
-        <div class="cap"><span class="k">{{Подпись 2}}</span><span>01 · {{контекст}}</span></div>
+        <div class="cap"><span class="k">{{Подпись 2}}</span><span>{{контекст}}</span></div>
       </figure>
       <figure>
         <div class="img"><!-- <img src="images/03.jpg" alt=""> --></div>
-        <div class="cap"><span class="k">{{Подпись 3}}</span><span>02 · {{контекст}}</span></div>
+        <div class="cap"><span class="k">{{Подпись 3}}</span><span>{{контекст}}</span></div>
       </figure>
       <figure>
         <div class="img"><!-- <img src="images/04.jpg" alt=""> --></div>
-        <div class="cap"><span class="k">{{Подпись 4}}</span><span>03 · {{контекст}}</span></div>
+        <div class="cap"><span class="k">{{Подпись 4}}</span><span>{{контекст}}</span></div>
       </figure>
     </div>
-    <p class="body" style="max-width:78ch">{{Один абзац: что общее у всех кадров, что меняется, что это значит для клиента}}.</p>
+    <p class="body" style="max-width:78ch">{{Один абзац: что общее у всех кадров, что меняется, что это значит для клиента}}</p>
   </div>
-  <span class="pn">06 / 11</span>
 </section>
 
 <!-- 07 · TECH — research candidates + our optimization layer -->
-<section class="slide" data-screen-label="07 Технологии">
+<section class="slide" data-screen-label="Технологии">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:4vh">
-    <h2 class="h-xl" style="max-width:24ch;font-weight:600">Подберём оптимальный стек под&nbsp;вашу задачу.</h2>
+    <h2 class="h-xl" style="max-width:24ch;font-weight:600">Подберём оптимальный стек под&nbsp;вашу задачу</h2>
     <div class="grid-2-7-5" style="gap:4vw">
       <div class="col gap-md">
-        <span class="meta">Кандидаты для&nbsp;research-этапа</span>
+        <h3 class="h-md" style="font-weight:600">Кандидаты для&nbsp;research-этапа</h3>
         <div class="pill-row tight">
           <span class="pill dark">{{Кандидат A}}</span>
           <span class="pill dark">{{Кандидат B}}</span>
           <span class="pill dark">{{Кандидат C}}</span>
           <span class="pill dark">{{Кандидат D}}</span>
         </div>
-        <p class="body" style="max-width:46ch">На&nbsp;research-этапе прогоняем кандидатов на&nbsp;вашей фактуре. Выбираем тот, у&nbsp;которого выше {{ключевая метрика}}.</p>
+        <p class="body" style="max-width:46ch">На&nbsp;research-этапе прогоняем кандидатов на&nbsp;вашей фактуре. Выбираем тот, у&nbsp;которого выше {{ключевая метрика}}</p>
       </div>
       <div class="col gap-md">
-        <span class="meta">Наш слой оптимизации</span>
+        <h3 class="h-md" style="font-weight:600">Наш слой оптимизации</h3>
         <div class="card" style="padding:2.6vh 1.4vw">
-          <span class="lbl">In-house · {{«~10× ускорение» / etc.}}</span>
-          <div class="ttl" style="font-size:1.4vw">{{Список техник: квантизация, кэш, пр.}}.</div>
-          <div class="desc">{{Один абзац: что даёт это ускорение в цифрах}}.</div>
+          <div class="ttl" style="font-size:1.4vw">In-house · {{«~10× ускорение» / etc.}} — {{Список техник: квантизация, кэш, пр.}}</div>
+          <div class="desc">{{Один абзац: что даёт это ускорение в цифрах}}</div>
         </div>
       </div>
     </div>
   </div>
-  <span class="pn">07 / 11</span>
 </section>
 
 <!-- 08 · HARDWARE / INFRA — recommended vs minimum -->
-<section class="slide" data-screen-label="08 Инфраструктура">
+<section class="slide" data-screen-label="Инфраструктура">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:4vh">
-    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Заголовок-формула про требования}}.</h2>
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Заголовок-формула про требования}}</h2>
     <div class="grid-2-6-6" style="gap:2vw;margin-top:1vh">
       <div class="card featured">
-        <span class="lbl">Рекомендуем</span>
-        <div class="ttl">{{Конфигурация / провайдер}}<br>{{Ёмкость}}</div>
-        <div class="desc">{{Запас по производительности и почему этот вариант предпочтителен}}.</div>
+        <div class="ttl">Рекомендуем — {{Конфигурация / провайдер}}<br>{{Ёмкость}}</div>
+        <div class="desc">{{Запас по производительности и почему этот вариант предпочтителен}}</div>
       </div>
-      <div class="card outline">
-        <span class="lbl">Минимум</span>
-        <div class="ttl">{{Минимальная конфигурация}}<br>{{Ёмкость}}</div>
-        <div class="desc">{{Полный функционал, но без запаса. Когда оправдано}}.</div>
+      <div class="card" style="background:var(--ink-soft)">
+        <div class="ttl">Минимум — {{Минимальная конфигурация}}<br>{{Ёмкость}}</div>
+        <div class="desc">{{Полный функционал, но без запаса. Когда оправдано}}</div>
       </div>
     </div>
-    <p class="body" style="max-width:78ch;margin-top:1vh">{{Один абзац про остальное: периферия, подбор и сборка под ключ}}.</p>
+    <p class="body" style="max-width:78ch;margin-top:1vh">{{Один абзац про остальное: периферия, подбор и сборка под ключ}}</p>
   </div>
-  <span class="pn">08 / 11</span>
 </section>
 
 <!-- 09 · STAGES — 3-card breakdown with stage prices -->
-<section class="slide" data-screen-label="09 Этапы">
+<section class="slide" data-screen-label="Этапы">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:4vh">
-    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{N&nbsp;недель<br>от&nbsp;старта до&nbsp;запуска}}.</h2>
+    <h2 class="h-xl" style="max-width:22ch;font-weight:600">{{N&nbsp;недель<br>от&nbsp;старта до&nbsp;запуска}}</h2>
     <div class="grid-3" style="margin-top:1vh">
       <div class="card">
-        <span class="lbl">Этап 01 · {{N}} нед.</span>
-        <div class="ttl">Research<br>&amp;&nbsp;{{подбор / discovery}}.</div>
-        <div class="desc">{{Что делаем, что получает клиент на выходе этапа}}.</div>
+        <div class="ttl">Этап 01 · {{N}} нед. — Research<br>&amp;&nbsp;{{подбор / discovery}}</div>
+        <div class="desc">{{Что делаем, что получает клиент на выходе этапа}}</div>
         <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
       </div>
       <div class="card">
-        <span class="lbl">Этап 02 · {{N}} нед.</span>
-        <div class="ttl">MVP &amp;&nbsp;Pilot.</div>
-        <div class="desc">{{Дообучение, сборка пайплайна, прогон полного цикла}}.</div>
+        <div class="ttl">Этап 02 · {{N}} нед. — MVP &amp;&nbsp;Pilot</div>
+        <div class="desc">{{Дообучение, сборка пайплайна, прогон полного цикла}}</div>
         <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
       </div>
       <div class="card featured">
-        <span class="lbl">Этап 03 · {{N}} нед.</span>
-        <div class="ttl">Production<br>&amp;&nbsp;запуск.</div>
-        <div class="desc">{{Деплой, обучение оператора, поддержка после запуска}}.</div>
+        <div class="ttl">Этап 03 · {{N}} нед. — Production<br>&amp;&nbsp;запуск</div>
+        <div class="desc">{{Деплой, обучение оператора, поддержка после запуска}}</div>
         <div class="price">{{XXX&nbsp;000&nbsp;₽}}</div>
       </div>
     </div>
   </div>
-  <span class="pn">09 / 11</span>
 </section>
 
 <!-- 10 · PRICE — itemized stages + huge final number -->
-<section class="slide" data-screen-label="10 Стоимость">
+<section class="slide" data-screen-label="Стоимость">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:4vh">
-    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Название проекта}} под&nbsp;ключ.</h2>
+    <h2 class="h-xl" style="max-width:18ch;font-weight:600">{{Название проекта}} под&nbsp;ключ</h2>
     <div class="col gap-sm" style="max-width:80vw;margin-top:2vh">
       <div class="stage-row">
         <span class="num-lbl">Этап 01</span>
@@ -486,26 +453,24 @@
       </div>
     </div>
     <div class="col" style="margin-top:auto;padding-top:2vh;padding-bottom:2vh;align-items:flex-end">
-      <span class="meta" style="color:rgba(255,255,255,.7);align-self:flex-start">Итого&nbsp;— под&nbsp;ключ, {{N&nbsp;недель}}</span>
+      <p class="lead dim" style="align-self:flex-start;max-width:42ch;margin-bottom:1vh">Итого — под&nbsp;ключ, {{N&nbsp;недель}}</p>
       <div class="price-final" style="font-size:9.5vw;padding-right:5vw"><span>{{XXX XXX}}</span><span class="cur">&nbsp;₽</span></div>
     </div>
   </div>
-  <span class="pn">10 / 11</span>
 </section>
 
 <!-- 11 · CONTACT — single owner with 2-3 contact pills -->
-<section class="slide" data-screen-label="11 Контакты">
+<section class="slide" data-screen-label="Контакты">
   <div class="brand"><svg width="28" height="28" style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
   <div class="frame top" style="padding-top:13vh;gap:5vh">
-    <h2 class="h-hero" style="max-width:14ch;font-weight:600">Давайте сделаем<br>ваш проект.&nbsp;<span class="heart">🤍</span></h2>
-    <p class="lead" style="max-width:38ch">{{Имя}}, {{роль}} Круассан&nbsp;Студио&nbsp;— ответит на&nbsp;{{вопросы / технические вопросы}} и&nbsp;соберёт {{демо / план}} за&nbsp;пару дней.</p>
+    <h2 class="h-hero" style="max-width:14ch;font-weight:600">Давайте сделаем<br>ваш проект&nbsp;<span class="heart">🤍</span></h2>
+    <p class="lead" style="max-width:38ch">{{Имя}}, {{роль}} Круассан&nbsp;Студио&nbsp;— ответит на&nbsp;{{вопросы / технические вопросы}} и&nbsp;соберёт {{демо / план}} за&nbsp;пару дней</p>
     <div class="col gap-sm" style="margin-top:2vh">
-      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">@{{telegram}}</span>
-      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">{{e-mail}}</span>
-      <span class="pill light" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">hello@croissanstudio.ru</span>
+      <span class="pill dark" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">@{{telegram}}</span>
+      <span class="pill dark" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">{{e-mail}}</span>
+      <span class="pill dark" style="align-self:flex-start;font-size:max(15px,1.18vw);padding:1em 1.4em">hello@croissanstudio.ru</span>
     </div>
   </div>
-  <span class="pn">11 / 11</span>
 </section>
 
 </div>
@@ -560,7 +525,7 @@ function buildOverview(){
     wrap.appendChild(clone);
     const label=document.createElement('div');
     label.style.cssText='padding:6px 10px;font-family:"Golos Text",sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;opacity:.7;background:rgba(0,0,0,.35)';
-    label.textContent=(i+1)+' / '+total+'  ·  '+(s.dataset.screenLabel||'');
+    label.textContent=s.dataset.screenLabel||'';
     card.appendChild(wrap);
     card.appendChild(label);
     card.onclick=()=>{toggleOverview();go(i)};

@@ -10,7 +10,7 @@ when a token exists.
 
 | Role | Token | Value |
 |------|-------|-------|
-| Primary (CTA, accents) | `--brand-primary` | `#2727CA` |
+| Primary (CTA, accents) | `--brand-primary` | `#2727CA` — **Croissan blue** (spoken name; rich deep blue, no «t» in «Croissan») |
 | Primary hover | `--brand-primary-hover` | `#2424B4` |
 | Brand dark (main text) | `--brand-dark` | `#150E47` |
 | Brand black (premium covers, high-contrast) | `--brand-black` | `#0E0E14` |
