@@ -219,13 +219,16 @@ The work ships if these slip through, but it stops feeling like ours.
 - **Default 18-slide КП when 11 would do.** See [`brand/proposal-structure.md`](../brand/proposal-structure.md)
   for the criteria. Padding a КП makes it feel insecure; trust the compact structure
   when the brief is tech-led.
-- **`var(--brand-primary)` used 6+ times in the rendered body.** Cap at ~2 visible uses
-  per screen — primary CTA + one accent. Beyond that, the brand color stops being the
-  brand color and becomes wallpaper.
+- **Brand blue used as wallpaper.** Cap repeated `var(--brand-primary)` accents at ~2 visible
+  uses per web screen. On slides, use blue for covers, openers, and big ideas; case studies,
+  product screenshots, and page-like compositions should usually start from graphite or white.
 - **More than ~12 raw hex values outside `:root` / `@theme`.** If a file is shedding
   hex, tokens were not honored. Refactor.
 - **Hyphenated bullet lists.** `- foo / - bar / - baz` with trivial labels. Either it's
   worth a real sentence each or it's a `pill-row`.
+- **Over-padded slide templates.** Huge safe margins, centered text blocks, evenly spaced
+  feature cards, and no edge tension make Croissan slides feel like generic SaaS exports.
+  Tight margins are fine when the type is compact and cards carry the reading padding.
 - **Section headers shouting** in `text-uppercase`. Marketing section H2s stay sentence case.
   On **slides**, don't stack a small uppercase line above the main heading — fold context into
   the H2, lead, pills, or card titles (see [`design-system/decks.md`](../design-system/decks.md)).
@@ -357,6 +360,9 @@ looks like — concrete moves a reviewer can recognize as "this writer knows the
   (card grid) → focus (chip cluster) → process (numbered list) → pricing (comparison
   table) → CTA (heavy-glass card). Each section reads as its own thing; the page has
   rhythm.
+- **Slides with deliberate edge tension.** Loud covers can use a cropped croissant and
+  tight text margins; case and product slides can stay calmer on graphite. The surface
+  choice should say how loud the moment is.
 - **Photos that look like the team actually exists.** Real portraits in the polaroid
   treatment, real product screenshots in case-study slides, real client logos in the
   trust strip. If you can't trace a photo to a real person/product/client, don't ship

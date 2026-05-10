@@ -166,9 +166,10 @@
     .slide.paper    { background: var(--paper); color: var(--ink); }
     .slide.ink      { background: var(--ink);   color: var(--paper); }
     .slide.graphite { background: var(--graphite); color: var(--paper); }
+    .slide.tight    { --frame-inset: 48px 61px 48px 61px; }
+    .slide.card-protected { --frame-inset: 48px 61px 48px 61px; }
 
-    /* Slide chrome — brand mark + page number on every slide.
-       Coordinates here match deck-framework's 1920×1080 canvas. */
+    /* Quiet lockup — use on standalone business slides, not every loud cover. */
     .brand-mark {
       position: absolute;
       top: 60px; left: 116px;
@@ -180,6 +181,7 @@
     .pn {
       position: absolute;
       bottom: 60px; right: 116px;
+      display: none;
       font-weight: 500; font-size: 14px;
       letter-spacing: .16em;
       color: var(--paper-mute);
@@ -192,12 +194,14 @@
     /* Frame (content area) — sits inside outer 7vh / 6vw padding */
     .frame {
       position: absolute;
-      inset: 150px 116px 150px 116px;
+      inset: var(--frame-inset, 150px 116px 150px 116px);
       display: flex; flex-direction: column;
       min-height: 0;
+      z-index: 1;
     }
     .frame.center { justify-content: center; }
     .frame.top    { justify-content: flex-start; padding-top: 30px; }
+    .frame.tight  { justify-content: flex-start; padding-top: 0; }
 
     /* Type scale */
     .h-hero { font-weight: 700; font-size: 122px; line-height: 1.02; letter-spacing: -3.05px; text-wrap: balance; }
@@ -211,7 +215,7 @@
     .num    { font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
     .dim    { color: var(--paper-mute); }
 
-    /* Pill / chip — five variants */
+    /* Pill / chip — three filled variants */
     .pill {
       display: inline-flex; align-items: center; gap: .55em;
       font-weight: 500; font-size: 19px; line-height: 1;
@@ -222,8 +226,6 @@
       border: 1px solid transparent;
     }
     .pill.dark    { background: var(--ink); color: var(--paper); }
-    .pill.light   { background: var(--paper); color: var(--cobalt); }
-    .pill.outline { background: transparent; color: var(--paper); border-color: rgba(255,255,255,.45); }
     .pill.soft    { background: var(--cobalt-soft); color: var(--paper); }
     .pill.deep    { background: var(--cobalt-deep); color: var(--paper); }
     .pill-row     { display: flex; flex-wrap: wrap; gap: 14px 16px; align-items: center; }
@@ -255,9 +257,6 @@
     .card.featured       { background: var(--paper); color: var(--cobalt); }
     .card.featured .lbl  { color: var(--cobalt-deep); }
     .card.featured .desc { color: rgba(39,39,202,.78); }
-    .card.outline        { background: transparent; border: 1px solid var(--line); color: var(--paper); }
-    .card.outline .desc  { color: var(--paper-dim); }
-
     /* Number-box (cobalt slides only) */
     .number-box {
       border-radius: 32px;
@@ -374,11 +373,10 @@
   <!-- ============================================================
        SLIDE 01 · COVER
        ============================================================ -->
-  <section class="slide brand active" data-screen-label="01 Привет">
-    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
-    <div class="frame top" style="padding-top:14vh">
+  <section class="slide brand tight active" data-screen-label="01 Привет">
+    <div class="frame tight">
       <h1 class="h-hero" style="max-width:18ch">Привет!<br>Мы Круассан Студио</h1>
-      <p class="h-xl" style="margin-top:5vh;max-width:18ch">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
+      <p class="h-xl" style="margin-top:34px;max-width:18ch">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
     </div>
     <span class="pn">01 / 11</span>
   </section>
@@ -439,9 +437,9 @@
       <h2 class="h-hero" style="max-width:14ch">{{Название<br>проекта}}.</h2>
       <p class="lead" style="max-width:42ch">{{Одно-два предложения: что это для пользователя клиента, какой результат.}}</p>
       <div class="pill-row" style="margin-top:30px">
-        <span class="pill outline">{{N&nbsp;недель}}</span>
-        <span class="pill outline">Под&nbsp;ключ</span>
-        <span class="pill outline">{{Ключевая характеристика}}</span>
+        <span class="pill deep">{{N&nbsp;недель}}</span>
+        <span class="pill soft">Под&nbsp;ключ</span>
+        <span class="pill deep">{{Ключевая характеристика}}</span>
       </div>
     </div>
     <span class="pn">04 / 11</span>
@@ -491,8 +489,8 @@
       <div class="grid-2-7-5" style="align-items:end">
         <h2 class="h-lg" style="max-width:22ch">{{Один тезис про результат демо}}.</h2>
         <div class="pill-row" style="justify-content:flex-end">
-          <span class="pill outline">{{Метрика}}</span>
-          <span class="pill light">{{Источник кадров}}</span>
+          <span class="pill deep">{{Метрика}}</span>
+          <span class="pill dark">{{Источник кадров}}</span>
         </div>
       </div>
       <div class="demo-grid">
@@ -562,7 +560,7 @@
           <div class="ttl">{{Конфигурация}}<br>{{Ёмкость}}</div>
           <div class="desc">{{Запас по производительности и почему этот вариант.}}</div>
         </div>
-        <div class="card outline">
+        <div class="card" style="background:var(--ink-soft)">
           <span class="lbl">Минимум</span>
           <div class="ttl">{{Минимальная}}<br>{{Ёмкость}}</div>
           <div class="desc">{{Полный функционал, но без запаса. Когда оправдано.}}</div>
@@ -633,9 +631,9 @@
       <h2 class="h-hero" style="max-width:14ch">Давайте сделаем<br>ваш проект.&nbsp;🤍</h2>
       <p class="lead" style="max-width:38ch">{{Имя}}, {{роль}} Круассан&nbsp;Студио&nbsp;— ответит на&nbsp;{{вопросы}} и&nbsp;соберёт {{демо / план}} за&nbsp;пару дней.</p>
       <div class="col gap-sm" style="margin-top:30px">
-        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">@{{telegram}}</span>
-        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">{{e-mail}}</span>
-        <span class="pill light" style="align-self:flex-start;font-size:24px;padding:18px 28px">hello@croissanstudio.ru</span>
+        <span class="pill dark" style="align-self:flex-start;font-size:24px;padding:18px 28px">@{{telegram}}</span>
+        <span class="pill dark" style="align-self:flex-start;font-size:24px;padding:18px 28px">{{e-mail}}</span>
+        <span class="pill dark" style="align-self:flex-start;font-size:24px;padding:18px 28px">hello@croissanstudio.ru</span>
       </div>
     </div>
     <span class="pn">11 / 11</span>

@@ -133,6 +133,8 @@ section is short and catches almost every regression. Specifically check:
 - Russian copy uses «…» quotes, em-dashes (`—`), and `&nbsp;` before short prepositions.
 - No invented metrics; everything traces to `facts.md` or a real engagement.
 - No `lorem ipsum` / "Feature one/two/three" filler.
+- Slide surfaces have the right volume: brand blue for loud covers/openers/big ideas,
+  graphite or white for calmer case and page-like slides.
 
 ## Voice
 
@@ -152,7 +154,9 @@ This is a **strong reference, not a strict template**. Three rings:
 - **Negotiable** — spacing, motion, novel pill variants. Adjust with one-line cause
   noted.
 - **Free** — section layouts, copy, slide compositions, novel section types not in
-  docs. Invent freely **inside the token system**.
+  docs. Invent freely **inside the token system**. For slides, that includes choosing
+  tight vs. standard density, cropping the croissant as a composition object, and deciding
+  whether brand ownership comes from a big mark, a quiet lockup, or the surface itself.
 
 Full treatment: `agents/creative-latitude.md`.
 

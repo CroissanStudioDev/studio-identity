@@ -14,6 +14,9 @@ not the script.
   Never `bg-[#2727CA]`, `text-gray-500`, `text-zinc-700`, etc.
 - Body text is **never lighter than `text-primary-60`** on the light background. `text-primary-50`
   is for placeholders only.
+- On slides, Croissan blue is the loud surface, not the default fill. For case studies,
+  product screenshots, and page-like layouts, check graphite or white before reaching for
+  brand blue.
 
 ## Typography
 
@@ -69,4 +72,5 @@ Don't ship a workaround. The cost of asking is one round-trip; the cost of brand
 
 This file does not say "match every example in the repo verbatim." Most of design is
 the gray area in between these locked rules — section composition, novel layouts, fresh
-copy. That's [`creative-latitude.md`](creative-latitude.md)'s territory. Read it.
+copy, slide density, cropped brand marks, and whether a slide needs quiet or loud brand
+ownership. That's [`creative-latitude.md`](creative-latitude.md)'s territory. Read it.

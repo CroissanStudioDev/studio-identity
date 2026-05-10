@@ -14,11 +14,15 @@ rotated ellipse. It exists in two visual modes (flat 2D and dimensional 3D) and 
 |---------|-------------|------|
 | **2D flat — brand primary** | Default. Light or neutral surfaces. | [`../../assets/logos/croissan-logo.svg`](../../assets/logos/croissan-logo.svg) |
 | **2D flat — white** | Brand-primary, dark, or photographic surfaces. | [`../../assets/logos/croissan-logo-white.svg`](../../assets/logos/croissan-logo-white.svg) |
-| **3D rendered (mascot)** | Decorative hero accents, deck covers, social posts. Never as a UI control. | Lives in the studio's private design archive — ask a founder for the latest export |
+| **3D rendered (mascot)** | Decorative hero accents, loud deck covers, social posts. Never as a UI control. | Lives in the studio's private design archive — ask a founder for the latest export |
 
 The **3D mark** is the dimensional purple-blue rendered croissant visible in deck covers and
 brand collateral. Treat it as a mascot / illustration, not a logo. Don't use it in dense UI
 contexts; use the 2D flat mark.
+
+On loud covers, the croissant can become the main spatial object: large, cropped by the
+canvas edge, and balanced against the headline. Avoid centering it like a badge or using
+it as a faint watermark; it should feel placed, not stamped.
 
 ## Wordmark + lockups
 
@@ -60,7 +64,8 @@ artifact.
 | Minimum (anywhere) | **24×24** px (below this curves blur) |
 | Navbar | 32–40 px |
 | Hero / about | 64–96 px |
-| Deck cover (3D mark) | 200–600 px depending on slide width |
+| Quiet deck chrome | 28–36 px |
+| Loud deck cover / hero mark | 200–600 px, often cropped off-canvas |
 
 Always preserve the aspect ratio — viewBox is square; render at `height=N width=N`.
 

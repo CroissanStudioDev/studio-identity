@@ -96,7 +96,9 @@ the second copy.
 ### Step 3 — Fill the slides in pass-by-pass order
 
 **Pass 1: cover + offer (slides 1, 4)**. Get the studio identity and the proposal title
-locked in first — those are what gets quoted in the email body.
+locked in first — those are what gets quoted in the email body. Use loud blue only when
+the slide needs maximum brand presence; quieter case/page-like slides should usually start
+from graphite or white.
 
 **Pass 2: cases (slide 2)**. Pick **two** shipped projects from the studio's portfolio
 that are *similar in shape* to the client's brief. Not the most recent, not the most
@@ -134,12 +136,14 @@ Run the checklist below before declaring done. Failing any P0 item = ship is not
   phrases, stock photography, mid-grey backgrounds, decorative drop-shadows.
 - [ ] No `{{placeholders}}` left anywhere. Search `{{`.
 - [ ] No `pill.outline`, `pill.light`, or `card.outline` unless the brief explicitly overrides (default is filled-only).
-- [ ] Brand mark + wordmark present on **every slide** (including covers, dividers, totals).
+- [ ] Brand ownership is clear on every slide: large cropped croissant, quiet lockup, or
+  surface/type ownership. Do not force the same small logo chrome onto every slide.
 - [ ] All studio-level metrics traceable to `references/facts.md`.
 - [ ] Pricing slide totals match the sum of stage prices.
 
 #### P1 — should-fix
-- [ ] No more than 3 consecutive slides of the same `slide.<surface>` class. Vary the rhythm.
+- [ ] No more than 3 consecutive slides of the same `slide.<surface>` class. Vary the rhythm,
+  and don't use brand blue as wallpaper for calm case/page slides.
 - [ ] Cases slide (2) shows two projects, not three. The compact deck doesn't have room for three.
 - [ ] H1 on case-study slides uses Medium, not Bold. (Slide 5+ if applied.)
 - [ ] At least one slide uses `card.featured` to indicate the recommended option.
@@ -163,7 +167,8 @@ the trunk of the КП narrative — branches are yours to invent within the desi
 
 - **New slide types** the brief calls for (e.g., "compliance & security", "analytics
   dashboard preview", "rollout timeline beyond 3 weeks") — invent the layout using the
-  pill/card/grid vocabulary already in the seed.
+  pill/card/grid vocabulary already in the seed. You may choose tight vs. standard density,
+  crop the croissant as a scene object, and choose loud blue vs. graphite/white by slide intent.
 - **Slide ordering** within constraints: Cover always slide 1, CTA always last, pricing
   before contact. Everything in between is yours.
 - **Headlines** that fit the voice — caring, smart, slightly bold. Don't paraphrase

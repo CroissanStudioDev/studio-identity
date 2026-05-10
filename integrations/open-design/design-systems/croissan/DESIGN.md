@@ -7,7 +7,7 @@
 
 Croissan Studio's identity feels like a confident product team that happens to look you in the eye — Russian-default copy, real numbers, real client logos, and a single Croissan blue (`#2727CA`) doing 90% of the brand work. The system places enormous faith in **typography over chrome**: the heaviest UI element is usually a pill, the deepest shadow appears only on a polaroid photo card. There are no gradients on hero surfaces, no glassmorphism on web, no decorative illustration outside the croissant mark itself.
 
-The voice is "caring, smart, slightly bold" — and the visuals match. Slides and product pages alike commit hard to **brand primary as a full background**: an entire 1280×720 cover slide is `#2727CA`, white text, two buttons. The web equivalent is a near-white canvas with a single `bg-brand` CTA. White or black are admitted only when the use case earns it: white for content-heavy reading and the marketing site, black `#000` for premium covers and contrast moments, and **graphite `#252527`** as a fourth surface — exclusively for case-study slides where product screenshots need a softer-than-black backdrop.
+The voice is "caring, smart, slightly bold" — and the visuals match. Slides use surface volume deliberately: **brand primary as a full background** is the loud mode for covers, openers, and big ideas, not the default for every page-like slide. The web equivalent is a near-white canvas with a single `bg-brand` CTA. White or black are admitted when the use case earns it: white for content-heavy reading and the marketing site, black `#000` for premium covers and contrast moments, and **graphite `#252527`** as the calm surface for case studies, product screenshots, and slides where content should lead over brand volume.
 
 The signature mark is a stylized croissant — three crescent strokes around an offset rotated ellipse, intentionally asymmetric. It exists in two modes: a **flat 2D SVG** (the working logo, used everywhere from navbar to slide chrome) and a **3D rendered version** (used as a mascot on deck covers and hero accents — never as a UI control). Wordmark lockups put the croissant inline at the right of the word "Studio."
 
@@ -15,7 +15,7 @@ A second sibling identity — **Croissan Community** — uses the same lockup sy
 
 **Key Characteristics:**
 - Croissan blue `#2727CA` as the only brand accent. White on brand, brand on white, white on black — the full surface vocabulary.
-- A **fourth surface** for case studies: graphite `#252527`. Distinct from `#000`; softer for screenshots.
+- A **calm surface** for case studies and page-like slides: graphite `#252527`. Distinct from `#000`; softer for screenshots and less loud than brand blue.
 - Type scale runs on **two typefaces only**: Right Grotesk Bold for H1 (web) and Golos Text for everything else (web, slides, body, decks).
 - Pill-and-card vocabulary. Three pill variants (`dark`, `soft`, `deep` — filled only, no outline / no white pill on brand slides) and two slide card variants (default ink / ink-soft fill, `featured` white) carry most data presentation.
 - **Polaroid photo card** for team portraits — bg white, asymmetric padding (top 30, bottom 40, sides 20), `rounded-[1px]`, drop-shadow, rotated ±2–4°. Fully recognizable.
@@ -27,7 +27,7 @@ A second sibling identity — **Croissan Community** — uses the same lockup sy
 ## 2. Color Palette & Roles
 
 ### Primary
-- **Croissan blue** (`#2727CA`): The single brand color. CSS variable `--brand-primary`. Used for primary CTA backgrounds, accent text, deck/slide backgrounds (most slides), and the signature mark itself. The single highest-visibility color across the system.
+- **Croissan blue** (`#2727CA`): The single brand color. CSS variable `--brand-primary`. Used for primary CTA backgrounds, accent text, loud deck/slide backgrounds, and the signature mark itself. The single highest-visibility color across the system.
 - **Brand primary hover** (`#2424B4`): A darker variant. CSS variable `--brand-primary-hover`. Used only as the hover/active state on primary CTAs.
 
 ### Secondary surfaces on brand slide backgrounds
@@ -39,7 +39,7 @@ A second sibling identity — **Croissan Community** — uses the same lockup sy
 - **Canvas** (`oklch(0.98 0.01 260)`, ≈ `#FAFAFB`): The default page background on the marketing site. Cooler than pure white, holds a hint of brand hue.
 - **Paper** (`#FFFFFF`): True white. Used inside cards, white-mode slides, and inverse text on brand slides (inside `card.featured`).
 - **Ink Black** (`#0E0E14` / `#000000`): The premium surface — deck covers, video title cards, high-contrast social. Two values used interchangeably; `#0E0E14` reads better on backlit displays, `#000` for print/PDF.
-- **Graphite** (`#252527`): Exclusive surface for **case-study slides** in КП decks. Not a fallback for black — pick deliberately when a slide is product-screenshot-led.
+- **Graphite** (`#252527`): Calm surface for **case-study slides**, product screenshots, and page-like deck compositions. Not a fallback for black — pick deliberately when content should lead over brand volume.
 
 ### Neutrals & text
 - **Brand Dark** (`#150E47`): The system's "near-black" for body text on the marketing site. Same hue family as the primary — that's what makes greys look coherent without going monochrome. CSS variable `--brand-dark`. Used as `text-primary` (100%), with opacity scale: `text-primary-90` (90%), `-80`, `-70`, `-60`, `-50` — anything below 60% is decorative-only (placeholders), not reading text.
@@ -106,6 +106,10 @@ Never a hero gradient. Never a "trust" two-stop sweep. If you find yourself reac
 | Card body (chip large) | 32 px | 600 | 1.2 | −0.96 px | `#BCBCFF` on brand. |
 | Tag / sticker / metric chip | 18 px | 500 | 1.0 / 1.2 | −0.36 px | white. With `text-shadow: 0 0 8px rgba(0,0,0,0.2)` when over photos. |
 
+Tight editorial slides can put large type close to the canvas edge, usually 32–40 px on a
+1280×720 composition. That only works with compact line-height (`~0.95–1.0`), tight block
+gaps, and short copy; longer reading needs standard padding or a card.
+
 ### Hierarchy (HTML deck framework — viewport-relative)
 
 The HTML deck template ([`../../templates/croissan-deck.html`](../../templates/croissan-deck.html)) uses a viewport-relative scale so a single deck reads at any projector resolution:
@@ -169,7 +173,7 @@ Heavy glass (CTA): rounded-3xl bg-gradient-to-br from-white/10 to-white/5 shadow
 
 ### Cards (slides)
 
-Two variants on Croissan-blue slides. Same shape (`border-radius:18px`, `padding:2.6vh 1.6vw`, `display:flex; flex-direction:column; gap:1vh; height:100%`). **Filled surfaces only** — no transparent/outline card chrome:
+Two variants on Croissan-blue or graphite slides. Same shape (`border-radius:18px`, `padding:2.6vh 1.6vw`, `display:flex; flex-direction:column; gap:1vh; height:100%`). **Filled surfaces only** — no transparent/outline card chrome. On tight slides, cards are also spacing containers: keep outside gaps compact and let internal padding carry reading comfort.
 
 | Variant | Surface | Text | When |
 |---------|---------|------|------|
@@ -329,19 +333,22 @@ Every page section follows one shape:
 6. CTA — repeat the hero CTA in a heavy-glass card.
 7. Footer — contacts, founders, legal.
 
-### Slides — universal chrome
+### Slides — brand ownership
 
-Every slide carries:
-- **Brand mark + wordmark** top-left (`28 px` SVG + "Круассан Студио" Golos Bold ≈14–16 px, gap `.55em`).
-- Outer padding: `7vh` top/bottom, `6vw` left/right (≈ `75.6 px / 115.2 px` on a 1920×1080 page).
+Every slide should feel owned by Croissan, but ownership has modes:
+- **Big croissant** — covers and idea slides can use a large cropped 2D/3D mark as a spatial object.
+- **Quiet lockup** — standalone business PDFs can use the top-left `28 px` SVG + "Круассан Студио" Golos Bold ≈14–16 px, gap `.55em`.
+- **Surface-only** — inside a coherent deck, color, type, and a few key croissant moments can carry ownership without repeating logo chrome everywhere.
+- Outer padding: tight `32–40 px` on 1280×720 for loud visual moments; standard `7vh / 6vw` for long КП content; card-protected when outer margins are tight but card padding is generous.
 
-The brand mark is **never removed** — not on cover, not on the section divider, not on the totals slide.
+Do not center the croissant like a badge or use it as a faint watermark. It should be placed,
+cropped, and balanced against the text block.
 
 ### Slides — five canonical kinds
 
 Vary across consecutive slides — never run more than 3 of the same kind in a row, the deck flattens.
 
-1. **Cover** — H1 + 3D mark inline + caption + logo strip. Brand background.
+1. **Cover** — H1 + large cropped croissant or 3D mark inline + short caption/URL. Usually loud blue or black.
 2. **Section divider** — same H1 layout as cover, no body. Lead is one line. Lots of empty space — that's the pace.
 3. **Content with chips** — H1 + lead + 2×2 grid of number-boxes. For "what we do," "process," "team roles."
 4. **Team intro** — H1 + polaroid photo cards + sticker tags. The most "human" slide.
@@ -376,7 +383,7 @@ If you reach for `box-shadow: 0 10px 30px rgba(0,0,0,0.15)` on a marketing card,
 - ✅ **External links**: `rel="noopener noreferrer" target="_blank"`.
 - ✅ **Real photography**. Real team, real client logos, real product screenshots.
 - ✅ **Print/PDF CSS** on HTML decks. Lock the slide to 1920×1080 for export.
-- ✅ **Brand mark on every slide** — wordmark chrome is non-negotiable (no page-number footer).
+- ✅ **Clear brand ownership on every slide** — big cropped croissant, quiet lockup, or surface/type ownership depending on the composition.
 - ✅ **Touch targets ≥ 44×44 px**, WCAG AA contrast.
 
 ### Don't
@@ -451,7 +458,7 @@ This section tells an agent how to **use this design system without copying it v
 
 - **New section types** the brief mentions but the docs don't cover. Invent the layout; honor the tokens.
 - **New copy patterns** that fit the voice (caring + smart + slightly bold). The voice docs cover *examples*, not the full space.
-- **New slide compositions** for proposals about specifically tech-led products. The five canonical slide kinds are the **trunk**, not the whole tree.
+- **New slide compositions** for proposals about specifically tech-led products. The five canonical slide kinds are the **trunk**, not the whole tree; choose tight vs. standard density and loud-blue vs. graphite/white based on the slide's job.
 - **Iconography for technical concepts** the brief introduces (e.g., a stack diagram). Lucide-style monoline SVG, 1.6–1.8 px stroke, `currentColor`.
 
 ### What's out of scope for invention

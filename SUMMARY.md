@@ -3,7 +3,7 @@
 **One-paragraph summary.** Croissan Studio is a Russian-default AI product studio.
 Voice is caring, smart, slightly bold — partner not vendor, concrete numbers over fuzzy
 adjectives. Visual identity runs on a single Croissan blue (`#2727CA`) over near-white,
-with black and graphite (`#252527`) as premium and case-study surfaces. Two typefaces
+with black and graphite (`#252527`) as premium and calm case/page surfaces. Two typefaces
 do all the work: **Right Grotesk Bold** for web H1, **Golos Text** for everything else.
 
 This file is **the 20% of the brand that gives 80% value** — designed to be pasted into
@@ -23,7 +23,7 @@ brand-correct output without installing anything.
 --brand-primary-hover:  #2424B4;   /* hover state on primary */
 --brand-dark:           #150E47;   /* near-black, same hue family */
 --brand-black:          #0E0E14;   /* premium / cover surface */
---brand-graphite:       #252527;   /* CASE-STUDY slides only */
+--brand-graphite:       #252527;   /* calm case / product screenshot surface */
 --background:           oklch(0.98 0.01 260);  /* near-white canvas */
 --color-error:          #E53935;
 ```
@@ -39,6 +39,11 @@ brand-correct output without installing anything.
 --paper-mute:    rgba(255,255,255,.55);   /* tertiary text on dark */
 --line:          rgba(255,255,255,.18);   /* dividers on dark */
 ```
+
+Use Croissan blue as the loud surface: covers, openers, big ideas, and moments that need
+maximum brand presence. Use graphite for cases, product screenshots, and most page-like
+slides where content should lead over brand volume. White is for dense reading, logo fields,
+and comparisons.
 
 **Tailwind class equivalents:** `bg-brand`, `text-brand`, `text-brand-dark`,
 `text-error`. **Body text opacity scale on light:** `text-primary` (100%), `text-primary-90`,
@@ -83,6 +88,10 @@ Card body     Golos Text SemiBold 32px / 1.2 / color #BCBCFF on Croissan blue
 Tag/sticker   Golos UI Medium (or Golos Text Medium) 18px / line-height 1
 ```
 
+Tight editorial slides can put text close to the canvas edge, but only with compact
+line-height (`~0.95–1.0`) and tight gaps. If the copy needs more reading comfort, use
+standard padding or put it inside a card.
+
 Russian-default: em-dashes (`—`), Russian quotes («…»), non-breaking spaces (`&nbsp;`)
 before short prepositions (`с&nbsp;ИИ`, `за&nbsp;2-4&nbsp;недели`).
 
@@ -102,12 +111,16 @@ add a fourth pill type or a third card chrome without a brand decision.
 .pill.deep    bg #1F1FA8, white text          — alternative when soft would clash
 ```
 
-**Cards** on Croissan-blue slide backgrounds (border-radius 18px, padding `2.6vh 1.6vw`):
+**Cards** on Croissan-blue or graphite slide backgrounds (border-radius 18px, padding
+`2.6vh 1.6vw`):
 
 ```
 .card           bg #0E0E14 (or `#1A1A22` ink-soft for contrast), white text — default / alt tier
 .card.featured  bg white, brand-blue text       — recommended option / highlighted tier
 ```
+
+Cards are also spacing tools: on tight slides, keep outside gaps compact and let internal
+padding create the breathing room.
 
 ---
 
@@ -179,6 +192,8 @@ Treat as P0:
 14. **Mid-grey backgrounds.** Surfaces are: Croissan blue, white, black, graphite. Anything in
     between (zinc-700, slate-800) is the AI midtone — not ours.
 15. **Drop-shadows on cards.** Polaroids are the only exception in the system.
+16. **Brand-blue wallpaper.** Blue is the loud mode, not the default answer for every slide.
+    If the slide is a case, screenshot, or page-like composition, check graphite or white first.
 
 ---
 
@@ -186,12 +201,16 @@ Treat as P0:
 
 Vary across consecutive slides — never run >3 of the same kind in a row:
 
-1. **Cover** — H1 + 3D mark inline + caption + logo strip. Brand background.
+1. **Cover** — H1 + large cropped croissant or 3D mark inline + short caption/URL. Usually loud blue or black.
 2. **Section divider** — same H1 layout as cover, no body. Lead is one line.
 3. **Content with chips** — H1 + lead + 2×2 grid of number-boxes.
 4. **Team intro** — H1 + polaroid photo cards + sticker tags.
 5. **Case study** — graphite `#252527`, H1 Medium with split-color, lead, metric chips,
    screenshot composition.
+
+Brand ownership has modes. Use a large cropped croissant on loud covers and idea slides,
+a quiet lockup for standalone business PDFs, or surface-only ownership when the deck context
+is already clear. Don't force a tiny logo lockup onto every slide.
 
 ---
 

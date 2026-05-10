@@ -46,10 +46,17 @@ something fundamental here (type scale, color tokens, card variants), update tha
 Stack:
 - **Golos Text** (Google Fonts) — only typeface; weight + size do all the work.
 - CSS tokens: `--croissan-blue` (+ `-deep`, `-soft`) for the brand slide background and pill fills.
+- Surface modes: loud Croissan blue for covers/openers/big ideas; graphite for cases,
+  product screenshots, and calmer page-like slides; white for dense reading and logo fields.
+- Density helpers: default padding for long КП content, `.slide.tight` for editorial
+  visual moments, `.slide.card-protected` when tight outer margins need cards to carry
+  the reading space.
 - **3 pill variants** (filled only): `dark`, `soft`, `deep` — no outline, no white pill on brand slides.
 - **2 card variants**: default (ink or ink-soft fill), `featured` (white) — no outline cards.
 - Type scale: `h-hero`, `h-xl`, `h-lg`, `h-md`, `h-sm`, plus `lead`, `body`.
-- Brand mark + wordmark top-left every slide; **no slide page numbers** in the layout.
+- Brand ownership modes: use a large cropped croissant on loud covers, a quiet top-left
+  lockup for standalone business slides, or surface/type ownership inside a coherent deck.
+  **No slide page numbers** in the layout.
 
 ## When to use this vs the designer-led path
 
@@ -70,6 +77,8 @@ The designer-led masters live in the studio's private design archive — ask a f
 - **Don't add new color tokens** without updating `decks.md` and `identity/colors.md`.
 - **Don't replace the croissant logo** with a re-drawn version. Use the inline SVG already
   in the file.
+- **Don't use brand blue as wallpaper.** For case studies, product screenshots, and
+  page-like slides, start from graphite or white.
 - **Don't add JS frameworks.** Vanilla. If you need state, you're in the wrong file —
   use the React/Next setup instead.
 - **Don't ship the deck with `{{placeholders}}` still in it.** Search for `{{` before sending.
