@@ -48,9 +48,6 @@ Stack:
 - CSS tokens: `--croissan-blue` (+ `-deep`, `-soft`) for the brand slide background and pill fills.
 - Surface modes: loud Croissan blue for covers/openers/big ideas; graphite for cases,
   product screenshots, and calmer page-like slides; white for dense reading and logo fields.
-- Density helpers: default padding for long КП content, `.slide.tight` for editorial
-  visual moments, `.slide.card-protected` when tight outer margins need cards to carry
-  the reading space.
 - **3 pill variants** (filled only): `dark`, `soft`, `deep` — no outline, no white pill on brand slides.
 - **2 card variants**: default (ink or ink-soft fill), `featured` (white) — no outline cards.
 - Type scale: `h-hero`, `h-xl`, `h-lg`, `h-md`, `h-sm`, plus `lead`, `body`.

@@ -154,9 +154,9 @@ This is a **strong reference, not a strict template**. Three rings:
 - **Negotiable** — spacing, motion, novel pill variants. Adjust with one-line cause
   noted.
 - **Free** — section layouts, copy, slide compositions, novel section types not in
-  docs. Invent freely **inside the token system**. For slides, that includes choosing
-  tight vs. standard density, cropping the croissant as a composition object, and deciding
-  whether brand ownership comes from a big mark, a quiet lockup, or the surface itself.
+  docs. Invent freely **inside the token system**. For slides, that includes cropping
+  the croissant as a composition object and deciding whether brand ownership comes from
+  a big mark, a quiet lockup, or the surface itself.
 
 Full treatment: `agents/creative-latitude.md`.
 

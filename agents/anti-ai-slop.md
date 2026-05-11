@@ -226,9 +226,6 @@ The work ships if these slip through, but it stops feeling like ours.
   hex, tokens were not honored. Refactor.
 - **Hyphenated bullet lists.** `- foo / - bar / - baz` with trivial labels. Either it's
   worth a real sentence each or it's a `pill-row`.
-- **Over-padded slide templates.** Huge safe margins, centered text blocks, evenly spaced
-  feature cards, and no edge tension make Croissan slides feel like generic SaaS exports.
-  Tight margins are fine when the type is compact and cards carry the reading padding.
 - **Section headers shouting** in `text-uppercase`. Marketing section H2s stay sentence case.
   On **slides**, don't stack a small uppercase line above the main heading — fold context into
   the H2, lead, pills, or card titles (see [`design-system/decks.md`](../design-system/decks.md)).
@@ -360,9 +357,6 @@ looks like — concrete moves a reviewer can recognize as "this writer knows the
   (card grid) → focus (chip cluster) → process (numbered list) → pricing (comparison
   table) → CTA (heavy-glass card). Each section reads as its own thing; the page has
   rhythm.
-- **Slides with deliberate edge tension.** Loud covers can use a cropped croissant and
-  tight text margins; case and product slides can stay calmer on graphite. The surface
-  choice should say how loud the moment is.
 - **Photos that look like the team actually exists.** Real portraits in the polaroid
   treatment, real product screenshots in case-study slides, real client logos in the
   trust strip. If you can't trace a photo to a real person/product/client, don't ship

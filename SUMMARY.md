@@ -88,10 +88,6 @@ Card body     Golos Text SemiBold 32px / 1.2 / color #BCBCFF on Croissan blue
 Tag/sticker   Golos UI Medium (or Golos Text Medium) 18px / line-height 1
 ```
 
-Tight editorial slides can put text close to the canvas edge, but only with compact
-line-height (`~0.95–1.0`) and tight gaps. If the copy needs more reading comfort, use
-standard padding or put it inside a card.
-
 Russian-default: em-dashes (`—`), Russian quotes («…»), non-breaking spaces (`&nbsp;`)
 before short prepositions (`с&nbsp;ИИ`, `за&nbsp;2-4&nbsp;недели`).
 
@@ -118,9 +114,6 @@ add a fourth pill type or a third card chrome without a brand decision.
 .card           bg #0E0E14 (or `#1A1A22` ink-soft for contrast), white text — default / alt tier
 .card.featured  bg white, brand-blue text       — recommended option / highlighted tier
 ```
-
-Cards are also spacing tools: on tight slides, keep outside gaps compact and let internal
-padding create the breathing room.
 
 ---
 

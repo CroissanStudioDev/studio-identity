@@ -166,8 +166,6 @@
     .slide.paper    { background: var(--paper); color: var(--ink); }
     .slide.ink      { background: var(--ink);   color: var(--paper); }
     .slide.graphite { background: var(--graphite); color: var(--paper); }
-    .slide.tight    { --frame-inset: 48px 61px 48px 61px; }
-    .slide.card-protected { --frame-inset: 48px 61px 48px 61px; }
 
     /* Quiet lockup — use on standalone business slides, not every loud cover. */
     .brand-mark {
@@ -194,14 +192,13 @@
     /* Frame (content area) — sits inside outer 7vh / 6vw padding */
     .frame {
       position: absolute;
-      inset: var(--frame-inset, 150px 116px 150px 116px);
+      inset: 150px 116px 150px 116px;
       display: flex; flex-direction: column;
       min-height: 0;
       z-index: 1;
     }
     .frame.center { justify-content: center; }
     .frame.top    { justify-content: flex-start; padding-top: 30px; }
-    .frame.tight  { justify-content: flex-start; padding-top: 0; }
 
     /* Type scale */
     .h-hero { font-weight: 700; font-size: 122px; line-height: 1.02; letter-spacing: -3.05px; text-wrap: balance; }
@@ -373,10 +370,11 @@
   <!-- ============================================================
        SLIDE 01 · COVER
        ============================================================ -->
-  <section class="slide brand tight active" data-screen-label="01 Привет">
-    <div class="frame tight">
+  <section class="slide brand active" data-screen-label="01 Привет">
+    <div class="brand-mark"><svg style="color:#fff"><use href="#croissan-logo"/></svg><span class="wm">Круассан Студио</span></div>
+    <div class="frame top" style="padding-top:14vh">
       <h1 class="h-hero" style="max-width:18ch">Привет!<br>Мы Круассан Студио</h1>
-      <p class="h-xl" style="margin-top:34px;max-width:18ch">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
+      <p class="h-xl" style="margin-top:5vh;max-width:18ch">Заботливая студия<br>полного цикла,<br>эксперты в&nbsp;ИИ.</p>
     </div>
     <span class="pn">01 / 11</span>
   </section>

@@ -72,5 +72,4 @@ Don't ship a workaround. The cost of asking is one round-trip; the cost of brand
 
 This file does not say "match every example in the repo verbatim." Most of design is
 the gray area in between these locked rules — section composition, novel layouts, fresh
-copy, slide density, cropped brand marks, and whether a slide needs quiet or loud brand
-ownership. That's [`creative-latitude.md`](creative-latitude.md)'s territory. Read it.
+copy, cropped brand marks, and whether a slide needs quiet or loud brand ownership. That's [`creative-latitude.md`](creative-latitude.md)'s territory. Read it.

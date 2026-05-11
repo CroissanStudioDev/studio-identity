@@ -167,8 +167,8 @@ the trunk of the КП narrative — branches are yours to invent within the desi
 
 - **New slide types** the brief calls for (e.g., "compliance & security", "analytics
   dashboard preview", "rollout timeline beyond 3 weeks") — invent the layout using the
-  pill/card/grid vocabulary already in the seed. You may choose tight vs. standard density,
-  crop the croissant as a scene object, and choose loud blue vs. graphite/white by slide intent.
+  pill/card/grid vocabulary already in the seed. Crop the croissant as a scene object
+  and choose loud blue vs. graphite/white by slide intent.
 - **Slide ordering** within constraints: Cover always slide 1, CTA always last, pricing
   before contact. Everything in between is yours.
 - **Headlines** that fit the voice — caring, smart, slightly bold. Don't paraphrase

@@ -47,9 +47,8 @@ You **don't** need to ask before:
   same shape.
 - **Composing novel slide types** for КП subjects the canonical structure doesn't
   cover (compliance & security, rollout timeline, custom integration diagrams). The five
-  slide kinds are the **trunk**, not the whole tree; you can choose tight vs. standard
-  density, crop the croissant as a scene object, and pick loud-blue vs. graphite/white
-  based on the slide's job.
+  slide kinds are the **trunk**, not the whole tree; crop the croissant as a scene object
+  and pick loud-blue vs. graphite/white based on the slide's job.
 - **Creating monoline SVG icons** for technical concepts the brief introduces — stack
   diagrams, architecture sketches, protocol flows. 1.6–1.8 px stroke, `currentColor`,
   Lucide-style.
@@ -70,9 +69,8 @@ probably did the right thing.
 
 You **may** deviate, but leave a one-line comment or PR note explaining why:
 
-- **Tweaking spacing** (e.g., `py-20` instead of `py-16` on a section that needs it, or
-  using tight slide margins for a loud visual moment).
-  Note: "tight margins work here because the headline is short and the card carries padding."
+- **Tweaking spacing** (e.g., `py-20` instead of `py-16` on a section that needs it).
+  Note: "this section has a tall hero asset, default `py-16` cropped it."
 - **Adding a fourth pill variant** for a one-off use case. Note: "client logos pill —
   needed transparent border because logos already include their own backgrounds."
 - **Substituting Inter for Golos Text** on a compliance/legal slide where rendering

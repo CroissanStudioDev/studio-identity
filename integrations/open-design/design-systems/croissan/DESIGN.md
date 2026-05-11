@@ -104,12 +104,6 @@ Never a hero gradient. Never a "trust" two-stop sweep. If you find yourself reac
 | Lead / subtitle | 48 px | 400 | 1.2 | −0.96 px | white at 80% opacity. `max-width: 800 px`. |
 | Caption / pre-strip | 32 px | 400 | 1.2 | −0.64 px | white at 80%. Above logo strips. |
 | Card body (chip large) | 32 px | 600 | 1.2 | −0.96 px | `#BCBCFF` on brand. |
-| Tag / sticker / metric chip | 18 px | 500 | 1.0 / 1.2 | −0.36 px | white. With `text-shadow: 0 0 8px rgba(0,0,0,0.2)` when over photos. |
-
-Tight editorial slides can put large type close to the canvas edge, usually 32–40 px on a
-1280×720 composition. That only works with compact line-height (`~0.95–1.0`), tight block
-gaps, and short copy; longer reading needs standard padding or a card.
-
 ### Hierarchy (HTML deck framework — viewport-relative)
 
 The HTML deck template ([`../../templates/croissan-deck.html`](../../templates/croissan-deck.html)) uses a viewport-relative scale so a single deck reads at any projector resolution:
@@ -173,7 +167,7 @@ Heavy glass (CTA): rounded-3xl bg-gradient-to-br from-white/10 to-white/5 shadow
 
 ### Cards (slides)
 
-Two variants on Croissan-blue or graphite slides. Same shape (`border-radius:18px`, `padding:2.6vh 1.6vw`, `display:flex; flex-direction:column; gap:1vh; height:100%`). **Filled surfaces only** — no transparent/outline card chrome. On tight slides, cards are also spacing containers: keep outside gaps compact and let internal padding carry reading comfort.
+Two variants on Croissan-blue or graphite slides. Same shape (`border-radius:18px`, `padding:2.6vh 1.6vw`, `display:flex; flex-direction:column; gap:1vh; height:100%`). **Filled surfaces only** — no transparent/outline card chrome.
 
 | Variant | Surface | Text | When |
 |---------|---------|------|------|
@@ -339,7 +333,7 @@ Every slide should feel owned by Croissan, but ownership has modes:
 - **Big croissant** — covers and idea slides can use a large cropped 2D/3D mark as a spatial object.
 - **Quiet lockup** — standalone business PDFs can use the top-left `28 px` SVG + "Круассан Студио" Golos Bold ≈14–16 px, gap `.55em`.
 - **Surface-only** — inside a coherent deck, color, type, and a few key croissant moments can carry ownership without repeating logo chrome everywhere.
-- Outer padding: tight `32–40 px` on 1280×720 for loud visual moments; standard `7vh / 6vw` for long КП content; card-protected when outer margins are tight but card padding is generous.
+- Outer padding: `7vh` top/bottom, `6vw` left/right (≈ `75.6 px` / `115.2 px` on a 1920×1080 page); slides use the **1280×720 master** with **80 px** top/left, **72–80 px** right, **72 px** bottom unless the brief dictates otherwise.
 
 Do not center the croissant like a badge or use it as a faint watermark. It should be placed,
 cropped, and balanced against the text block.
@@ -458,7 +452,7 @@ This section tells an agent how to **use this design system without copying it v
 
 - **New section types** the brief mentions but the docs don't cover. Invent the layout; honor the tokens.
 - **New copy patterns** that fit the voice (caring + smart + slightly bold). The voice docs cover *examples*, not the full space.
-- **New slide compositions** for proposals about specifically tech-led products. The five canonical slide kinds are the **trunk**, not the whole tree; choose tight vs. standard density and loud-blue vs. graphite/white based on the slide's job.
+- **New slide compositions** for proposals about specifically tech-led products. The five canonical slide kinds are the **trunk**, not the whole tree; pick loud-blue vs. graphite/white based on the slide's job.
 - **Iconography for technical concepts** the brief introduces (e.g., a stack diagram). Lucide-style monoline SVG, 1.6–1.8 px stroke, `currentColor`.
 
 ### What's out of scope for invention
